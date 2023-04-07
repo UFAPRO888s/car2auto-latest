@@ -108,9 +108,9 @@ export function HeroWhite() {
           {carData.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}
-              className="overflow-hidden rounded-lg bg-white shadow-lg py-4"
+              className="overflow-hidden rounded-lg bg-white py-4 shadow-lg"
             >
-              <div>
+              <div className="relative">
                 <Image
                   src={
                     'https://fastly-production.24c.in/' +
@@ -123,6 +123,10 @@ export function HeroWhite() {
                   className="h-auto w-full rounded-t-lg object-cover"
                   unoptimized
                 />
+                <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
+                  <div className="h-5 w-auto object-contain"></div>
+                  <p className="text-[14px] text-white">รถมาใหม่</p>
+                </div>
               </div>
               <div className="bg-[#1b65a6] py-2">
                 <div className="flex justify-between px-4 text-white">
@@ -249,7 +253,7 @@ export function HeroWhite() {
                     รายละเอียดเพิ่มเติม
                   </span>
                 </Button>
-                <div className='text-center flex items-center justify-center text-[#1b65a6]'>
+                <div className="flex items-center justify-center text-center text-[#1b65a6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -269,7 +273,7 @@ export function HeroWhite() {
                       d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                     />
                   </svg>
-                  <span className='text-xs'>{carDataUP.city}</span>
+                  <span className="text-xs">{carDataUP.city}</span>
                 </div>
               </div>
             </div>
@@ -279,7 +283,6 @@ export function HeroWhite() {
           <Button
             //href={`/cars/?make=${Maname}`}
             variant="solid"
-            
             className="flex items-center justify-center rounded-md border border-gray-300 bg-[#1b65a6] px-4 py-2 font-medium shadow-sm hover:bg-gray-50"
             onClick={handleClick}
           >
