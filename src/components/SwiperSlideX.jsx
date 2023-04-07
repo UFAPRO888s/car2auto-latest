@@ -31,7 +31,7 @@ export function SwiperSlideX() {
             {/* <Image src={HeroImg1} alt='HeroImg1'/> */}
             <div className="mb-20 mt-20">
               <Image
-                src={LogoColor}
+                src={'/images/Car2autobuy-03.png'}
                 alt="HeroImg1"
                 layout="fixed"
                 width={200}
@@ -88,7 +88,7 @@ export function SwiperSlideX() {
             <div></div>
             <div className="mb-20 mt-20">
               <Image
-                src={LogoColor}
+                src={'/images/Car2autobuy-03.png'}
                 alt="HeroImg1"
                 layout="fixed"
                 width={200}
