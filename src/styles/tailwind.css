@@ -383,7 +383,6 @@
 .mySwiper2 {
   height: 500px;
   width: 100%;
-
 }
 
 .mySwiper .swiper-slide-thumb-active {
@@ -402,7 +401,7 @@
   align-items: center;
 }
 
-.swiper-slideV img {
+.mySwiper2 img {
   display: block;
   width: 100%;
   height: 100%;

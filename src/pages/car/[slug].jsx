@@ -178,7 +178,7 @@ export default function CarDetailing({ DataCar }) {
       <main className=" bg-[#d2e0ed]">
         <Container>
           <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-12">
-            <div className="col-span-10 h-[500px] w-full">
+            <div className="col-span-10 h-auto md:h-[500px] w-full">
               <Swiper
                 loop={true}
                 spaceBetween={10}
@@ -203,7 +203,7 @@ export default function CarDetailing({ DataCar }) {
                 ))}
               </Swiper>
             </div>
-            <div className="col-span-2">
+            <div className="hidden md:block col-span-2">
               <SwiperV imgxs={DataCar.gallery} />
             </div>
           </div>
@@ -211,14 +211,14 @@ export default function CarDetailing({ DataCar }) {
 
         <div className="bg-white">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-2 px-4 py-4 sm:px-6 md:grid-cols-12 lg:px-8">
-            <div className="col-span-6 flex text-center">
+            <div className="col-span-6 block md:flex text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="h-10 w-10 text-red-500"
+                className="h-5 md:h-10 w-auto text-red-500"
               >
                 <path
                   strokeLinecap="round"
@@ -226,7 +226,7 @@ export default function CarDetailing({ DataCar }) {
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                 />
               </svg>
-              <div className="grid grid-rows-2 ">
+              <div className="grid grid-rows-2">
                 <h1 className="text-2xl font-bold ">
                   {DataCar?.make} {DataCar?.model} {DataCar?.year}
                 </h1>
@@ -285,7 +285,7 @@ export default function CarDetailing({ DataCar }) {
                 </div>
               </div>
             </div>
-            <div className="col-span-2 flex text-start">
+            <div className="hidden md:block col-span-2 flex text-start">
               <div className="text-2xl font-bold">
                 <CurrencyFormat
                   value={(
@@ -337,7 +337,7 @@ export default function CarDetailing({ DataCar }) {
               <div>
                 <h3 className="text-2xl font-semibold">รายละเอียดรถยนต์</h3>
               </div>
-              <div className="grid grid-cols-1 gap-4 py-8 md:grid-cols-5">
+              <div className="grid grid-cols-2 gap-4 py-8 md:grid-cols-5">
                 <div className="grid grid-rows-2 gap-2">
                   <h4>ออกรถเมื่อ:</h4>
                   <p className="font-bold">{DataCar?.year}</p>
@@ -564,7 +564,7 @@ export default function CarDetailing({ DataCar }) {
                 </div>
               </div>
             </div>
-            <div className="w-full rounded-lg bg-white px-8 py-4">
+            <div className="w-full rounded-lg bg-white px-4 md:px-8 py-4">
               <div className="mx-auto grid grid-cols-1">
                 <h4 className="text-2xl font-bold">
                   คำนวนสินเชื่อ
