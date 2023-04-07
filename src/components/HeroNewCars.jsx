@@ -162,10 +162,10 @@ export function HeroNewCars() {
                           </div>
                         </div>
                         <div className="col-span-2 text-center">
-                          <p className="px-2 text-2xl font-bold">
-                            {GroupBrandSL.countC}
+                          <p className="px-2 text-lg font-bold">
+                            {GroupBrandSL.odometerReading}
                           </p>
-                          <small>คัน</small>
+                          <small>กม.</small>
                         </div>
                       </div>
                     </div>
@@ -246,10 +246,10 @@ export function HeroNewCars() {
                             </div>
                           </div>
                           <div className="col-span-2 text-center">
-                            <p className="px-2 text-2xl font-bold">
-                              {GroupBrandSL.countC}
+                            <p className="px-2 text-lg font-bold">
+                              {GroupBrandSL.odometerReading}
                             </p>
-                            <small>คัน</small>
+                            <small>กม.</small>
                           </div>
                         </div>
                       </div>
