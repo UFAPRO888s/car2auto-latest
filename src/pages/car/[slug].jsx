@@ -23,9 +23,48 @@ import SwiperV from '@/components/SwiperV'
 import carData from '@/data/carlist'
 import { Container } from '@/components/Container'
 import CurrencyFormat from 'react-currency-format'
+import { TextField } from '@/components/Fields'
 
 export default function CarDetailing({ DataCar }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState()
+  const [DownBt, setDownBt] = useState('')
+  const [DownPr, setDownPr] = useState('')
+  const [Interest, setInterest] = useState('')
+  const [Period, setPeriod] = useState('')
+  const [Price, setPrice] = useState('')
+  const [PriceXvat, setPriceXvat] = useState('')
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  function handlePriceChange(event) {
+    //   console.log(event.target.value)
+    setPrice(event.target.value)
+  }
+
+  function handleDownBtChange(event) {
+    //  console.log(event.target.value)
+    setDownBt(event.target.value)
+  }
+  function handlePerDownChange(event) {
+    //  console.log(event.target.value)
+    setDownPr(event.target.value)
+    //const prx = "0."+event.target.value
+    const prtobt = (Price * event.target.value) / 100
+    // console.log(prtobt)
+    setDownBt(prtobt)
+  }
+  function handleinterestChange(event) {
+    // console.log(event.target.value)
+    setInterest(event.target.value)
+  }
+  function PricePeriod(value) {
+    // console.log(value)
+    const PriceXDown = (Price - DownBt) * (Interest / 100)
+    const intye = PriceXDown * value
+    const PriceXvat = Number(intye) + Number(Price)
+    const PriceXintye = PriceXvat / (value * 12)
+    //const PriceXvatXinx = PriceXvat + Interest - DownBt;
+    //console.log(intye)
+    setPeriod(PriceXintye.toFixed(2))
+    setPriceXvat(PriceXvat)
+  }
   return (
     <>
       <Head>
@@ -196,16 +235,373 @@ export default function CarDetailing({ DataCar }) {
                 }
                 variant="solid"
                 color="blue"
-                className="rounded-md w-full"
+                className="w-full rounded-md"
               >
                 <span className="text-center text-xs">ติดต่อผู้ขาย</span>
               </Button>
             </div>
           </div>
-          <div className="bg-white">
-            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-2 px-4 py-4 sm:px-6 md:grid-cols-12 lg:px-8">
+          <div className="bg-[#1b65a6] text-white">
+            <div className="mx-auto grid max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
               <div>
-                <h3>xxx</h3>
+                <h3 className="text-2xl font-semibold">รายละเอียดรถยนต์</h3>
+              </div>
+              <div className="grid grid-cols-1 gap-4 py-8 md:grid-cols-5">
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>ออกรถเมื่อ:</h4>
+                  <p className="font-bold">{DataCar?.year}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>ทะเบียน:</h4>
+                  <p className="font-bold">{DataCar?.year}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>เจ้าของ:</h4>
+                  <p className="font-bold">{DataCar?.ownerNumber}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>สี:</h4>
+                  <p className="font-bold">{DataCar?.color}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>คู่มือรถ:</h4>
+                  <p className="font-bold">{DataCar?.booked}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>ที่นั่ง:</h4>
+                  <p className="font-bold">{DataCar?.st}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>ระบบเกียร์:</h4>
+                  <p className="font-bold">{DataCar?.transmissionType}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>เครื่องยนต์:</h4>
+                  <p className="font-bold">{DataCar?.engineCc}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>ระยะทางที่ขับ:</h4>
+                  <p className="font-bold">{DataCar?.odometerReading}</p>
+                </div>
+                <div className="grid grid-rows-2 gap-2">
+                  <h4>พรบ:</h4>
+                  คุ้มครองถึง{' '}
+                  <p className="font-bold">{DataCar?.warrantyExpiryDate}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#d2e0ed] py-10">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-2 px-4 py-8 sm:px-6 md:grid-cols-2 lg:px-8">
+            <div className="w-full rounded-lg bg-white px-8 py-4">
+              <div className="text-start text-gray-700">
+                <h4 className="text-2xl font-bold">
+                  สิ่งอำนวยความสะดวก
+                  <br />
+                  <span className="text-lg">
+                    {DataCar?.make} {DataCar?.model}
+                  </span>
+                </h4>
+                <div className="flex justify-between py-4 text-start">
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>ถุงลมนิรภัย</p>
+                  </div>
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>กล้องถอย</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="flex justify-between py-4">
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>ระบบตรวจจุดอับสายตา</p>
+                  </div>
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>ระบบควบคุมความเร็วอัตโนมัติ</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="flex justify-between py-4">
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>บูลทูธ</p>
+                  </div>
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>เซ็นเซอร์ถอยหลัง</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="flex justify-between py-4">
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>หน้าต่างไฟฟ้า</p>
+                  </div>
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>กล้องหน้ารถ</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="flex justify-between py-4">
+                  <div className="mr-2 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <p>การติดตั้ง คาร์ซีท</p>
+                  </div>
+                  <div className="mr-2 flex items-center"></div>
+                </div>
+              </div>
+            </div>
+            <div className="w-full rounded-lg bg-white px-8 py-4">
+              <div className="mx-auto grid grid-cols-1">
+                <h4 className="text-2xl font-bold">
+                  คำนวนสินเชื่อ
+                  <br />
+                  <span className="text-lg">
+                    {DataCar?.make} {DataCar?.model}
+                  </span>
+                </h4>
+                <div className="rounded-lg md:col-span-8">
+                  <div className="mx-4 my-4 rounded-lg">
+                    <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+                      <div>
+                        <TextField
+                          id={'PriceCha'}
+                          label={'ราคารถ (บาท)'}
+                          defValue={DataCar?.price}
+                          onChange={handlePriceChange}
+                        />
+                      </div>
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-6">
+                        <TextField
+                          id={'DownBt'}
+                          className="col-span-1 md:col-span-4"
+                          label={'เงินดาวน์ บาท'}
+                          onChange={handleDownBtChange}
+                          defValue={DownBt}
+                          dix={true}
+                        />
+                        <TextField
+                          id={'PerDown'}
+                          className="col-span-1 md:col-span-2"
+                          label={'เงินดาวน์ %'}
+                          defValue={'0'}
+                          onChange={handlePerDownChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+                      <div>
+                        <TextField
+                          id={'interest'}
+                          label={'อัตราดอกเบี้ย (%)'}
+                          onChange={handleinterestChange}
+                        />
+                      </div>
+                      <div>
+                        <h3 className="mb-3 block text-sm font-medium text-gray-700">
+                          ระยะเวลา
+                        </h3>
+                        <div className="grid grid grid-cols-3 justify-items-center gap-2 font-bold md:grid-cols-6">
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('1')}
+                          >
+                            1
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('2')}
+                          >
+                            2
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('3')}
+                          >
+                            3
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('4')}
+                          >
+                            4
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('5')}
+                          >
+                            5
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod('6')}
+                          >
+                            6
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid content-center justify-items-center md:col-span-4">
+                  <div className="mx-4 my-4 rounded-lg bg-[#ECF3F9] px-4 py-4">
+                    <small>ยอดจัดรวม:</small>
+                    <div className="text-2xl font-bold">
+                      <CurrencyFormat
+                        value={PriceXvat}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={'฿'}
+                        renderText={(value) => (
+                          <p>
+                            {value} <span className="text-xs">บาท</span>
+                          </p>
+                        )}
+                      />
+                    </div>
+
+                    <small>ประเมินค่าผ่อนชำระรายเดือน:</small>
+                    <div className="text-2xl font-bold text-red-500">
+                      <CurrencyFormat
+                        value={Period}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={'฿'}
+                        renderText={(value) => (
+                          <p>
+                            {value} <span className="text-xs">บาท</span>
+                          </p>
+                        )}
+                      />
+                    </div>
+                    <p className="text-xs">
+                      อัตราดอกเบี้ยและจำนวนเงินที่คำนวณเป็นเพียงการประมาณการเท่านั้น
+                      จำนวนจริงอาจแตกต่างกันไปตามเครดิตของคุณ
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

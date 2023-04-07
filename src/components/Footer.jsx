@@ -6,7 +6,7 @@ import { NavLink } from '@/components/NavLink'
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-[url('/images/banner/banner1920x9152.jpg')] bg-cover bg-center bg-no-repeat ">
+    <footer className="border-t border-gray-200 bg-[url('/images/banner/banner1920x9152.jpg')] bg-cover bg-center bg-no-repeat py-10">
       <Container>
         <div className="my-10 grid grid-cols-1 gap-4 pb-6 pt-16 md:grid-cols-4 md:py-6 lg:flex-row lg:items-center">
           <div>
