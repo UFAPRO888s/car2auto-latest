@@ -5,11 +5,12 @@ import { Faqs } from '@/components/Faqs'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { HeroCars } from '@/components/HeroCars'
+import { HeroNewCars } from '@/components/HeroNewCars'
 import { Pricing } from '@/components/Pricing'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { Testimonials } from '@/components/Testimonials'
-
+import { HeroWhite } from '@/components/HeroWhite'
 export default function Home() {
   return (
     <>
@@ -23,7 +24,8 @@ export default function Home() {
       <Header />
       <SwiperSlideX />
       <main>
-        <HeroCars />
+        <HeroNewCars />
+        <HeroWhite />
         {/* <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />
