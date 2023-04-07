@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import { Button } from '@/components/Button'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -118,8 +119,8 @@ export default function CarDetailing({ DataCar }) {
                 </div>
               </div>
             </div>
-            <div className="col-span-2 flex text-end">
-              <div className="text-2xl font-bold">
+            <div className="col-span-2">
+              <div className="text-end text-2xl font-bold">
                 <CurrencyFormat
                   value={DataCar?.price}
                   displayType={'text'}
@@ -183,7 +184,30 @@ export default function CarDetailing({ DataCar }) {
                 <p className="text-xs">เงินดาวน์ 0 บาท</p>
               </div>
             </div>
-            <div className="col-span-2 flex text-center"></div>
+            <div className="col-span-2 flex text-center">
+              <Button
+                href={
+                  '/car/' +
+                  DataCar.make +
+                  '-' +
+                  DataCar.model +
+                  '-' +
+                  DataCar.appointmentId
+                }
+                variant="solid"
+                color="blue"
+                className="rounded-md w-full"
+              >
+                <span className="text-center text-xs">ติดต่อผู้ขาย</span>
+              </Button>
+            </div>
+          </div>
+          <div className="bg-white">
+            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-2 px-4 py-4 sm:px-6 md:grid-cols-12 lg:px-8">
+              <div>
+                <h3>xxx</h3>
+              </div>
+            </div>
           </div>
         </div>
       </main>
