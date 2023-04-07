@@ -15,7 +15,10 @@ export function AuthLayout({ children }) {
           <Image
             className="absolute inset-0 h-full w-full object-cover"
             src={backgroundImage}
-            alt=""
+            alt="เข้าสู่ระบบ สมัครสมาชิก"
+            layout='responsive'
+            width={100}
+            height={100}
             unoptimized
           />
         </div>
