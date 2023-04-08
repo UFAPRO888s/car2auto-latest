@@ -27,48 +27,51 @@ import { Container } from '@/components/Container'
 import CurrencyFormat from 'react-currency-format'
 import { TextField } from '@/components/Fields'
 import CenteredSingleAction from '@/components/CenteredSingleAction'
+
 export default function CarDetailing({ DataCar }) {
-  const [DownBt, setDownBt] = useState('')
-  const [DownPr, setDownPr] = useState('')
-  const [Interest, setInterest] = useState('')
-  const [Period, setPeriod] = useState('')
-  const [Price, setPrice] = useState('')
-  const [PriceXvat, setPriceXvat] = useState('')
+  // const [XDownBt, setxDownBt] = useState('')
+  // const [XDownPr, setxDownPr] = useState('')
+  // const [XInterest, setxInterest] = useState('')
+  // const [XPeriod, setxPeriod] = useState('')
+  // const [XPrice, setxPrice] = useState('')
+  // const [XPriceXvat, setxPriceXvat] = useState('')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [open, setOpen] = useState(false)
 
-  function handlePriceChange(event) {
-    //   console.log(event.target.value)
-    setPrice(event.target.value)
-  }
+  // function handlePriceChange(event) {
+  //   console.log(event.target.value)
+  //  // setPrice(event)
+  // }
 
-  function handleDownBtChange(event) {
-    //  console.log(event.target.value)
-    setDownBt(event.target.value)
-  }
-  function handlePerDownChange(event) {
-    //  console.log(event.target.value)
-    setDownPr(event.target.value)
-    //const prx = "0."+event.target.value
-    const prtobt = (Price * event.target.value) / 100
-    // console.log(prtobt)
-    setDownBt(prtobt)
-  }
-  function handleinterestChange(event) {
-    // console.log(event.target.value)
-    setInterest(event.target.value)
-  }
-  function PricePeriod(value) {
-    // console.log(value)
-    const PriceXDown = (Price - DownBt) * (Interest / 100)
-    const intye = PriceXDown * value
-    const PriceXvat = Number(intye) + Number(Price)
-    const PriceXintye = PriceXvat / (value * 12)
-    //const PriceXvatXinx = PriceXvat + Interest - DownBt;
-    //console.log(intye)
-    setPeriod(PriceXintye.toFixed(2))
-    setPriceXvat(PriceXvat)
-  }
+  // function handleDownBtChange(event) {
+  //    console.log(event.target.value)
+  //    setxDownBt(event.target.value)
+  // }
+
+  // function handlePerDownChange(event) {
+  //   console.log(event.target.value)
+  //   //setxDownPr(event.target.value)
+  //   //const prx = "0."+event.target.value
+  //   console.log(XPrice)
+  //   const prtobt = (XPrice * event.target.value) / 100
+  //   // console.log(prtobt)
+  //   setxDownBt(prtobt)
+  // }
+  // function handleinterestChange(event) {
+  //   // console.log(event.target.value)
+  //   setxInterest(event.target.value)
+  // }
+  // function PricePeriod(value) {
+  //   // console.log(value)
+  //   const PriceXDown = (XPrice - XDownBt) * (XInterest / 100)
+  //   const intye = PriceXDown * value
+  //   const PriceXvat = Number(intye) + Number(XPrice)
+  //   const PriceXintye = PriceXvat / (value * 12)
+  //   //const PriceXvatXinx = PriceXvat + Interest - DownBt;
+  //   //console.log(intye)
+  //   setxPeriod(PriceXintye.toFixed(2))
+  //   setxPriceXvat(PriceXvat)
+  // }
   return (
     <>
       <Head>
@@ -395,7 +398,7 @@ export default function CarDetailing({ DataCar }) {
                     {DataCar?.make} {DataCar?.model}
                   </span>
                 </h4>
-                <div className="flex justify-between py-4 text-start">
+                <div className="grid grid-cols-2 py-4 text-start">
                   <div className="mr-2 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -432,8 +435,8 @@ export default function CarDetailing({ DataCar }) {
                   </div>
                 </div>
                 <hr />
-                <div className="flex justify-between py-4">
-                  <div className="mr-2 flex items-center">
+                <div className="grid grid-cols-2 py-4">
+                  <div className="mr-2 flex items-start">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -469,7 +472,7 @@ export default function CarDetailing({ DataCar }) {
                   </div>
                 </div>
                 <hr />
-                <div className="flex justify-between py-4">
+                <div className="grid grid-cols-2 py-4">
                   <div className="mr-2 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -506,7 +509,7 @@ export default function CarDetailing({ DataCar }) {
                   </div>
                 </div>
                 <hr />
-                <div className="flex justify-between py-4">
+                <div className="grid grid-cols-2 py-4">
                   <div className="mr-2 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -543,7 +546,7 @@ export default function CarDetailing({ DataCar }) {
                   </div>
                 </div>
                 <hr />
-                <div className="flex justify-between py-4">
+                <div className="grid grid-cols-2 py-4">
                   <div className="mr-2 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -575,14 +578,17 @@ export default function CarDetailing({ DataCar }) {
                   </span>
                 </h4>
                 <div className="rounded-lg md:col-span-8">
-                  <div className="mx-4 my-4 rounded-lg">
-                    <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+                 
+                  {/*<div className="mx-4 my-4 rounded-lg">
+                     <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
                       <div>
                         <TextField
                           id={'PriceCha'}
                           label={'ราคารถ (บาท)'}
                           defValue={DataCar?.price}
+                          //value={DataCar?.price}
                           onChange={handlePriceChange}
+                          //onChange={(event) => setPrice(event.target.value)}
                         />
                       </div>
                       <div className="grid grid-cols-1 gap-2 md:grid-cols-6">
@@ -591,19 +597,19 @@ export default function CarDetailing({ DataCar }) {
                           className="col-span-1 md:col-span-4"
                           label={'เงินดาวน์ บาท'}
                           onChange={handleDownBtChange}
-                          defValue={DownBt}
+                          defValue={XDownBt}
                           dix={true}
                         />
                         <TextField
                           id={'PerDown'}
                           className="col-span-1 md:col-span-2"
                           label={'เงินดาวน์ %'}
-                          defValue={'0'}
+                          //defValue={'0'}
                           onChange={handlePerDownChange}
                         />
                       </div>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+                    </div> */}
+                    {/* <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
                       <div>
                         <TextField
                           id={'interest'}
@@ -654,15 +660,15 @@ export default function CarDetailing({ DataCar }) {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </div> 
+                  </div>*/}
                 </div>
-                <div className="grid grid content-center justify-items-center md:col-span-4">
+                {/* <div className="grid grid content-center justify-items-center md:col-span-4">
                   <div className="mx-4 my-4 rounded-lg bg-[#ECF3F9] px-4 py-4">
                     <small>ยอดจัดรวม:</small>
                     <div className="text-2xl font-bold">
                       <CurrencyFormat
-                        value={PriceXvat}
+                        value={XPriceXvat}
                         displayType={'text'}
                         thousandSeparator={true}
                         prefix={'฿'}
@@ -677,7 +683,7 @@ export default function CarDetailing({ DataCar }) {
                     <small>ประเมินค่าผ่อนชำระรายเดือน:</small>
                     <div className="text-2xl font-bold text-red-500">
                       <CurrencyFormat
-                        value={Period}
+                        value={XPeriod}
                         displayType={'text'}
                         thousandSeparator={true}
                         prefix={'฿'}
@@ -693,7 +699,7 @@ export default function CarDetailing({ DataCar }) {
                       จำนวนจริงอาจแตกต่างกันไปตามเครดิตของคุณ
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

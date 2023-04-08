@@ -1,8 +1,9 @@
+import React, { useId, Fragment, useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { AuthLayout } from '@/components/AuthLayout'
 import { initFirebase } from '@/lib/firebase/initFirebase'
-import { useEffect, useState } from 'react'
+
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import {
   getAuth,
@@ -11,7 +12,8 @@ import {
   GithubAuthProvider,
   EmailAuthProvider,
   FacebookAuthProvider,
-  signInWithEmailAndPassword,signInWithPopup
+  signInWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth'
 import { setUserCookie } from '@/lib/firebase/userCookies'
 import { mapUserData } from '@/lib/firebase/mapUserData'
@@ -23,9 +25,10 @@ import Img_FB from '@/images/facebook.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-initFirebase() // initialize firebase
+import { db } from '@/lib/firebase/initFirebase'
+import { doc, setDoc, Timestamp, GeoPoint } from 'firebase/firestore'
 
-//const auth = getAuth()
+initFirebase()
 
 export default function Login() {
   const router = useRouter()
@@ -41,7 +44,8 @@ export default function Login() {
       signInWithEmailAndPassword(auth, Email, Password)
         .then((userCredential) => {
           const user = userCredential.user
-          setUserCookie(user)//console.log(user)
+          setUserCookie(user) //console.log(user)
+          WriteToCloudFirestore(user)
           //localStorage.setItem('userdatax', JSON.stringify(user))
           router.push('/')
         })
@@ -67,14 +71,15 @@ export default function Login() {
         const token = credential.accessToken
         const user = result.user
         setUserCookie(user)
-        //console.log(user)
+        WriteToCloudFirestore(user)
+        console.log(user)
         //localStorage.setItem('userdatax', JSON.stringify(user))
         router.push('/')
       })
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        const email = error.customData.email
+        //const email = error.customData.email
         const credential = GoogleAuthProvider.credentialFromError(error)
       })
   }
@@ -88,6 +93,7 @@ export default function Login() {
         const token = credential.accessToken
         const user = result.user
         setUserCookie(user)
+        WriteToCloudFirestore(user)
         //console.log(user)
         //localStorage.setItem('userdatax', JSON.stringify(user))
         router.push('/')
@@ -95,10 +101,35 @@ export default function Login() {
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        const email = error.customData.email
+        //const email = error.customData.email
         const credential = FacebookAuthProvider.credentialFromError(error)
       })
   }
+
+  const WriteToCloudFirestore = async (datax) => {
+    //const WriteToCloudFirestore = (datax) => {
+
+    try {
+      const userDoc = doc(db, 'car2autobuy', datax.uid)
+      await setDoc(
+        userDoc,
+        { 
+        uid: datax.uid,
+        // number_data: 2,
+        // boolean_data: true,
+        // map_data: { stringInMap: 'Hi', numberInMap: 7 },
+        // array_data: ['text', 4],
+        // null_data: null,
+        // time_stamp: Timestamp.fromDate(new Date('December 17, 1995 03:24:00')),
+        // geo_point: new GeoPoint(34.714322, -131.468435)
+        })
+      alert('Data was successfully sent to cloud firestore!')
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -170,8 +201,8 @@ export default function Login() {
             </div>
           </div>
           <div className="text-center">
-              <p className="text-base text-red-500">{TextErrorLogin}</p>
-            </div>
+            <p className="text-base text-red-500">{TextErrorLogin}</p>
+          </div>
         </div>
         <form action="#" className="mt-10 grid grid-cols-1 gap-y-4">
           <TextField

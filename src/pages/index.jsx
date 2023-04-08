@@ -14,6 +14,7 @@ import { HeroWhite } from '@/components/HeroWhite'
 import { SecondaryHero } from '@/components/SecondaryHero'
 import BrandCards from '@/components/BrandCards'
 import { SecondaryBuySale } from '@/components/SecondaryBuySale'
+import BlogsList from '@/components/BlogsList'
 export default function Home() {
   return (
     <>
@@ -33,6 +34,7 @@ export default function Home() {
         <BrandCards/>
         <SecondaryHero />
         <SecondaryBuySale />
+        <BlogsList />
         {/* <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />
