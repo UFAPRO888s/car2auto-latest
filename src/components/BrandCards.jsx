@@ -21,7 +21,7 @@ export default function BrandCards({Maname}) {
               key={project.brand}
               className="col-span-1 flex rounded-md shadow-sm hover:bg-[#130F40] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <Link href={`/cars/?make=${project.brand}&low=0&max=5000000`} className="h-auto w-full">
+              <Link href={`/buycars/?make=${project.brand}&min=0&max=5000000`} className="h-auto w-full">
                 <div
                   className={classNames(
                     'flex flex flex-col items-center justify-center rounded-md border border-gray-200 p-1 text-sm font-medium text-gray-500'

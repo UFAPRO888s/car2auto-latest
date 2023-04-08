@@ -11,7 +11,11 @@ import { Testimonials } from '@/components/Testimonials'
 import Car_Recommendations_grid from '@/components/Car_Recommendations_grid'
 import { SwiperSlideXbuy } from '@/components/SwiperSlideXbuy'
 import { Container } from '@/components/Container'
-export default function BuyCars() {
+import { HeroWhiteBuyCar } from '@/components/HeroWhiteBuyCar'
+
+
+export default function BuyCars({DataCar,textRxSx,contexzt}) {
+ // console.log(DataCar)
   return (
     <>
       <Head>
@@ -28,6 +32,7 @@ export default function BuyCars() {
       <main>
         <Container>
           <Car_Recommendations_grid />
+          <HeroWhiteBuyCar DataCars={DataCar} textDis={textRxSx} ConTex={contexzt}/>
           {/* <HeroCars /> */}
           {/* <PrimaryFeatures />
         <SecondaryFeatures />
@@ -40,4 +45,23 @@ export default function BuyCars() {
       <Footer />
     </>
   )
+}
+export async function getServerSideProps(context) {
+  const { make, min, max } = context.query
+  const res = await fetch(
+    `https://car2auto-2023-default-rtdb.asia-southeast1.firebasedatabase.app/dataCar.json`
+  )
+  const data = await res.json()
+  // console.log(data)
+  let result = data;
+  let textRx = "ไม่พบรถยนต์ยี่ห้อ" +make;
+  let conx = "ไม่พบการค้นหา"
+  if(make||min && max){
+   result = data.filter((carx) => carx.make == make | carx.price >= min | carx.price <= max)
+   textRx = "พบรถยนต์ "+make+" จำนวน "+result.length +" คัน";
+   conx = "ตามเงื่อนไข ยี่ห้อ "+make+" หรือ ราคามากกว่า "+min+" หรือ ไม่เกิน "+max
+  }
+  return {
+    props: { DataCar: result ,textRxSx: textRx ,contexzt:conx},
+  }
 }

@@ -101,7 +101,7 @@ export default function Car_Recommendations_grid() {
           ยี่ห้อรถยนต์มือสองแนะนำ
         </h3>
         <ul role="list" className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-4">
-          {BrandData.map((Brand, BrandIdx) => (
+          {BrandData.slice(0,12).map((Brand, BrandIdx) => (
             <li key={BrandIdx}>
               <button
                 type="button"
