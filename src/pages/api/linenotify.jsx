@@ -2,7 +2,15 @@ const lineNotify = require('line-notify-nodejs')(
   'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'
 )
 
-export default function handler(req, res) {
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
+}
+
+export default function handlerLine(req, res) {
   const { selYear } = req.body
   const { selMake } = req.body
   const { selModel } = req.body

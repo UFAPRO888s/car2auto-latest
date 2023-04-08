@@ -38,7 +38,8 @@ import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
 // import UploadFile from '@/components/storage/UploadFile'
 //B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y
-import Alart_description from '@/components/Alart_description'
+//import Alart_description from '@/components/Alart_description'
+//import handlerLine from '@/api/linenotify'
 
 initFirebase()
 const storage = getStorage()
