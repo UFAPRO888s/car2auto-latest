@@ -88,7 +88,7 @@ export default function SaleCars() {
   const subscribe = async (e) => {
     e.preventDefault()
 
-    const res = await fetch(`https://carx2auto.netlify.app/api/lineNotify`, {
+    const res = await fetch(`/api/lineNotify`, {
       body: JSON.stringify({
         selYear: selectedYear?.YearName,
         selMake: selectedMake?.brand,
@@ -107,7 +107,7 @@ export default function SaleCars() {
     })
 
     const { error } = await res.json()
-    let mxmsg = `NEW ประเมินราคา<br/>ปีรถ: ${selectedYear?.YearName}<br/>ยี่ห้อ: ${selectedMake?.brand}<br/>รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name}<br/>สีตัวรถ: ${selectedColor?.name}<br/>ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel}<br/>line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
+    let mxmsg = `NEW ประเมินราคา ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
     if (error) {
       setError(true)
       setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
