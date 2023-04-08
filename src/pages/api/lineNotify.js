@@ -12,6 +12,7 @@ export default async (req, res) => {
   const { selCity } = req.body
   const { selGear } = req.body
   const { selColor } = req.body
+  const { URLimage } = req.body
   
   if (!selYear && !selMake && !selNameUs) {
     return res.status(400).json({ error: 'MSG is required' })
@@ -21,6 +22,8 @@ export default async (req, res) => {
     lineNotify
       .notify({
         message: mxmsg,
+        imageThumbnail: 'https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/user_uploadsdb4aecef-e538-4cff-a5f3-7c06f3054fa4.jpg?alt=media',
+        imageFullsize: 'https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/user_uploadsdb4aecef-e538-4cff-a5f3-7c06f3054fa4.jpg?alt=media'
       })
       .then(() => {
         console.log('send completed!')

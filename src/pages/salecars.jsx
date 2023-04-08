@@ -2,29 +2,30 @@ import Head from 'next/head'
 import React, { useId, Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { CallToAction } from '@/components/CallToAction'
+//import { CallToAction } from '@/components/CallToAction'
 import Image from 'next/image'
-import { Faqs } from '@/components/Faqs'
+//import { Faqs } from '@/components/Faqs'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import { Pricing } from '@/components/Pricing'
-import { PrimaryFeatures } from '@/components/PrimaryFeatures'
-import { SecondaryFeatures } from '@/components/SecondaryFeatures'
-import { Testimonials } from '@/components/Testimonials'
+// import { Hero } from '@/components/Hero'
+// import { Pricing } from '@/components/Pricing'
+// import { PrimaryFeatures } from '@/components/PrimaryFeatures'
+// import { SecondaryFeatures } from '@/components/SecondaryFeatures'
+// import { Testimonials } from '@/components/Testimonials'
 import { SelectField, TextField } from '@/components/Fields'
 import { Button } from '@/components/Button'
 import { RadioGroup } from '@headlessui/react'
 import { year } from '@/data/opt'
-import CityCars from '@/components/CityCars'
-import { DownDropYear } from '@/components/DownDropYear'
-import MakeAndLogo from '@/components/MakeAndLogo'
-import YearVValue from '@/components/YearCars'
-import ColorPicker from '@/components/ColorPicker'
-import TransmissionType from '@/components/TransmissionType'
+// import CityCars from '@/components/CityCars'
+// import { DownDropYear } from '@/components/DownDropYear'
+// import MakeAndLogo from '@/components/MakeAndLogo'
+// import YearVValue from '@/components/YearCars'
+// import ColorPicker from '@/components/ColorPicker'
+// import TransmissionType from '@/components/TransmissionType'
 import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
+import UploadFile from '@/components/storage/UploadFile'
 //B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y
 
 const TransType = [
@@ -56,9 +57,9 @@ const colors = [
     bgColor: 'bg-yellow-500',
     selectedColor: 'ring-yellow-500',
   },
-  { name: 'Slate', bgColor: 'bg-slate-500', selectedColor: 'ring-slate-500' },
+
   { name: 'Gray', bgColor: 'bg-gray-500', selectedColor: 'ring-gray-500' },
-  { name: 'Zinc', bgColor: 'bg-zinc-500', selectedColor: 'ring-zinc-500' },
+
   { name: 'Red', bgColor: 'bg-red-500', selectedColor: 'ring-red-500' },
   {
     name: 'Orange',
@@ -83,6 +84,8 @@ export default function SaleCars() {
   const [selectedCity, setSelectedCity] = useState('')
   const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
   const [selectedColor, setSelectedColor] = useState(colors[0])
+  const [valueImgss, setValueImgss] = useState('')
+
   // console.log(selectedYear?.YearName)
 
   const subscribe = async (e) => {
@@ -99,6 +102,7 @@ export default function SaleCars() {
         selCity: selectedCity?.CityName,
         selGear: selectedTransmission?.name,
         selColor: selectedColor?.name,
+        URLimage: valueImgss,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -575,6 +579,7 @@ export default function SaleCars() {
                     </RadioGroup.Label>
                     <div className="mt-4 flex flex-wrap items-center justify-around gap-2 space-x-3 md:flex md:flex-nowrap">
                       {colors.map((color) => (
+                        
                         <RadioGroup.Option
                           key={color.name}
                           value={color}
@@ -583,7 +588,7 @@ export default function SaleCars() {
                               color.selectedColor,
                               active && checked ? 'ring ring-offset-1' : '',
                               !active && checked ? 'ring-2' : '',
-                              'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
+                              'relative -m-0.5 flex flex-col cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
                             )
                           }
                         >
@@ -597,10 +602,22 @@ export default function SaleCars() {
                               'h-8 w-8 rounded-full border border-black border-opacity-10'
                             )}
                           />
+                          <span className='text-[10px]'>{color.name}</span>
                         </RadioGroup.Option>
+                        
+                       
                       ))}
                     </div>
                   </RadioGroup>
+                </div>
+                <div>
+                  <label
+                    htmlFor="uploadCarImg"
+                    className="mb-3 block text-sm font-medium text-gray-700"
+                  >
+                    อัพโหลดรูปรถยนต์
+                  </label>
+                  <UploadFile />
                 </div>
                 <div className="py-6">
                   <Button
