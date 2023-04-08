@@ -70,7 +70,7 @@ export default function BlogsList() {
   useEffect(() => {
     ;(async () => {
       const res = await fetch(
-        `https://www.lekdedthai.com/wp-json/wp/v2/posts?&_embed&per_page=8&_fields=id,date_gmt,modified_gmt,slug,title,content,excerpt,categories,_links`
+        `https://archive.car2autobuy.com/wp-json/wp/v2/posts?&_embed&per_page=8&_fields=id,date_gmt,modified_gmt,slug,title,content,excerpt,categories,_links`
       )
       const data = await res.json()
       setBlogData(data)
@@ -80,7 +80,7 @@ export default function BlogsList() {
       // this now gets called when the component unmounts
     }
   }, [])
- // console.log(BlogData)
+  // console.log(BlogData)
   return (
     <Container>
       <div className="bg-white px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
@@ -97,45 +97,60 @@ export default function BlogsList() {
           <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
             {BlogData?.slice(0, 3).map((post, indexPost) => (
               <div key={indexPost}>
-                <div>
-                  <a href={'#'} className="inline-block">
-                    <span
-                      className={classNames(
-                       // post.category.color,
-                       'bg-green-100 text-green-800',
-                        'inline-flex items-center rounded-full px-3 py-0.5 text-sm font-medium'
+                <Link href={`/car-story/${post['slug']}`}>
+                  <div className="relative">
+                    <Image
+                      src={
+                        post['_embedded']['wp:featuredmedia'][0]['source_url']
+                      }
+                      alt={post['title']['rendered'].replace(
+                        /(<([^>]+)>)|&.+;/gm,
+                        ' '
                       )}
-                    >
-                      {"รถมือสอง"}
-                    </span>
-                  </a>
-                </div>
-                <a href={post.href} className="mt-4 block">
-                  <p className="text-xl font-semibold text-gray-900">
+                      layout="responsive"
+                      className=" w-full rounded-lg object-cover object-center"
+                      width={100}
+                      height={70}
+                    />
+                    <div className="absolute left-2 top-2">
+                      <a href={'#'} className="inline-block">
+                        <span
+                          className={classNames(
+                            // post.category.color,
+                            'bg-green-100 text-green-800',
+                            'inline-flex items-center rounded-full px-3 py-0.5 text-sm font-medium'
+                          )}
+                        >
+                          {'รถมือสอง'}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </Link>
+                <Link href={`/car-story/${post['slug']}`} className="mt-4 block">
+                  <h3 className="text-xl font-semibold text-gray-900">
                     {post['title']['rendered'].replace(
                       /(<([^>]+)>)|&.+;/gm,
                       ' '
                     )}
-                  </p>
-                  {/* <p className="mt-3 text-base text-gray-500">
-                    {post.description}
-                  </p> */}
-                  <div
-                    className="mt-3 text-base text-gray-500"
-                    dangerouslySetInnerHTML={{
-                      __html: post['excerpt']['rendered'].replace(
-                        /(<([^>]+)>)|&.+;/gm,
-                        ' '
-                      ),
-                    }}
-                  ></div>
-                </a>
+                  </h3>
+                </Link>
+                <div
+                  className="mt-3 text-base text-gray-500"
+                  dangerouslySetInnerHTML={{
+                    __html: post['excerpt']['rendered'].replace(
+                      /(<([^>]+)>)|&.+;/gm,
+                      ' '
+                    ),
+                  }}
+                ></div>
+
                 <div className="mt-6 flex items-center">
                   <div className="flex-shrink-0">
-                    <a href={'#'}>
+                    <div>
                       <span className="sr-only">{'CHANGYED'}</span>
                       <Image
-                        src={"/images/Car2autobuy-01.png"}
+                        src={'/images/Car2autobuy-01.png'}
                         alt={
                           'ตรวจหวย ' +
                           post['title']['rendered'].replace(
@@ -148,11 +163,11 @@ export default function BlogsList() {
                         width={100}
                         height={100}
                       />
-                    </a>
+                    </div>
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-900">
-                      <Link href={'#'}>{'CHANGYED'}</Link>
+                      {'CAR2AUTOBUY'}
                     </p>
                     <div className="flex space-x-1 text-sm text-gray-500">
                       <time dateTime={post['date_gmt']}>
