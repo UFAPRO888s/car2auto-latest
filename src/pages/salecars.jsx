@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useId, Fragment, useEffect, useState } from 'react'
+import React, { useId, Fragment, useEffect, useRef, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 //import { CallToAction } from '@/components/CallToAction'
@@ -15,18 +15,30 @@ import { Header } from '@/components/Header'
 import { SelectField, TextField } from '@/components/Fields'
 import { Button } from '@/components/Button'
 import { RadioGroup } from '@headlessui/react'
-import { year } from '@/data/opt'
+// import { year } from '@/data/opt'
 // import CityCars from '@/components/CityCars'
 // import { DownDropYear } from '@/components/DownDropYear'
 // import MakeAndLogo from '@/components/MakeAndLogo'
 // import YearVValue from '@/components/YearCars'
 // import ColorPicker from '@/components/ColorPicker'
 // import TransmissionType from '@/components/TransmissionType'
+
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage'
+import { initFirebase } from '@/lib/firebase/initFirebase'
+
 import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
-import UploadFile from '@/components/storage/UploadFile'
+// import UploadFile from '@/components/storage/UploadFile'
 //B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y
+
+initFirebase()
+const storage = getStorage()
 
 const TransType = [
   {
@@ -84,9 +96,52 @@ export default function SaleCars() {
   const [selectedCity, setSelectedCity] = useState('')
   const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
   const [selectedColor, setSelectedColor] = useState(colors[0])
-  const [valueImgss, setValueImgss] = useState('')
 
+  const inputEl = useRef(null)
+  const [value, setValue] = useState(0)
+  const [valueImgss, setValueImgss] = useState()
   // console.log(selectedYear?.YearName)
+
+  function handleTelChange(event) {
+    console.log(event.target.value)
+    setSelectedTel(event.target.value)
+  }
+
+  function uploadFile() {
+    var file = inputEl.current.files[0]
+    // setValueImgss(
+    //   'https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/' +
+    //     file.name +
+    //     '?alt=media'
+    // )
+    // create a storage ref
+    const storageRef = ref(storage, 'user_uploads' + file.name)
+
+    // upload file
+    const task = uploadBytesResumable(storageRef, file)
+
+    // update progress bar
+    task.on(
+      'state_change',
+
+      function progress(snapshot) {
+        setValue((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+      },
+
+      function error(err) {
+        alert(error)
+      },
+
+      function complete() {
+        getDownloadURL(task.snapshot.ref).then((downloadURL) => {
+          // console.log('File available at', downloadURL);
+          setValueImgss(downloadURL)
+          //alert('Uploaded to firebase storage successfully!'+downloadURL)
+        })
+      }
+    )
+  }
+  //https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/user_uploadsscreencapture-localhost-3000-car-Nissan-Frontier-Navara-THA6630001164-2023-04-02-14_20_57.png?alt=media
 
   const subscribe = async (e) => {
     e.preventDefault()
@@ -391,7 +446,7 @@ export default function SaleCars() {
                     id="tel_car"
                     name="tel_car"
                     label={'เบอร์โทร'}
-                    onChange={(event) => setSelectedTel(event.target.value)}
+                    onChange={handleTelChange}
                   />
                   <TextField
                     id="lineid_car"
@@ -579,7 +634,6 @@ export default function SaleCars() {
                     </RadioGroup.Label>
                     <div className="mt-4 flex flex-wrap items-center justify-around gap-2 space-x-3 md:flex md:flex-nowrap">
                       {colors.map((color) => (
-                        
                         <RadioGroup.Option
                           key={color.name}
                           value={color}
@@ -588,7 +642,7 @@ export default function SaleCars() {
                               color.selectedColor,
                               active && checked ? 'ring ring-offset-1' : '',
                               !active && checked ? 'ring-2' : '',
-                              'relative -m-0.5 flex flex-col cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
+                              'relative -m-0.5 flex cursor-pointer flex-col items-center justify-center rounded-full p-0.5 focus:outline-none'
                             )
                           }
                         >
@@ -602,22 +656,40 @@ export default function SaleCars() {
                               'h-8 w-8 rounded-full border border-black border-opacity-10'
                             )}
                           />
-                          <span className='text-[10px]'>{color.name}</span>
+                          <span className="text-[10px]">{color.name}</span>
                         </RadioGroup.Option>
-                        
-                       
                       ))}
                     </div>
                   </RadioGroup>
                 </div>
-                <div>
+                <div className="w-full">
                   <label
                     htmlFor="uploadCarImg"
                     className="mb-3 block text-sm font-medium text-gray-700"
                   >
                     อัพโหลดรูปรถยนต์
                   </label>
-                  <UploadFile />
+                  <div className="mx-5 my-5">
+                    {valueImgss ? (
+                      <div>
+                        <Image
+                          src={valueImgss}
+                          alt={'imgUP'}
+                          layout="fixed"
+                          width={100}
+                          height={100}
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : null}
+                    <progress
+                      value={value}
+                      max="100"
+                      style={{ width: '100%' }}
+                    ></progress>
+                    <br />
+                    <input type="file" onChange={uploadFile} ref={inputEl} />
+                  </div>
                 </div>
                 <div className="py-6">
                   <Button

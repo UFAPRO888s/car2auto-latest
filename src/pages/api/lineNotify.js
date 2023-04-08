@@ -22,8 +22,8 @@ export default async (req, res) => {
     lineNotify
       .notify({
         message: mxmsg,
-        imageThumbnail: 'https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/user_uploadsdb4aecef-e538-4cff-a5f3-7c06f3054fa4.jpg?alt=media',
-        imageFullsize: 'https://firebasestorage.googleapis.com/v0/b/car2auto-2023.appspot.com/o/user_uploadsdb4aecef-e538-4cff-a5f3-7c06f3054fa4.jpg?alt=media'
+        imageThumbnail: URLimage,
+        imageFullsize: URLimage
       })
       .then(() => {
         console.log('send completed!')
