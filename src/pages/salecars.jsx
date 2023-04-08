@@ -152,40 +152,54 @@ export default function SaleCars() {
 
   const subscribe = async (e) => {
     e.preventDefault()
+    if (
+      selectedYear?.YearName != '' ||
+      selectedMake?.brand != '' ||
+      valueImgss != ''
+    ) {
+      const res = await fetch(`/api/linenotify`, {
+        body: JSON.stringify({
+          selYear: selectedYear?.YearName,
+          selMake: selectedMake?.brand,
+          selModel: selectedModel,
+          selNameUs: selectedNameUs,
+          selTel: selectedTel,
+          selLine: selectedLineId,
+          selCity: selectedCity?.CityName,
+          selGear: selectedTransmission?.name,
+          selColor: selectedColor?.name,
+          URLimage: valueImgss,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      })
 
-    const res = await fetch(`/api/linenotify`, {
-      body: JSON.stringify({
-        selYear: selectedYear?.YearName,
-        selMake: selectedMake?.brand,
-        selModel: selectedModel,
-        selNameUs: selectedNameUs,
-        selTel: selectedTel,
-        selLine: selectedLineId,
-        selCity: selectedCity?.CityName,
-        selGear: selectedTransmission?.name,
-        selColor: selectedColor?.name,
-        URLimage: valueImgss,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
+      const { error } = await res.json()
+      let mxmsg = `NEW ประเมินราคา ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
+      if (error) {
+        setError(true)
+        setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
+        return
+      }
 
-    const { error } = await res.json()
-    let mxmsg = `NEW ประเมินราคา ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
-    if (error) {
-      setError(true)
-      setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
-      return
+      selectedYear = ''
+      selectedMake = ''
+      selectedModel = ''
+      selectedNameUs = ''
+      selectedTel = ''
+      selectedLineId = ''
+      selectedCity = ''
+      inputEl = ''
+
+      setError(false)
+      setSubscribed(true)
+      setMessage(
+        'ส่งข้อมูลเรียบร้อย! 🎉 พนักงานจะติดต่อกลับด่วนที่สุด\n' + mxmsg
+      )
     }
-
-    selectedYear = ''
-    setError(false)
-    setSubscribed(true)
-    setMessage('ส่งข้อมูลเรียบร้อย! 🎉 พนักงานจะติดต่อกลับด่วนที่สุด\n' + mxmsg)
   }
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -706,12 +720,15 @@ export default function SaleCars() {
                   >
                     ส่งไปยังพนักงาน
                   </Button>
-                  <Button href={"line://oaMessage/@272iybrg/?สวัสดี%20❤️"} className="w-full rounded-md">
+                  <Button
+                    href={'line://oaMessage/@272iybrg/?สวัสดี%20❤️'}
+                    className="w-full rounded-md"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="64"
                       height="64"
-                      className='object-contain mr-2'
+                      className="mr-2 object-contain"
                     >
                       <path
                         d="M64 27.487c0-14.32-14.355-25.97-32-25.97S0 13.168 0 27.487c0 12.837 11.384 23.588 26.762 25.62 1.042.225 2.46.688 2.82 1.578.322.81.21 2.076.103 2.894l-.457 2.74c-.14.81-.643 3.164 2.772 1.725s18.428-10.852 25.143-18.58h-.001C61.78 38.38 64 33.218 64 27.487"

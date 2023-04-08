@@ -56,10 +56,10 @@ export async function getServerSideProps(context) {
   let result = data;
   let textRx = "ไม่พบรถยนต์ยี่ห้อ" +make;
   let conx = "ไม่พบการค้นหา"
-  if(make||min && max){
+  if(make){
    result = data.filter((carx) => carx.make == make | carx.price >= min | carx.price <= max)
    textRx = "รถยนต์ "+make+" จำนวน "+result.length +" คัน";
-   conx = "ตามเงื่อนไข ยี่ห้อ "+make+" หรือ ราคามากกว่า "+min+" หรือ ไม่เกิน "+max
+   conx = "ตามเงื่อนไข ยี่ห้อ "+make
   }else{
     result = data;
     textRx = "รถยนต์ทั้งหมด จำนวน "+result.length +" คัน";
