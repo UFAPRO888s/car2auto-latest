@@ -2,7 +2,7 @@ const lineNotify = require('line-notify-nodejs')(
   'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'
 )
 
-export default async (req, res) => {
+export default function handler(req, res) {
   const { selYear } = req.body
   const { selMake } = req.body
   const { selModel } = req.body
@@ -18,7 +18,7 @@ export default async (req, res) => {
     return res.status(400).json({ error: 'MSG is required' })
   }
   try {
-    let mxmsg = `NEW ประเมินราคา\nปีรถ: ${selYear}\nยี่ห้อ: ${selMake}\nรุ่น: ${selModel}\nเกียร์: ${selGear}\nสีตัวรถ: ${selColor}\nชื่อติดต่อ: ${selNameUs}\nเบอร์โทร: ${selTel}\nline: ${selLine}\nจังหวัด: ${selCity}`
+    let mxmsg = `NEW\nปีรถ: ${selYear}\nยี่ห้อ: ${selMake}\nรุ่น: ${selModel}\nเกียร์: ${selGear}\nสีตัวรถ: ${selColor}\nชื่อติดต่อ: ${selNameUs}\nเบอร์โทร: ${selTel}\nline: ${selLine}\nจังหวัด: ${selCity}`
     lineNotify
       .notify({
         message: mxmsg,
