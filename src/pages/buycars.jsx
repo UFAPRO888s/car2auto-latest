@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { SwiperSlideX } from '@/components/SwiperSlideX'
 import { CallToAction } from '@/components/CallToAction'
 import { Faqs } from '@/components/Faqs'
 import { Footer } from '@/components/Footer'
@@ -9,27 +8,34 @@ import { Pricing } from '@/components/Pricing'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { Testimonials } from '@/components/Testimonials'
-
+import Car_Recommendations_grid from '@/components/Car_Recommendations_grid'
+import { SwiperSlideXbuy } from '@/components/SwiperSlideXbuy'
+import { Container } from '@/components/Container'
 export default function BuyCars() {
   return (
     <>
       <Head>
-        <title>รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง car2autobuy</title>
+        <title>
+          ซื้อรถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง car2autobuy
+        </title>
         <meta
           name="description"
-          content="รถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง"
+          content="ซื้อรถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง"
         />
       </Head>
       <Header />
-      <SwiperSlideX />
+      <SwiperSlideXbuy />
       <main>
-        {/* <HeroCars /> */}
-        {/* <PrimaryFeatures />
+        <Container>
+          <Car_Recommendations_grid />
+          {/* <HeroCars /> */}
+          {/* <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />
         <Testimonials />
         <Pricing />
         <Faqs /> */}
+        </Container>
       </main>
       <Footer />
     </>
