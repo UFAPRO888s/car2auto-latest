@@ -112,7 +112,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis,ConTex }) {
           {DataCars.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}
-              className="overflow-hidden rounded-lg bg-white py-4 shadow-lg"
+              className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
               <div className="relative">
                 <Image
