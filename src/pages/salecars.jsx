@@ -88,7 +88,7 @@ export default function SaleCars() {
   const subscribe = async (e) => {
     e.preventDefault()
 
-    const res = await fetch(`/api/lineNotify`, {
+    const res = await fetch(`https://carx2auto.netlify.app/api/lineNotify`, {
       body: JSON.stringify({
         selYear: selectedYear?.YearName,
         selMake: selectedMake?.brand,
