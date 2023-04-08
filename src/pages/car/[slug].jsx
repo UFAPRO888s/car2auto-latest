@@ -175,7 +175,7 @@ export default function CarDetailing({ DataCar }) {
         </Dialog>
       </Transition.Root>
       {/* <SwiperSlideX /> */}
-      <main className=" bg-[#d2e0ed]">
+      <main className="bg-[#d2e0ed]">
         <Container>
           <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-12">
             <div className="col-span-10 h-auto md:h-[500px] w-full">
@@ -198,6 +198,7 @@ export default function CarDetailing({ DataCar }) {
                       layout="responsive"
                       width={100}
                       height={60}
+                      className='bg-[#d2e0ed]'
                     />
                   </SwiperSlide>
                 ))}

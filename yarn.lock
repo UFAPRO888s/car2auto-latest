@@ -1037,6 +1037,13 @@ axe-core@^4.6.2:
   resolved "https://registry.npmmirror.com/axe-core/-/axe-core-4.6.3.tgz#fc0db6fdb65cc7a80ccf85286d91d64ababa3ece"
   integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
 
+axios@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.npmmirror.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
+  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
+  dependencies:
+    follow-redirects "^1.14.8"
+
 axobject-query@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmmirror.com/axobject-query/-/axobject-query-3.1.1.tgz#3b6e5c6d4e43ca7ba51c5babf99d22a9c68485e1"
@@ -1832,6 +1839,11 @@ focus-visible@^5.2.0:
   resolved "https://registry.npmmirror.com/focus-visible/-/focus-visible-5.2.0.tgz#3a9e41fccf587bd25dcc2ef045508284f0a4d6b3"
   integrity sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
 
+follow-redirects@^1.14.8:
+  version "1.15.2"
+  resolved "https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+
 for-each@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npmmirror.com/for-each/-/for-each-0.3.3.tgz#69b447e88a0a5d32c3e7084f3f1710034b21376e"
@@ -2547,6 +2559,13 @@ limiter@^1.1.5:
   version "1.1.5"
   resolved "https://registry.npmmirror.com/limiter/-/limiter-1.1.5.tgz#8f92a25b3b16c6131293a0cc834b4a838a2aa7c2"
   integrity sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==
+
+line-notify-nodejs@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/line-notify-nodejs/-/line-notify-nodejs-1.0.1.tgz#1bc61938ecd8274eff5efeadbfd1be69cb1aa0d5"
+  integrity sha512-pqMmFa+VFo0swA7iOmTDCU6couJidLD69XlQPazB4dCRnOTUFxVdQOw77iXOSPh/vFM90EyEaeJg/fX4Fq1E7Q==
+  dependencies:
+    axios "^0.26.1"
 
 lines-and-columns@^1.1.6:
   version "1.2.4"

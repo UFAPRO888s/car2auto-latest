@@ -11,18 +11,7 @@ const colorvalue = [
     ColorCode: 'black',
     Order: 2,
   },
-  {
-    ColorId: 12,
-    ColorName: 'สีเทา',
-    ColorCode: 'grey',
-    Order: 3,
-  },
-  {
-    ColorId: 11,
-    ColorName: 'สีเงิน',
-    ColorCode: 'silver',
-    Order: 4,
-  },
+ 
   {
     ColorId: 3,
     ColorName: 'สีแดง',

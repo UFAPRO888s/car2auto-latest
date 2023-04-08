@@ -1,8 +1,8 @@
 const Cityvalue = [
   {
     CityId: 0,
-    CityName: 'ทั้งหมด',
-    CityCode: 'ทั้งหมด',
+    CityName: 'ไม่มีจังหวัด',
+    CityCode: 'ไม่มีจังหวัด',
     RegionId: 0,
   },
   {

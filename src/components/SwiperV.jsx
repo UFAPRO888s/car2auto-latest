@@ -12,7 +12,7 @@ import { Mousewheel, Pagination } from 'swiper'
 export default function SwiperV({ imgxs }) {
   //console.log(imgxs)
   return (
-    <>
+    <div>
       <Swiper
         direction={'vertical'}
         slidesPerView={4}
@@ -22,7 +22,7 @@ export default function SwiperV({ imgxs }) {
           clickable: true,
         }}
         modules={[Mousewheel, Pagination]}
-        className="mySwiper2 rounded-xl"
+        className="mySwiper2 rounded-xl overflow-hidden"
       >
         {imgxs.map((groupgallery, groupIndex) => (
           <SwiperSlide key={groupIndex}>
@@ -32,11 +32,11 @@ export default function SwiperV({ imgxs }) {
               layout="responsive"
               width={100}
               height={60}
-              className="rounded-xl object-cover"
+              className="rounded-xl object-cover overflow-hidden"
             />
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   )
 }

@@ -194,6 +194,7 @@ export default function LoanCalc() {
             </div>
           </div>
         </div>
+        <div className='py-4'></div>
       </main>
       <Footer />
     </>
