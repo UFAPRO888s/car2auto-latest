@@ -107,7 +107,7 @@ export default function SaleCars() {
     })
 
     const { error } = await res.json()
-    let mxmsg = `NEW ประเมินราคา\nปีรถ: ${selectedYear?.YearName}\nยี่ห้อ: ${selectedMake?.brand}\nรุ่น: ${selectedModel}\nเกียร์: ${selectedTransmission}\nสีตัวรถ: ${selectedColor}\nชื่อติดต่อ: ${selectedNameUs}\nเบอร์โทร: ${selectedTel}\nline: ${selectedLineId}\nจังหวัด: ${selectedCity}`
+    let mxmsg = `NEW ประเมินราคา<br/>ปีรถ: ${selectedYear?.YearName}<br/>ยี่ห้อ: ${selectedMake?.brand}<br/>รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name}<br/>สีตัวรถ: ${selectedColor?.name}<br/>ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel}<br/>line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
     if (error) {
       setError(true)
       setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
