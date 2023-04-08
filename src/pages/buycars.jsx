@@ -58,8 +58,12 @@ export async function getServerSideProps(context) {
   let conx = "ไม่พบการค้นหา"
   if(make||min && max){
    result = data.filter((carx) => carx.make == make | carx.price >= min | carx.price <= max)
-   textRx = "พบรถยนต์ "+make+" จำนวน "+result.length +" คัน";
+   textRx = "รถยนต์ "+make+" จำนวน "+result.length +" คัน";
    conx = "ตามเงื่อนไข ยี่ห้อ "+make+" หรือ ราคามากกว่า "+min+" หรือ ไม่เกิน "+max
+  }else{
+    result = data;
+    textRx = "รถยนต์ทั้งหมด จำนวน "+result.length +" คัน";
+    conx = "";
   }
   return {
     props: { DataCar: result ,textRxSx: textRx ,contexzt:conx},
