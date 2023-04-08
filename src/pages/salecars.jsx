@@ -15,6 +15,8 @@ import { Header } from '@/components/Header'
 import { SelectField, TextField } from '@/components/Fields'
 import { Button } from '@/components/Button'
 import { RadioGroup } from '@headlessui/react'
+
+// import LineLogo from '@/images/logos/line-icon.svg'
 // import { year } from '@/data/opt'
 // import CityCars from '@/components/CityCars'
 // import { DownDropYear } from '@/components/DownDropYear'
@@ -36,6 +38,7 @@ import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
 // import UploadFile from '@/components/storage/UploadFile'
 //B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y
+import Alart_description from '@/components/Alart_description'
 
 initFirebase()
 const storage = getStorage()
@@ -103,7 +106,11 @@ export default function SaleCars() {
   // console.log(selectedYear?.YearName)
 
   function handleTelChange(event) {
-    console.log(event.target.value)
+    const telxcheck = event.target.value
+    if (telxcheck.length > 12) {
+      setMessage('กรุณาตรวจสอบข้อมูล เบอร์โทรนะค่ะ!')
+    }
+    console.log(telxcheck)
     setSelectedTel(event.target.value)
   }
 
@@ -691,7 +698,7 @@ export default function SaleCars() {
                     <input type="file" onChange={uploadFile} ref={inputEl} />
                   </div>
                 </div>
-                <div className="py-6">
+                <div className="flex gap-4 py-6">
                   <Button
                     type="submit"
                     onClick={subscribe}
@@ -699,6 +706,26 @@ export default function SaleCars() {
                   >
                     ส่งไปยังพนักงาน
                   </Button>
+                  <Button onClick={subscribe} className="w-full rounded-md">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="64"
+                      height="64"
+                      className='object-contain mr-2'
+                    >
+                      <path
+                        d="M64 27.487c0-14.32-14.355-25.97-32-25.97S0 13.168 0 27.487c0 12.837 11.384 23.588 26.762 25.62 1.042.225 2.46.688 2.82 1.578.322.81.21 2.076.103 2.894l-.457 2.74c-.14.81-.643 3.164 2.772 1.725s18.428-10.852 25.143-18.58h-.001C61.78 38.38 64 33.218 64 27.487"
+                        fill="#00b900"
+                      />
+                      <g fill="#fff">
+                        <path d="M25.498 20.568h-2.245c-.344 0-.623.28-.623.623v13.943a.62.62 0 0 0 .623.62h2.245a.62.62 0 0 0 .623-.62V21.2c0-.343-.28-.623-.623-.623m15.45-.01h-2.244c-.345 0-.624.28-.624.623v8.284l-6.4-8.63c-.014-.022-.03-.043-.048-.063l-.004-.004a.4.4 0 0 0-.038-.038l-.044-.04c-.006-.004-.01-.008-.016-.012l-.032-.022-.02-.012-.033-.02c-.006-.002-.014-.006-.02-.01-.012-.006-.023-.012-.036-.016s-.014-.006-.02-.006c-.012-.006-.025-.008-.037-.012l-.022-.006c-.012-.002-.023-.006-.035-.008l-.026-.004c-.008-.002-.022-.004-.033-.004l-.032-.002c-.008 0-.014-.001-.022-.001h-2.244c-.344 0-.623.28-.623.623V35.13a.62.62 0 0 0 .623.62h2.244c.344 0 .624-.278.624-.62v-8.28l6.397 8.64a.63.63 0 0 0 .158.154c.018.014.032.022.045.03.006.004.012.008.018.01s.02.01.03.014.02.008.03.014l.06.022a.62.62 0 0 0 .168.022h2.244a.62.62 0 0 0 .623-.62V21.2c0-.343-.28-.623-.623-.623" />
+                        <path d="M20.087 32.264h-6.1V21.2c0-.344-.28-.623-.623-.623H11.12c-.344 0-.623.28-.623.623v13.942a.62.62 0 0 0 .174.431c.012.012.014.016.016.018.113.107.264.174.43.174h8.968c.344 0 .623-.28.623-.623v-2.245c0-.344-.278-.623-.623-.623m33.258-8.214c.344 0 .623-.28.623-.623V21.2c0-.344-.278-.623-.623-.623h-8.968c-.168 0-.32.067-.432.176-.012.01-.016.014-.018.018-.107.1-.173.262-.173.43v13.943a.62.62 0 0 0 .174.431l.016.016a.62.62 0 0 0 .431.174h8.968c.344 0 .623-.28.623-.623v-2.246c0-.344-.278-.623-.623-.623h-6.098v-2.357h6.098a.62.62 0 0 0 .623-.623V27.04c0-.344-.278-.624-.623-.624h-6.098V24.06h6.098z" />
+                      </g>
+                    </svg>
+                    ติดต่อผ่าน LINE
+                  </Button>
+                </div>
+                <div>
                   <p className="py-4 text-center text-xs">
                     เพื่อดำเนินการต่อ
                     ฉันยอมรับนโยบายความเป็นส่วนตัวและข้อกำหนดการใช้งาน
