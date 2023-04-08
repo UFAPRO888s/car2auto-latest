@@ -113,7 +113,7 @@ export default function BlogsList() {
                       height={70}
                     />
                     <div className="absolute left-2 top-2">
-                      <a href={'#'} className="inline-block">
+                      <div className="inline-block">
                         <span
                           className={classNames(
                             // post.category.color,
@@ -123,7 +123,7 @@ export default function BlogsList() {
                         >
                           {'รถมือสอง'}
                         </span>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </Link>

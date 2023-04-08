@@ -72,7 +72,7 @@ export default function Login() {
         const user = result.user
         setUserCookie(user)
         WriteToCloudFirestore(user)
-        console.log(user)
+        // console.log(user)
         //localStorage.setItem('userdatax', JSON.stringify(user))
         router.push('/')
       })
@@ -111,10 +111,14 @@ export default function Login() {
 
     try {
       const userDoc = doc(db, 'car2autobuy', datax.uid)
-      await setDoc(
-        userDoc,
-        { 
-        uid: datax.uid,
+      await setDoc(userDoc, {
+        uid: datax?.uid,
+        photoURL: datax?.photoURL,
+        providerId: datax?.providerId,
+
+        email: datax?.email,
+        displayName: datax?.displayName,
+
         // number_data: 2,
         // boolean_data: true,
         // map_data: { stringInMap: 'Hi', numberInMap: 7 },
@@ -122,8 +126,8 @@ export default function Login() {
         // null_data: null,
         // time_stamp: Timestamp.fromDate(new Date('December 17, 1995 03:24:00')),
         // geo_point: new GeoPoint(34.714322, -131.468435)
-        })
-      alert('Data was successfully sent to cloud firestore!')
+      })
+      alert('Data was successfully ChangYed send to cloud firestore!')
     } catch (error) {
       console.log(error)
       alert(error)

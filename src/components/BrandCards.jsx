@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function BrandCards({Maname}) {
+export default function BrandCards({ Maname }) {
   return (
     <Container>
       <div className="py-8">
@@ -21,7 +21,10 @@ export default function BrandCards({Maname}) {
               key={project.brand}
               className="col-span-1 flex rounded-md shadow-sm hover:bg-[#130F40] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <Link href={`/buycars/?make=${project.brand}&min=0&max=5000000`} className="h-auto w-full">
+              <Link
+                href={`/buycars/?make=${project.brand}&min=0&max=5000000`}
+                className="h-auto w-full"
+              >
                 <div
                   className={classNames(
                     'flex flex flex-col items-center justify-center rounded-md border border-gray-200 p-1 text-sm font-medium text-gray-500'
@@ -42,29 +45,6 @@ export default function BrandCards({Maname}) {
                   </p>
                 </div>
               </Link>
-              {/* <div className="hidden md:flex flex-1 items-center justify-between truncate">
-              <div className="flex-1 truncate px-4 py-2 text-sm">
-                <a
-                  href={project.href}
-                  className="font-medium text-gray-900 hover:text-gray-600"
-                >
-                  {project.brand}
-                </a>
-                <p className="text-gray-500">{project.count} คัน</p>
-              </div>
-              <div className="flex-shrink-0 pr-2">
-                <button
-                  type="button"
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white bg-transparent text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">Open options</span>
-                  <EllipsisVerticalIcon
-                    className="h-5 w-5"
-                    aria-hidden="true"
-                  />
-                </button>
-              </div> 
-            </div>*/}
             </li>
           ))}
         </ul>
