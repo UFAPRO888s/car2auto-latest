@@ -14,7 +14,7 @@ export default async (req, res) => {
   const { selColor } = req.body
   const { URLimage } = req.body
   
-  if (!selYear && !selMake && !selNameUs && !URLimage) {
+  if (!selTel) {
     return res.status(400).json({ error: 'MSG is required' })
   }
   try {
