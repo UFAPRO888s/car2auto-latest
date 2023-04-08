@@ -153,7 +153,7 @@ export default function SaleCars() {
   const subscribe = async (e) => {
     e.preventDefault()
 
-    const res = await fetch(`/api/lineNotify`, {
+    const res = await fetch(`https://line.car2autobuy.com/linenotify`, {
       body: JSON.stringify({
         selYear: selectedYear?.YearName,
         selMake: selectedMake?.brand,
