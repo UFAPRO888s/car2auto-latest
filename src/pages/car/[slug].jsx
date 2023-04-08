@@ -27,14 +27,15 @@ import { Container } from '@/components/Container'
 import CurrencyFormat from 'react-currency-format'
 import { TextField } from '@/components/Fields'
 import CenteredSingleAction from '@/components/CenteredSingleAction'
+import LoanX from '@/components/LoanX'
 
 export default function CarDetailing({ DataCar }) {
-  // const [XDownBt, setxDownBt] = useState('')
-  // const [XDownPr, setxDownPr] = useState('')
-  // const [XInterest, setxInterest] = useState('')
-  // const [XPeriod, setxPeriod] = useState('')
-  // const [XPrice, setxPrice] = useState('')
-  // const [XPriceXvat, setxPriceXvat] = useState('')
+  const [XDownBt, setxDownBt] = useState('')
+  const [XDownPr, setxDownPr] = useState('')
+  const [XInterest, setxInterest] = useState('')
+  const [XPeriod, setxPeriod] = useState('')
+  const [XPrice, setxPrice] = useState('')
+  const [XPriceXvat, setxPriceXvat] = useState('')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [open, setOpen] = useState(false)
 
@@ -48,30 +49,30 @@ export default function CarDetailing({ DataCar }) {
   //    setxDownBt(event.target.value)
   // }
 
-  // function handlePerDownChange(event) {
-  //   console.log(event.target.value)
-  //   //setxDownPr(event.target.value)
-  //   //const prx = "0."+event.target.value
-  //   console.log(XPrice)
-  //   const prtobt = (XPrice * event.target.value) / 100
-  //   // console.log(prtobt)
-  //   setxDownBt(prtobt)
-  // }
-  // function handleinterestChange(event) {
-  //   // console.log(event.target.value)
-  //   setxInterest(event.target.value)
-  // }
-  // function PricePeriod(value) {
-  //   // console.log(value)
-  //   const PriceXDown = (XPrice - XDownBt) * (XInterest / 100)
-  //   const intye = PriceXDown * value
-  //   const PriceXvat = Number(intye) + Number(XPrice)
-  //   const PriceXintye = PriceXvat / (value * 12)
-  //   //const PriceXvatXinx = PriceXvat + Interest - DownBt;
-  //   //console.log(intye)
-  //   setxPeriod(PriceXintye.toFixed(2))
-  //   setxPriceXvat(PriceXvat)
-  // }
+  function handlePerDownChange(event) {
+    //console.log(event.target.value)
+    setxDownPr(event.target.value)
+    //const prx = "0."+event.target.value
+    //console.log(XPrice)
+    const prtobt = (XPrice * event.target.value) / 100
+    // console.log(prtobt)
+    setxDownBt(prtobt)
+  }
+  function handleinterestChange(event) {
+    // console.log(event.target.value)
+    setxInterest(event.target.value)
+  }
+  function PricePeriod(value) {
+    //console.log(value)
+    const PriceXDown = (Number(XPrice) - Number(XDownBt)) * (Number(XInterest) / 100)
+    const intye = Number(PriceXDown) * Number(value)
+    const PriceXvat = Number(intye) + Number(XPrice)
+    const PriceXintye = Number(PriceXvat) / (Number(value) * 12)
+    //const PriceXvatXinx = PriceXvat + Interest - DownBt;
+    //console.log(intye)
+    setxPeriod(PriceXintye.toFixed(2))
+    setxPriceXvat(PriceXvat)
+  }
   return (
     <>
       <Head>
@@ -125,9 +126,7 @@ export default function CarDetailing({ DataCar }) {
                       >
                         ช่องทางติดต่อ
                       </Dialog.Title>
-                      <p className="text-sm text-gray-500">
-                       เลือกได้ตามสะดวก
-                      </p>
+                      <p className="text-sm text-gray-500">เลือกได้ตามสะดวก</p>
                       <div className="mt-2 grid grid-cols-3">
                         <div className="h-auto w-full">
                           <Image
@@ -181,7 +180,7 @@ export default function CarDetailing({ DataCar }) {
       <main className="bg-[#d2e0ed]">
         <Container>
           <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-12">
-            <div className="col-span-10 h-auto md:h-[500px] w-full">
+            <div className="col-span-10 h-auto w-full md:h-[500px]">
               <Swiper
                 loop={true}
                 spaceBetween={10}
@@ -201,13 +200,13 @@ export default function CarDetailing({ DataCar }) {
                       layout="responsive"
                       width={100}
                       height={60}
-                      className='bg-[#d2e0ed]'
+                      className="bg-[#d2e0ed]"
                     />
                   </SwiperSlide>
                 ))}
               </Swiper>
             </div>
-            <div className="hidden md:block col-span-2">
+            <div className="col-span-2 hidden md:block">
               <SwiperV imgxs={DataCar.gallery} />
             </div>
           </div>
@@ -215,14 +214,14 @@ export default function CarDetailing({ DataCar }) {
 
         <div className="bg-white">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-2 px-4 py-4 sm:px-6 md:grid-cols-12 lg:px-8">
-            <div className="col-span-6 block md:flex text-center">
+            <div className="col-span-6 block text-center md:flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="h-5 md:h-10 w-auto text-red-500"
+                className="h-5 w-auto text-red-500 md:h-10"
               >
                 <path
                   strokeLinecap="round"
@@ -289,7 +288,7 @@ export default function CarDetailing({ DataCar }) {
                 </div>
               </div>
             </div>
-            <div className="hidden md:block col-span-2 flex text-start">
+            <div className="col-span-2 flex hidden text-start md:block">
               <div className="text-2xl font-bold">
                 <CurrencyFormat
                   value={(
@@ -328,7 +327,6 @@ export default function CarDetailing({ DataCar }) {
                 type="button"
                 href={'#'}
                 variant="solid"
-                
                 className="w-full rounded-md bg-[#F37373]"
                 onClick={() => setOpen(true)}
               >
@@ -568,7 +566,7 @@ export default function CarDetailing({ DataCar }) {
                 </div>
               </div>
             </div>
-            <div className="w-full rounded-lg bg-white px-4 md:px-8 py-4">
+            <div className="w-full rounded-lg bg-white px-4 py-4 md:px-8">
               <div className="mx-auto grid grid-cols-1">
                 <h4 className="text-2xl font-bold">
                   คำนวนสินเชื่อ
@@ -578,7 +576,110 @@ export default function CarDetailing({ DataCar }) {
                   </span>
                 </h4>
                 <div className="rounded-lg md:col-span-8">
-                 
+                  <div className="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-2">
+                    <div className="text-3xl font-semibold">
+                      <CurrencyFormat
+                        value={DataCar?.price}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={''}
+                        renderText={(value) => (
+                          <div className="flex flex-row py-0">
+                            {value} <span className="text-xs">บาท</span>
+                          </div>
+                        )}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 text-2xl font-semibold md:grid-cols-6">
+                      <CurrencyFormat
+                        value={(DataCar?.price * Number(XDownPr)) / 100}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={''}
+                        renderText={(value) => (
+                          <div className="flex flex-row py-0">
+                            {value} <span className="text-xs">บาท</span>
+                          </div>
+                        )}
+                      />
+                    </div>
+                    <TextField
+                      id={'PerDown'}
+                      className=""
+                      label={'เงินดาวน์ %'}
+                      defValue={'0'}
+                      onChange={handlePerDownChange}
+                    />
+                    <div>
+                      <TextField
+                        id={'interest'}
+                        label={'อัตราดอกเบี้ย (%)'}
+                        onChange={handleinterestChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mx-4 my-4 rounded-lg bg-[#ECF3F9]">
+                    <div className="grid grid-cols-1 gap-4 px-4 py-4">
+                      <div>
+                        <h3 className="mb-3 block text-sm font-medium text-gray-700">
+                          ระยะเวลา
+                        </h3>
+                        <div className="grid grid grid-cols-3 justify-items-center gap-2 font-bold md:grid-cols-6">
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(1)}
+                          >
+                            1
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(2)}
+                          >
+                            2
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(3)}
+                          >
+                            3
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(4)}
+                          >
+                            4
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(5)}
+                          >
+                            5
+                          </div>
+                          <div
+                            className="cursor-pointer rounded-md bg-gray-700 px-4 py-2 text-gray-100 hover:bg-red-500"
+                            onClick={() => PricePeriod(6)}
+                          >
+                            6
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <small>ประเมินค่าผ่อนชำระรายเดือน:</small>
+                  <div className="text-2xl font-bold text-red-500">
+                    <CurrencyFormat
+                      value={XPeriod}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'฿'}
+                      renderText={(value) => (
+                        <div>
+                          {value} <span className="text-xs">บาท</span>
+                        </div>
+                      )}
+                    />
+                  </div>
                   {/*<div className="mx-4 my-4 rounded-lg">
                      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
                       <div>
@@ -609,7 +710,7 @@ export default function CarDetailing({ DataCar }) {
                         />
                       </div>
                     </div> */}
-                    {/* <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+                  {/* <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
                       <div>
                         <TextField
                           id={'interest'}

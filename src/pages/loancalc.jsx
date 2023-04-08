@@ -11,6 +11,7 @@ import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { Testimonials } from '@/components/Testimonials'
 import { TextField } from '@/components/Fields'
 import CurrencyFormat from 'react-currency-format'
+import LoanX from '@/components/LoanX'
 export default function LoanCalc() {
   const [DownBt, setDownBt] = useState('')
   const [DownPr, setDownPr] = useState('')
@@ -73,7 +74,8 @@ export default function LoanCalc() {
             คำนวณค่างวด รถยนต์มือสอง
           </p>
         </div>
-        <div className="mx-auto grid grid-cols-1 md:grid-cols-12">
+        <LoanX />
+        {/* <div className="mx-auto grid grid-cols-1 md:grid-cols-12">
           <div className="col-span-1 rounded-lg bg-[#173559] md:col-span-8">
             <div className="mx-4 my-4 rounded-lg bg-[#ECF3F9]">
               <div className="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-2">
@@ -193,7 +195,7 @@ export default function LoanCalc() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='py-4'></div>
       </main>
       <Footer />

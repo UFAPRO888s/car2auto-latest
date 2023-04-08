@@ -21,8 +21,8 @@ export default function handlerLine(req, res) {
   const { selGear } = req.body
   const { selColor } = req.body
   const { URLimage } = req.body
-  
-  if (!selTel) {
+
+  if (selTel== "" || selYear== "" || URLimage == "") {
     return res.status(400).json({ error: 'MSG is required' })
   }
   try {
@@ -31,7 +31,7 @@ export default function handlerLine(req, res) {
       .notify({
         message: mxmsg,
         imageThumbnail: URLimage,
-        imageFullsize: URLimage
+        imageFullsize: URLimage,
       })
       .then(() => {
         console.log('send completed!')
@@ -41,4 +41,3 @@ export default function handlerLine(req, res) {
     return res.status(500).json({ error: error.message || error.toString() })
   }
 }
-
