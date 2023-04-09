@@ -3,18 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { Container } from '@/components/Container'
-import { BlogSEO, PageSEO } from '@/components/SEO'
+import {  PageSEO } from '@/components/SEO'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { TwitterIcon, InstagramIcon } from '@/components/SocialIcons'
-
+import { formatDate } from '@/lib/formatDate'
 const ByCatPost = (props) => {
   const current = new Date(props.data[0]['date_gmt'])
   const dateTimeAB = `${current.getDate()} - ${
-    current.getMonth() + 1
-  } - ${current.getFullYear()}`
-  // console.log(dateTimeAB)
-
+     current.getMonth() + 1
+   } - ${current.getFullYear()}`
+   // console.log(dateTimeAB)
+  // const dateTimeAB = formatDate(current)
   function SocialLink({ className, href, children, icon: Icon }) {
     return (
       <li className={clsx(className, 'flex')}>

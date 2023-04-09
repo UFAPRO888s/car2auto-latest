@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && node ./scripts/generate-sitemap",
     "start": "next start",
-    "lint": "next lint --fix --dir src"
+    "lint": "next lint --fix --dir src",
+    "postbuild": "node scripts/postBuild.js"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
