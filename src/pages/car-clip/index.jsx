@@ -10,11 +10,11 @@ import { TwitterIcon, InstagramIcon } from '@/components/SocialIcons'
 import { formatDate } from '@/lib/formatDate'
 const ByCatPost = (props) => {
   const current = new Date(props.data[0]['date_gmt'])
- // const dateTimeAB = `${current.getDate()} - ${
-  //  current.getMonth() + 1
- // } - ${current.getFullYear()}`
+ const dateTimeAB = `${current.getDate()} - ${
+    current.getMonth() + 1
+  } - ${current.getFullYear()}`
   // console.log(dateTimeAB)
-  const dateTimeAB = formatDate(current)
+ // const dateTimeAB = formatDate(current)
   function SocialLink({ className, href, children, icon: Icon }) {
     return (
       <li className={clsx(className, 'flex')}>
