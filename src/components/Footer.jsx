@@ -56,7 +56,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="text-white text-xs">
+            <p className="text-xs text-white">
               ตัวแทนจำหน่ายรถยนต์ใหม่ และมือสองที่ได้รับรางวัล
               เป็นของศูนย์กลางตลาดรถที่ดีที่สุด ซึ่งมีสาขา ทั่วประเทศไทย
               รับประกันราคาต่ำสุดและการบริการลูกค้าที่ดีที่สุด
@@ -97,35 +97,42 @@ export function Footer() {
             Car2autobuy
           </p>
           <div className="flex gap-4 text-center text-white">
-            <div className="w-full h-auto">
-              <Image
-                className="w-10 h-10"
-                src={'/images/img/fb.png'}
-                alt="car-fb"
-                width={50}
-                height={50}
-                layout="fixed"
-              />
+            <div className="h-auto w-full">
+              <Link href={'https://facebook.com/'} title="facebook">
+                {' '}
+                <Image
+                  className="h-10 w-10"
+                  src={'/images/img/fb.png'}
+                  alt="car-fb"
+                  width={50}
+                  height={50}
+                  layout="fixed"
+                />
+              </Link>
             </div>
-            <div className="w-full h-auto">
-              <Image
-                className="w-10 h-10"
-                src={'/images/img/linex.png'}
-                alt="car-linex"
-                width={50}
-                height={50}
-                layout="fixed"
-              />
+            <div className="h-auto w-full">
+              <Link href={'https://line.com/'} title="facebook">
+                <Image
+                  className="h-10 w-10"
+                  src={'/images/img/linex.png'}
+                  alt="car-linex"
+                  width={50}
+                  height={50}
+                  layout="fixed"
+                />
+              </Link>
             </div>
-            <div className="w-full h-auto">
-              <Image
-                className="w-10 h-10"
-                src={'/images/img/youtube.png'}
-                alt="car-youtube"
-                width={50}
-                height={50}
-                layout="fixed"
-              />
+            <div className="h-auto w-full">
+              <Link href={'https://youtube.com/'} title="facebook">
+                <Image
+                  className="h-10 w-10"
+                  src={'/images/img/youtube.png'}
+                  alt="car-youtube"
+                  width={50}
+                  height={50}
+                  layout="fixed"
+                />
+              </Link>
             </div>
           </div>
         </div>
