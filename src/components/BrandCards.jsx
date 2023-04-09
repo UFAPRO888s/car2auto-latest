@@ -41,7 +41,7 @@ export default function BrandCards({ Maname }) {
 
                   {project.brand}
                   <p className="font-normal text-gray-500">
-                    {project.count} คัน
+                    {/* {project.count} คัน */}
                   </p>
                 </div>
               </Link>
