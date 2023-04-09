@@ -111,7 +111,7 @@ export function HeroWhite() {
               key={carDataIndex}
               className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
-              <div className="relative rounded-lg overflow-hidden">
+              <div className="relative rounded-t-lg overflow-hidden">
                 <Link href={
                     '/car/' +
                     carDataUP.make +
