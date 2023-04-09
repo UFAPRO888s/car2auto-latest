@@ -3,6 +3,12 @@ const cors = Cors({
   methods: ['POST', 'GET', 'HEAD'],
 })
 
+export const config = {
+  api: {
+    bodyParser: true
+  }
+};
+
 const lineNotify = require('line-notify-nodejs')(
   'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'
 )
