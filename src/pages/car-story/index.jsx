@@ -8,7 +8,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { TwitterIcon, InstagramIcon } from '@/components/SocialIcons'
 
-const ByCatPost = (props) => {
+const ByCatPostCarStory = (props) => {
   const current = new Date(props.data[0]['date_gmt'])
   const dateTimeAB = `${current.getDate()} - ${
      current.getMonth() + 1
@@ -202,4 +202,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default ByCatPost
+export default ByCatPostCarStory
