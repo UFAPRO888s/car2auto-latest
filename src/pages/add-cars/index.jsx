@@ -4,6 +4,10 @@ import { Header } from '@/components/Header'
 import { PageSEO } from '@/components/SEO'
 import { getUserFromCookie } from '@/lib/firebase/userCookies'
 import { useRouter } from 'next/router'
+import UptoHost from '@/components/UptoHost'
+
+
+
 export default function AddCars() {
   const router = useRouter()
   useEffect(() => {
@@ -11,7 +15,9 @@ export default function AddCars() {
     if (!storedgetUser) {
       router.push('/')
     }
+    console.log(storedgetUser)
   }, [])
+  
   return (
     <>
       <PageSEO
@@ -28,7 +34,7 @@ export default function AddCars() {
             <p className='text-base'>ลงขายรถ ง่าย ไว 24ชม.</p>
           </div>
           <div>
-            
+            <UptoHost />
           </div>
         </div>
       </main>

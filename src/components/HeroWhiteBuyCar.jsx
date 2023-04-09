@@ -115,7 +115,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
               key={carDataIndex}
               className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
-              <div className="relative rounded-t-lg">
+              <div className="relative rounded-t-lg overflow-hidden">
                 <Link
                   href={
                     '/car/' +
