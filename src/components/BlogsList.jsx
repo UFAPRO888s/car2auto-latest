@@ -20,10 +20,10 @@ export default function BlogsList() {
     })()
 
     return () => {
-      // this now gets called when the component unmounts
+     
     }
   }, [])
-  // console.log(BlogData)
+
   return (
     <Container>
       <div className="bg-white px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
@@ -41,7 +41,7 @@ export default function BlogsList() {
             {BlogData?.slice(0, 3).map((post, indexPost) => (
               <div key={indexPost}>
                 <Link href={`/car-story/${post['slug']}`}>
-                  <div className="relative">
+                  <div className="relative shadow-md hover:shadow-lg">
                     <Image
                       src={
                         post['_embedded']['wp:featuredmedia'][0]['source_url']

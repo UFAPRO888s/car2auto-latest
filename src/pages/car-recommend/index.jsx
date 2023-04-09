@@ -76,7 +76,7 @@ const ByCatPostCarRecommend = (props) => {
             </div>
             <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
               {props.data?.slice(0, 6).map((postXS, indexPost) => (
-                <div key={indexPost}>
+                <div key={indexPost} className='rounded-lg shadow-md hover:shadow-lg px-2 py-2 bg-gray-100'>
                   <Link href={`/car-recommend/${postXS['slug']}`}>
                     <div className="relative">
                       <Image
@@ -111,7 +111,7 @@ const ByCatPostCarRecommend = (props) => {
                   </Link>
                   <Link
                     href={`/car-recommend/${postXS['slug']}`}
-                    className="mt-4 block"
+                    className="mt-4 block px-2"
                   >
                     <h3 className="text-xl font-semibold text-gray-900">
                       {postXS['title']['rendered'].replace(
@@ -121,7 +121,7 @@ const ByCatPostCarRecommend = (props) => {
                     </h3>
                   </Link>
                   <div
-                    className="mt-3 text-base text-gray-500"
+                    className="mt-3 text-base text-gray-500 px-2"
                     dangerouslySetInnerHTML={{
                       __html: postXS['excerpt']['rendered'].replace(
                         /(<([^>]+)>)|&.+;/gm,
@@ -130,14 +130,14 @@ const ByCatPostCarRecommend = (props) => {
                     }}
                   ></div>
 
-                  <div className="mt-6 flex items-center">
+                  <div className="mt-6 flex items-center px-2">
                     <div className="flex-shrink-0">
                       <div>
                         <span className="sr-only">{'CHANGYED'}</span>
                         <Image
                           src={'/images/Car2autobuy-01.png'}
                           alt={
-                            'ตรวจหวย ' +
+                            'ข่าวรถยนต์มือสอง ' +
                             postXS['title']['rendered'].replace(
                               /(<([^>]+)>)|&.+;/gm,
                               ' '
