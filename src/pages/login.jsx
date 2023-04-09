@@ -127,7 +127,7 @@ export default function Login() {
         // time_stamp: Timestamp.fromDate(new Date('December 17, 1995 03:24:00')),
         // geo_point: new GeoPoint(34.714322, -131.468435)
       })
-      alert('Data was successfully ChangYed send to cloud firestore!')
+      //alert('Data was successfully ChangYed send to cloud firestore!')
     } catch (error) {
       console.log(error)
       alert(error)

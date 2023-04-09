@@ -120,7 +120,7 @@ export default function Car_Recommendations_grid() {
                       {Brand.brand}
                     </span>
                     <span className="block truncate text-sm font-medium text-gray-500">
-                      {Brand.count}
+                      {/* {Brand.count} */}
                     </span>
                   </span>
                 </span>
