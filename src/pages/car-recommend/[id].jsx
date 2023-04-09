@@ -8,7 +8,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { TwitterIcon, InstagramIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/banner-1920x915-1.jpg'
-import { formatDate } from '@/lib/formatDate'
+
 const LottoPost = (props) => {
   const current = new Date(props.data[0]['date_gmt'])
   const dateTimeAB = `${current.getDate()} - ${

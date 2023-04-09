@@ -1,7 +1,7 @@
 const fs = require("fs");
 const getPathsObject = require("./getPathsObject")
 const formatDate = require("./formatDate")
-const meta = require("../content/meta")
+const meta = require("../src/data/siteMetadata")
 const posts = require("../content/posts")
 
 // ROBOTS.txt
