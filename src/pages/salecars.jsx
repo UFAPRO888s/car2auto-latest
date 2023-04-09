@@ -158,7 +158,7 @@ export default function SaleCars() {
       selectedMake?.brand != '' ||
       valueImgss != ''
     ) {
-      const res = await fetch(`http://localhost:3000/api/linenotify`, {
+      const res = await fetch(`/api/linenotify`, {
         body: JSON.stringify({
           selYear: selectedYear?.YearName,
           selMake: selectedMake?.brand,
