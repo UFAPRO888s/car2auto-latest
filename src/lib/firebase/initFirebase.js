@@ -16,7 +16,7 @@ const clientCredentials = {
 function initFirebase() {
   if (typeof window !== undefined) {
     initializeApp(clientCredentials)
-    console.log('Firebase has been init successfully')
+    //console.log('Firebase has been init successfully')
   }
 }
 
