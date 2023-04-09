@@ -158,7 +158,7 @@ export default function SaleCars() {
       selectedMake?.brand != '' ||
       valueImgss != ''
     ) {
-      const res = await fetch(`/api/linenotify`, {
+      const res = await fetch(`http://localhost:3000/api/linenotify`, {
         body: JSON.stringify({
           selYear: selectedYear?.YearName,
           selMake: selectedMake?.brand,
@@ -201,6 +201,42 @@ export default function SaleCars() {
       )
     }
   }
+
+  // const subscribe = async (e) => {
+  //   e.preventDefault()
+  //   if (
+  //     selectedYear?.YearName != '' ||
+  //     selectedMake?.brand != '' ||
+  //     valueImgss != ''
+  //   ) {
+  //     let mxmsg = `NEW ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
+  //     const res = await SendLineNotify(mxmsg,valueImgss)
+  //     console.log(res)
+  //     const { error } = await res;
+      
+  //     if (error) {
+  //       setError(true)
+  //       setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
+  //       return
+  //     }
+
+  //     selectedYear = ''
+  //     selectedMake = ''
+  //     selectedModel = ''
+  //     selectedNameUs = ''
+  //     selectedTel = ''
+  //     selectedLineId = ''
+  //     selectedCity = ''
+  //     inputEl = ''
+
+  //     setError(false)
+  //     setSubscribed(true)
+  //     setMessage(
+  //       'ส่งข้อมูลเรียบร้อย! 🎉 พนักงานจะติดต่อกลับด่วนที่สุด\n' + mxmsg
+  //     )
+  //   }
+  // }
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
