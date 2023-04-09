@@ -10,8 +10,9 @@ import logoTransistor from '@/images/logos/transistor.svg'
 import logoTuple from '@/images/logos/tuple.svg'
 import carData from '@/data/carlist'
 import CurrencyFormat from 'react-currency-format'
+import Link from 'next/link'
 
-export function HeroWhiteBuyCar({ DataCars, textDis,ConTex }) {
+export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
   const [postNum, setPostNum] = useState(8) // Default number of posts dislplayed
   function handleClick() {
     setPostNum((prevPostNum) => prevPostNum + 4) // 3 is the number of posts you want to load per click
@@ -32,9 +33,9 @@ export function HeroWhiteBuyCar({ DataCars, textDis,ConTex }) {
             <span className="relative">ซื้อรถยนต์มือสอง</span>
           </span>{' '}
         </h3>
-        <div className='text-center'>
-          <p className='text-lg font-semibold'>{textDis}</p>
-          <p className='text-lg font-semibold text-red-500'>{ConTex}</p>
+        <div className="text-center">
+          <p className="text-lg font-semibold">{textDis}</p>
+          <p className="text-lg font-semibold text-red-500">{ConTex}</p>
         </div>
         <div className="flex justify-center py-4 text-center">
           <div className="grid grid-cols-1 md:grid-cols-4">
@@ -115,18 +116,29 @@ export function HeroWhiteBuyCar({ DataCars, textDis,ConTex }) {
               className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
               <div className="relative">
-                <Image
-                  src={
-                    'https://fastly-production.24c.in/' +
-                    carDataUP.mainImage.path
+                <Link
+                  href={
+                    '/car/' +
+                    carDataUP.make +
+                    '-' +
+                    carDataUP.model +
+                    '-' +
+                    carDataUP.appointmentId
                   }
-                  alt={carDataUP.variant}
-                  layout="responsive"
-                  width={100}
-                  height={60}
-                  className="h-auto w-full rounded-t-lg object-cover"
-                  unoptimized
-                />
+                  title={carDataUP?.variant}
+                >
+                  <Image
+                    src={
+                      'https://fastly-production.24c.in/' +
+                      carDataUP.mainImage.path
+                    }
+                    alt={carDataUP.variant}
+                    layout="responsive"
+                    width={100}
+                    height={60}
+                    className="h-auto w-full rounded-t-lg object-cover"
+                  />
+                </Link>
                 <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                   <div className="h-5 w-auto object-contain"></div>
                   <p className="text-[14px] text-white">รถมาใหม่</p>

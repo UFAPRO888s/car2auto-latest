@@ -68,7 +68,7 @@ export function HeroNewCars() {
         <div className="bg-blue-600/30 backdrop-brightness-75">
           <Container className="pb-10 pt-4 text-center md:pt-10 ">
             <div className="rounded-xl bg-white px-6 py-4 shadow-lg">
-              <div className="flex flex items-stretch justify-between gap-2">
+              <div className="grid grid-cols-1 md:flex md:flex md:items-stretch justify-between gap-2">
                 <div className="self-center px-4">
                   <h2 className="border-b-4 border-red-500 text-lg font-medium md:text-4xl">
                     ยี่ห้อรถยนต์มือสองแนะนำ
@@ -91,7 +91,30 @@ export function HeroNewCars() {
                             width={70}
                             height={70}
                             className="h-auto w-10 object-contain md:h-auto md:w-14"
-                            unoptimized
+                          />
+                        </div>
+                        <p className="text-xs">{MakeBrandUP.string}</p>
+                      </div>
+                    </Button>
+                  ))}
+                </div>
+                <div className="grid grid-cols-3 gap-4 py-4 md:hidden">
+                  {MakeBrand.map((MakeBrandUP, MakeIndex) => (
+                    <Button
+                      href={`/buycars/?make=${MakeBrandUP.brand}`}
+                      variant="outline"
+                      key={MakeIndex}
+                      className="rounded-lg"
+                    >
+                      <div>
+                        <div className="mx-auto">
+                          <Image
+                            src={MakeBrandUP.imgpath}
+                            alt={MakeBrandUP.brand}
+                            layout="fixed"
+                            width={70}
+                            height={70}
+                            className="h-5 w-5 object-contain"
                           />
                         </div>
                         <p className="text-xs">{MakeBrandUP.string}</p>
@@ -130,7 +153,6 @@ export function HeroNewCars() {
                           width={100}
                           height={70}
                           className="h-auto w-full rounded-t-lg object-cover"
-                          unoptimized
                         />
                         <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                           <div className="h-5 w-auto object-contain"></div>
@@ -213,7 +235,6 @@ export function HeroNewCars() {
                             width={100}
                             height={70}
                             className="h-auto w-full rounded-t-lg object-cover"
-                            unoptimized
                           />
                           <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                             <div className="h-5 w-auto object-contain"></div>

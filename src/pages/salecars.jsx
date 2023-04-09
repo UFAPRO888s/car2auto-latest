@@ -111,7 +111,7 @@ export default function SaleCars() {
     if (telxcheck.length > 12) {
       setMessage('กรุณาตรวจสอบข้อมูล เบอร์โทรนะค่ะ!')
     }
-    console.log(telxcheck)
+   // console.log(telxcheck)
     setSelectedTel(event.target.value)
   }
 
@@ -178,7 +178,7 @@ export default function SaleCars() {
       })
 
       const { error } = await res.json()
-      let mxmsg = `NEW ประเมินราคา ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
+      let mxmsg = `NEW ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
       if (error) {
         setError(true)
         setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')

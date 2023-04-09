@@ -2,7 +2,6 @@ import { Fragment, useEffect, useId, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/components/Button'
-import Head from 'next/head'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Pagination, Navigation, Thumbs } from 'swiper'
@@ -28,6 +27,8 @@ import CurrencyFormat from 'react-currency-format'
 import { TextField } from '@/components/Fields'
 import CenteredSingleAction from '@/components/CenteredSingleAction'
 import LoanX from '@/components/LoanX'
+import { PageSEO } from '@/components/SEO'
+import Link from 'next/link'
 
 export default function CarDetailing({ DataCar }) {
   const [XDownBt, setxDownBt] = useState('')
@@ -54,37 +55,34 @@ export default function CarDetailing({ DataCar }) {
     setxDownPr(event.target.value)
     //const prx = "0."+event.target.value
     //console.log(XPrice)
-    const prtobt = (XPrice * event.target.value) / 100
+    //const prtobt = (XPrice * event.target.value) / 100
     // console.log(prtobt)
-    setxDownBt(prtobt)
+    //setxDownBt(prtobt)
   }
   function handleinterestChange(event) {
     // console.log(event.target.value)
     setxInterest(event.target.value)
   }
   function PricePeriod(value) {
-    //console.log(value)
-    const PriceXDown = (Number(XPrice) - Number(XDownBt)) * (Number(XInterest) / 100)
-    const intye = Number(PriceXDown) * Number(value)
-    const PriceXvat = Number(intye) + Number(XPrice)
-    const PriceXintye = Number(PriceXvat) / (Number(value) * 12)
+    //console.log(XInterest,XPrice,XDownBt)
+    const PriceXDown =
+      (Number(XPrice) - Number(XDownBt)) * (Number(XInterest) / 100)
+    const intye = Number(PriceXDown) * value
+    //const PriceXvat = Number(intye) + Number(XPrice)
+    const PriceXintye = (Number(intye) + Number(XPrice)) / (Number(value) * 12)
     //const PriceXvatXinx = PriceXvat + Interest - DownBt;
-    //console.log(intye)
+    //console.log(PriceXDown,intye)
     setxPeriod(PriceXintye.toFixed(2))
-    setxPriceXvat(PriceXvat)
+    //setxPriceXvat(PriceXvat)
   }
   return (
     <>
-      <Head>
-        <title>
-          รถมือสอง {DataCar?.make} {DataCar?.model} {DataCar?.year}ราคาคุ้มค่า
-          รับประกันคุณภาพ - รถมือสอง car2autobuy
-        </title>
-        <meta
-          name="description"
-          content={`รถยนต์มือสอง ${DataCar?.variant} คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง`}
-        />
-      </Head>
+      <PageSEO
+        title={`รถมือสอง ${DataCar?.make} ${DataCar?.model} ${DataCar?.year} ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง car2autobuy`}
+        description={`รถยนต์มือสอง ${DataCar?.variant} คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง`}
+        ogImageUrlX={DataCar?.gallery[0].path}
+        twImageUrlX={DataCar?.gallery[0].path}
+      />
       <Header />
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -136,6 +134,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
+                            
                           />
                         </div>
                         <div className="h-auto w-full">
@@ -146,6 +145,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
+                            
                           />
                         </div>
                         <div className="h-auto w-full">
@@ -156,6 +156,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
+                            
                           />
                         </div>
                       </div>
@@ -201,6 +202,7 @@ export default function CarDetailing({ DataCar }) {
                       width={100}
                       height={60}
                       className="bg-[#d2e0ed]"
+                      
                     />
                   </SwiperSlide>
                 ))}
@@ -679,6 +681,7 @@ export default function CarDetailing({ DataCar }) {
                         </div>
                       )}
                     />
+                   <span className='text-xs font-normal text-black'>ต้องการคำนวน ภาษี7% คำนวนยอดผ่อนชำระรถยนต์ รายปี ตามอัตราดอกเบี้ยที่กำหนดได้เอง <Link className='text-red-500' href={"/loancalc"} title='คำนวนยอดผ่อนชำระรถยนต์'>คำนวนยอดผ่อนชำระรถยนต์</Link></span>
                   </div>
                   {/*<div className="mx-4 my-4 rounded-lg">
                      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">

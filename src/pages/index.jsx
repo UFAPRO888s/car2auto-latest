@@ -15,11 +15,14 @@ import { SecondaryHero } from '@/components/SecondaryHero'
 import BrandCards from '@/components/BrandCards'
 import { SecondaryBuySale } from '@/components/SecondaryBuySale'
 import BlogsList from '@/components/BlogsList'
+import { Speakers } from '@/components/Speakers'
 export default function Home() {
   return (
     <>
       <Head>
-        <title>รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง car2autobuy</title>
+        <title>
+          รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง car2autobuy
+        </title>
         <meta
           name="description"
           content="รถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง"
@@ -30,11 +33,12 @@ export default function Home() {
       <main>
         <HeroNewCars />
         <HeroWhite />
-    
-        <BrandCards/>
+
+        <BrandCards />
         <SecondaryHero />
         <SecondaryBuySale />
-        <BlogsList />
+        {/* <BlogsList /> */}
+        <Speakers />
         {/* <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />

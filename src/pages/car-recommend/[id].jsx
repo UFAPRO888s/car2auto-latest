@@ -44,10 +44,12 @@ const LottoPost = (props) => {
   return (
     <>
       <BlogSEO
-        title={props.data[0]['title']['rendered']?.replace(
-          /(<([^>]+)>)|&.+;/gm,
-          ' '
-        ) + " รถมือสอง car2autobuy"}
+        title={
+          props.data[0]['title']['rendered']?.replace(
+            /(<([^>]+)>)|&.+;/gm,
+            ' '
+          ) + ' รถมือสอง car2autobuy'
+        }
         date={props.data[0]['date_gmt']}
         lastmod={props.data[0]['date_gmt']}
         summary={props.data[0]['excerpt']['rendered']}
@@ -59,72 +61,6 @@ const LottoPost = (props) => {
       />
       <Header />
       <Container>
-        {/* <div className="w-full px-2 py-4 md:px-10 ">
-          {props.data.map((post, index) => {
-            return (
-              <article key={index} className="prose max-w-none text-white">
-              
-                <dt className="sr-only">
-                  เผยแพร่เมื่อ{' '}
-                  <time dateTime={post['date_gmt']}>{post['date_gmt']}</time>
-                </dt>
-                <div className="relative h-[250px] w-full">
-                  <Image
-                    className="rounded-lg"
-                    src={post['_embedded']['wp:featuredmedia'][0]['source_url']}
-                    layout="fill"
-                    objectFit="cover"
-                    alt={post['title']['rendered']?.replace(
-                      /(<([^>]+)>)|&.+;/gm,
-                      ' '
-                    )}
-                    priority="true"
-                  />
-                </div>
-                <div className="py-4">
-                  <div className="w-full">
-                    <h1 className="title-font my-2 text-3xl font-medium text-amber-400">
-                      {post['title']['rendered']}
-                    </h1>
-                    <div>
-                      <p className="text-xs font-semibold text-black/50">
-                        วันที่เผยแพร่ {dateTimeAB} |
-                      </p>
-                      <p className="text-end font-semibold text-pink-500">
-                        รถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี
-                        <br />
-                        <strong className="title-font my-2 text-3xl font-bold text-amber-400">
-                          รถยนต์มือสอง
-                        </strong>
-                        <br />
-                        ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย
-                      </p>
-                    </div>
-                    
-                    <article
-                      className="prose-h1:text-blue-100 prose-h2:text-blue-200 prose-h3:text-blue-300 leading-relaxed text-black"
-                      dangerouslySetInnerHTML={{
-                        __html: props?.contentY?.replace(/TODE/g, ' UFAX24 '),
-                      }}
-                    ></article>
-
-                    <div className="flex justify-center text-base font-medium leading-6">
-                      <Link
-                        href="/"
-                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        aria-label="รวม หวย"
-                        title="เรื่องหวย ทั้งหมด"
-                      >
-                        กลับไป หวย ทั้งหมด
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            )
-          })}
-        </div> */}
-
         <div className="grid grid-cols-1 gap-y-16 py-20 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
           <div className="lg:pl-20">
             <div className="max-w-xs px-2.5 lg:max-w-none">

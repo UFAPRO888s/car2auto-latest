@@ -10,10 +10,7 @@ import { NavLink } from '@/components/NavLink'
 import Ilogo from '../images/logos/Car2autobuy-Preview-01.svg'
 import cookies from 'js-cookie'
 import { useUser } from '@/lib/firebase/useUser'
-import {
-  setUserCookie,
-  getUserFromCookie,
-} from '@/lib/firebase/userCookies'
+import { setUserCookie, getUserFromCookie } from '@/lib/firebase/userCookies'
 import {
   getAuth,
   GoogleAuthProvider,
@@ -61,7 +58,7 @@ function MobileNavIcon({ open }) {
   )
 }
 
-function MobileNavigation() {
+function MobileNavigation({ UserXDisplayName }) {
   return (
     <Popover>
       <Popover.Button
@@ -99,7 +96,18 @@ function MobileNavigation() {
             <MobileNavLink href="/salecars">ขายรถยนต์</MobileNavLink>
             <MobileNavLink href="/loancalc">คำนวณสินเชื่อ</MobileNavLink>
             <hr className="m-2 border-slate-300/40" />
-            <MobileNavLink href="/login">เข้าสู่ระบบ</MobileNavLink>
+            {!UserXDisplayName ? (
+              <MobileNavLink href="/login">เข้าสู่ระบบ</MobileNavLink>
+            ) : null}
+            {UserXDisplayName ? (
+              <>
+                <Button href="/add-cars/" color="blue" className="rounded-md">
+                  ลงขายรถ
+                </Button>
+                <small className="text-center">{UserXDisplayName}</small>
+                
+              </>
+            ) : null}
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -173,8 +181,13 @@ export function Header() {
             ) : null}
             {UserDisplayName ? (
               <>
-                <div>
-                  <small>{UserDisplayName}</small>
+                <div className="hidden grid-cols-1 md:grid">
+                  <small className="text-xs text-black/50">
+                    {UserDisplayName}
+                  </small>
+                  <Button href="/add-cars/" color="blue" className="rounded-md">
+                    ลงขายรถ
+                  </Button>
                 </div>
                 <div className="hidden md:block">
                   <NavLink href="/login" onClick={handlesignOut}>
@@ -185,7 +198,7 @@ export function Header() {
             ) : null}
 
             <div className="-mr-1 md:hidden">
-              <MobileNavigation />
+              <MobileNavigation UserXDisplayName={UserDisplayName} />
             </div>
           </div>
         </nav>

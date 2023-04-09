@@ -22,7 +22,7 @@ export default function handlerLine(req, res) {
   const { selColor } = req.body
   const { URLimage } = req.body
 
-  if (selTel== "" || selYear== "" || URLimage == "") {
+  if (selTel == '' || selYear == '' || URLimage == '') {
     return res.status(400).json({ error: 'MSG is required' })
   }
   try {
