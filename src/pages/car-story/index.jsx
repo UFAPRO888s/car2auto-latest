@@ -54,7 +54,7 @@ const ByCatPostCarStory = (props) => {
         description={`รถยนต์มือสอง ${props.dataMeta['name']?.replace(
           /(<([^>]+)>)|&.+;/gm,
           ' '
-        )} คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง`}
+        )} จำนวน ${props.dataMeta['count']} คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง`}
       />
       <Header />
       <Container>
@@ -66,7 +66,7 @@ const ByCatPostCarStory = (props) => {
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')}
               </h2>
               <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                ข่าวสาร ล่าสุด บทความ{' '}
+                ข่าวสาร ล่าสุด จำนวน {props.dataMeta['count']} บทความ{' '}
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')} ดีๆ
                 เกี่ยวกับข้อมูลรถยนต์มือสอง หรือติดตามข่าวสารรถยนต์ในวงการรถยนต์{' '}
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')}

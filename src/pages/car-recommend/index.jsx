@@ -68,7 +68,7 @@ const ByCatPostCarRecommend = (props) => {
               <p className="mt-3 text-xl text-gray-500 sm:mt-4">
                 แนะนำโปรโมชั่น{' '}
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')} ดีๆ
-                แนะนำเกี่ยวกับข้อมูลรถยนต์มือสอง
+                แนะนำเกี่ยวกับข้อมูลรถยนต์มือสอง จำนวน {props.dataMeta['count']} เรื่อง
                 แนะนำช่องทางติดตามข่าวสารรถยนต์ในวงการรถยนต์{' '}
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')}
                 แนะนำเทคนิคการใช้งานและดูแลรถยนต์

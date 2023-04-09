@@ -66,7 +66,7 @@ const ByCatPostCarClip = (props) => {
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')}
               </h2>
               <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                คลิปหลุดโปรโมชั่น{' '}
+                คลิปหลุดโปรโมชั่น{' '} จำนวน {props.dataMeta['count']} เรื่อง
                 {props.dataMeta['name']?.replace(/(<([^>]+)>)|&.+;/gm, ' ')} ดีๆ
                 คลิปหลุดเกี่ยวกับข้อมูลรถยนต์มือสอง
                 คลิปหลุดข่าวสารรถยนต์ในวงการรถยนต์{' '}
