@@ -168,7 +168,7 @@ export function HeroWhite() {
                     />
                   </div>
                   <div className="flex items-end text-xs">
-                    <CurrencyFormat
+                    {/* <CurrencyFormat
                       value={(
                         ((parseInt(carDataUP?.price) * 7) / 100 +
                           parseInt(carDataUP?.price)) /
@@ -196,11 +196,11 @@ export function HeroWhite() {
                           </svg>
                         </p>
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="flex justify-between px-4 text-white">
-                  <div className="text-xs font-light">
+                  {/* <div className="text-xs font-light">
                     {' '}
                     <CurrencyFormat
                       value={
@@ -217,8 +217,8 @@ export function HeroWhite() {
                         </p>
                       )}
                     />
-                  </div>
-                  <div className="flex items-end text-xs">เงินดาวน์ 0 บาท</div>
+                  </div> */}
+                  {/* <div className="flex items-end text-xs">เงินดาวน์ 0 บาท</div> */}
                 </div>
               </div>
               <div className="flex justify-between px-4 py-2">

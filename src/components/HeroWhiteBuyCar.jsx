@@ -148,7 +148,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                 <div className="flex justify-between px-4 text-white">
                   <div className="text-2xl font-bold ">
                     {' '}
-                    <CurrencyFormat
+                     <CurrencyFormat
                       value={carDataUP.price}
                       displayType={'text'}
                       thousandSeparator={true}
@@ -158,10 +158,10 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                           {value} <span className="text-xs">บาท</span>
                         </p>
                       )}
-                    />
+                    /> 
                   </div>
                   <div className="flex items-end text-xs">
-                    <CurrencyFormat
+                    {/* <CurrencyFormat
                       value={(
                         ((parseInt(carDataUP?.price) * 7) / 100 +
                           parseInt(carDataUP?.price)) /
@@ -189,13 +189,13 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                           </svg>
                         </p>
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="flex justify-between px-4 text-white">
                   <div className="text-xs font-light">
                     {' '}
-                    <CurrencyFormat
+                    {/* <CurrencyFormat
                       value={
                         (parseInt(carDataUP?.price) * 7) / 100 +
                         parseInt(carDataUP?.price)
@@ -209,9 +209,9 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                           <span className="text-xs">บาท(รวมภาษี 7%)</span>
                         </p>
                       )}
-                    />
+                    /> */}
                   </div>
-                  <div className="flex items-end text-xs">เงินดาวน์ 0 บาท</div>
+                  {/* <div className="flex items-end text-xs">เงินดาวน์ 0 บาท</div> */}
                 </div>
               </div>
               <div className="flex justify-between px-4 py-2">

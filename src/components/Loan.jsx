@@ -51,7 +51,6 @@ export default function Loan({ car_pricex, car_title }) {
             name="price"
             id="price"
             className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            
             defaultValue={car_pricex}
             aria-describedby="price-currency"
           />
@@ -97,7 +96,7 @@ export default function Loan({ car_pricex, car_title }) {
           ไฟแนนซ์
         </label>
         <div className="relative mt-1 rounded-md shadow-sm">
-          <div className="absolute inset-y-0 left-0 flex items-center">
+          {/* <div className="absolute inset-y-0 left-0 flex items-center">
             <label htmlFor="finance" className="sr-only">
               ไฟแนนซ์
             </label>
@@ -114,7 +113,16 @@ export default function Loan({ car_pricex, car_title }) {
               <option>กสิกรไทย</option>
               <option>ไทยพาณิชย์</option>
             </select>
-          </div>
+          </div> */}
+          <input
+            type="number"
+            name="finance"
+            id="finance"
+            onChange={handlePeriodChange}
+            className="block w-full rounded-md border-gray-300 pl-32 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            placeholder="ใส่จำนวนปี"
+          />
+
           <input
             type="number"
             name="period"
@@ -157,7 +165,6 @@ export default function Loan({ car_pricex, car_title }) {
               </p>
             )}
           />
-         
         </p>
 
         <p className="text-end text-3xl font-bold text-red-500">
