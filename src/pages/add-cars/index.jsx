@@ -522,17 +522,17 @@ export default function AddCars() {
                 >
                   ปีรถยนต์
                 </label> */}
-                <label
+                {/* <label
                   htmlFor="year"
                   className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
                 >
                   ปีรถยนต์
-                </label>
+                </label> */}
                 {/* <YearVValue id="year_car" name="year_car" /> */}
                 <Listbox
                   value={selectedYear}
                   onChange={setSelectedYear}
-                  id="year"
+                 
                 >
                   {({ open }) => (
                     <>
@@ -718,13 +718,13 @@ export default function AddCars() {
                     }
                   />
                 </div>
-                <div className="">
-                  <label
+                <div className="relative">
+                  {/* <label
                     htmlFor="city"
                     className="absolute -top-2 left-2 -mt-px inline-block px-1 text-xs font-medium text-gray-900"
                   >
                     จังหวัด
-                  </label>
+                  </label> */}
                   {/* <CityCars id="city_car" name="city_car" /> */}
                   <Listbox value={selectedCity} onChange={setSelectedCity}>
                     {({ open }) => (
