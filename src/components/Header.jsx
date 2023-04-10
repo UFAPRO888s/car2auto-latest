@@ -104,7 +104,7 @@ function MobileNavigation({ UserXDisplayName }) {
                 <Button href="/add-cars/" color="blue" className="rounded-md">
                   ลงขายรถ
                 </Button>
-                <small className="text-center">{UserXDisplayName}</small>
+                <small className="text-center">{UserXDisplayName.name}</small>
                 
               </>
             ) : null}
@@ -199,7 +199,7 @@ export function Header() {
             ) : null}
 
             <div className="-mr-1 md:hidden">
-              <MobileNavigation UserXDisplayName={UserDisplayName} />
+              <MobileNavigation UserXDisplayName={user} />
             </div>
           </div>
         </nav>

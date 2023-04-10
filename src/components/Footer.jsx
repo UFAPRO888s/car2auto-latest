@@ -29,7 +29,7 @@ export function Footer() {
           <div>
             <ul className="grid list-disc grid-cols-1 md:grid-cols-2">
               <li>
-                <Link className="text-white hover:text-orange-500" href={'#'}>
+                <Link className="text-white hover:text-orange-500" href={'/buycars'}>
                   ค้นหารถ
                 </Link>
               </li>
@@ -44,8 +44,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="text-white hover:text-orange-500" href={'#'}>
-                  Car Autobuy
+                <Link
+                  className="text-white hover:text-orange-500"
+                  href={'/terms'}
+                >
+                  เงื่อนไขการใช้บริการ
                 </Link>
               </li>
               <li>
