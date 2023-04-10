@@ -173,7 +173,7 @@ export function HeroWhite() {
                         layout="responsive"
                         width={100}
                         height={60}
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="overflow-hidden object-cover"
                       />
                     </SwiperSlide>
                   ))}
