@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore'
 //import WriteToCloudFirestore from '@/components/cloudFirestore/Write'
 
-function UptoHost({ car_IDX }) {
+function UptoHost() {
   const { user } = useUser()
   const [file, setFile] = useState('')
   const [fileList, setFileList] = useState(null)
@@ -61,51 +61,13 @@ function UptoHost({ car_IDX }) {
         .catch((err) => console.log(err))
     }
     getFile(PathImg)
-    console.log(PathImg)
-
-    try {
-      const userDoc = doc(db, 'car2autobuy', user.id)
-      await updateDoc(userDoc, car_IDX, { Gimg: PathImg })
-      alert('Data was successfully sent to cloud firestore!')
-    } catch (error) {
-      console.log(error)
-      alert(error)
-    }
   }
   const files = fileList ? [...fileList] : []
-  //let datax = [];
-
-  //console.log(data)
+  //console.log(dataImg)
 
   return (
     <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
       <div className="space-y-1 text-center">
-        {/* {data.path ? (
-            <Image
-              src={data.path}
-              alt={data.name}
-              width={100}
-              height={100}
-              layout="responsive"
-              className="rounded-md"
-            />
-          ) : (
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 48 48"
-              aria-hidden="true"
-            >
-              <path
-                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )} */}
-
         <div className="grid grid-cols-1 text-sm text-gray-600">
           <label
             htmlFor="file-upload"
@@ -163,7 +125,13 @@ function UptoHost({ car_IDX }) {
                     />
                   </svg>
                 )}
-                <p className="text-xs">{file.name}</p>
+                <p className="text-xs line-clamp-1">{file.name}</p>
+                <input
+                  type="hidden"
+                  className='text-xs'
+                  defaultValue={'https://storage.car2autobuy.com/' + file.name}
+                  //onChange={(event) => handleFileChange(event.target.value)}
+                />
               </div>
             </li>
           ))}

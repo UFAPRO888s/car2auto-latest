@@ -22,7 +22,7 @@ function classNames(...classes) {
 
 export default function TransmissionType() {
   const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
-  console.log(selectedTransmission?.name)
+ // console.log(selectedTransmission?.name)
   return (
     <RadioGroup value={selectedTransmission} onChange={setSelectedTransmission}>
       <RadioGroup.Label className="block text-sm font-medium text-gray-700">

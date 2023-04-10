@@ -21,14 +21,7 @@ import {
   GeoPoint,
 } from 'firebase/firestore'
 
-function uuidv4() {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  )
-}
+
 
 export default function AddCars() {
   const { user } = useUser()
@@ -39,41 +32,37 @@ export default function AddCars() {
   const [Add_Name, setAdd_Name] = useState('')
   const [Add_Line, setAdd_Line] = useState('')
   const [Add_Tel, setAdd_Tel] = useState('')
+  const [imgxUP, setimgxUP] = useState('')
   const [GcarAddID, setIDGcarID] = useState('')
+  const [fileList, setFileList] = useState(null)
+  const [dataImg, getFile] = useState([])
+  const [progress, setProgess] = useState(0)
 
   const uniqueId = () => {
-    const dateString = Date.now().toString(36);
-    const randomness = Math.random().toString(36).substr(2);
-    return dateString + randomness;
-  };
+    const dateString = Date.now().toString(36)
+    const randomness = Math.random().toString(36).substr(2)
+    return dateString + randomness
+  }
 
   const current = new Date()
   const dateTimeAB = `${current.getDate()} - ${
     current.getMonth() + 1
   } - ${current.getFullYear()}`
 
-  //const el = useRef()
-  
-  
-
-  
-  
-  
+  const  inputEl = useRef()
 
   useEffect(() => {
     (async () => {
       const UXIDCAR = uniqueId()
       setIDGcarID(UXIDCAR)
-    })();
-  
-    return () => {
-      // this now gets called when the component unmounts
-    };
-  }, []);
+    })()
 
-  //console.log(GcarAddID)
+    return () => {
+     
+    }
+  }, [])
+
   const sendData = async () => {
-   // const GcarIDX = uuidv4()
     try {
       const userDoc = doc(db, 'car2autobuy', user.id)
       await updateDoc(userDoc, GcarAddID, {
@@ -85,8 +74,17 @@ export default function AddCars() {
         Add_Email: UserUEmail,
         Add_DisplayName: UserUDisplayName,
         current: current,
+        imagesG: dataImg,
       })
-      alert('Data was successfully sent to cloud firestore!')
+      alert('Data successfully sent to cloud firestore!')
+      //router.push('/add-cars')
+      setAdd_Name('')
+      setAdd_Line('')
+      setAdd_Tel('')
+      setimgxUP('')
+
+      
+      router.push('/add-cars')
     } catch (error) {
       console.log(error)
       alert(error)
@@ -102,8 +100,39 @@ export default function AddCars() {
     setUUserEmail(storedgetUser.email)
     setUUserDisplayName(storedgetUser.name)
   }, [])
-  //console.log(UserUId)
 
+  const handleChange = (e) => {
+    setProgess(0)
+    setFileList(e.target.files)
+  }
+
+  const uploadFile = async () => {
+    const PathImg = []
+    for (let i = 0; i < fileList?.length; i++) {
+      const formData = new FormData()
+      formData.append(`file`, fileList[i])
+      axios
+        .post('https://storage.car2autobuy.com/upload', formData, {
+          onUploadProgress: (ProgressEvent) => {
+            let progress =
+              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
+              '%'
+            setProgess(progress)
+          },
+        })
+        .then((res) => {
+          PathImg.push({
+            name: res.data.name,
+            path: 'https://storage.car2autobuy.com' + res.data.path,
+          })
+        })
+        .catch((err) => console.log(err))
+    }
+    getFile(PathImg)
+    alert('อัพโหลดเรียบร้อยครับ!')
+  }
+  //const files = fileList ? [...fileList] : []
+  //console.log(dataImg)
   return (
     <>
       <PageSEO
@@ -135,9 +164,75 @@ export default function AddCars() {
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-5">
-                <UptoHost car_IDX={GcarAddID} />
+                {/* <UptoHost car_IDX={GcarAddID} /> */}
+                <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
+                  <div className="space-y-1 text-center">
+                    <div className="grid grid-cols-1 text-sm text-gray-600">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                      >
+                        <span>รูปภาพ</span>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          className="sr-only"
+                          onChange={handleChange}
+                          multiple
+                        />
+                      </label>
+                      <div className="pl-1">
+                        <div className="progessBar">{progress}</div>
+                        <Button onClick={uploadFile} className="rounded-md">
+                          Upload
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      อัพโหลดรูปฟรี 24ชั่วโมงไม่เว้นวันหยุดราชการ
+                    </p>
+                  </div>
+                  <div className="w-full">
+                    <ul className="grid grid-cols-4 gap-2">
+                      {dataImg?.map((file, i) => (
+                        <li key={i}>
+                          <div>
+                            {file.path ? (
+                              <Image
+                                src={
+                                  file.path
+                                }
+                                alt={file.name}
+                                width={100}
+                                height={100}
+                                className="rounded-md object-contain"
+                                layout="responsive"
+                              />
+                            ) : (
+                              <svg
+                                className="mx-auto h-12 w-12 text-gray-400"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 48 48"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                  strokeWidth={2}
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                            <p className="line-clamp-1 text-xs">{file.name}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-
               <div className="col-span-1"></div>
             </div>
             {/* ing */}
@@ -153,6 +248,7 @@ export default function AddCars() {
                   type="text"
                   name="name"
                   id="name"
+                  value={Add_Name}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="ชื่อผู้ลงประกาศ"
                   onChange={(event) => setAdd_Name(event.target.value)}
@@ -169,6 +265,7 @@ export default function AddCars() {
                   type="tel"
                   name="tel"
                   id="tel"
+                  value={Add_Tel}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="เบอร์โทรศัพท์"
                   onChange={(event) => setAdd_Tel(event.target.value)}
@@ -185,6 +282,7 @@ export default function AddCars() {
                   type="text"
                   name="line_id"
                   id="line_id"
+                  value={Add_Line}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
                   placeholder="LINE ID"
                   onChange={(event) => setAdd_Line(event.target.value)}

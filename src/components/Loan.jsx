@@ -5,31 +5,43 @@ export default function Loan({ car_pricex, car_title }) {
   const [Down, setDown] = useState('')
   const [Interest, setInterest] = useState('')
   const [Period, setPeriod] = useState('')
+ // const [Price, setPrice] = useState('')
+  const [PriceXvat, setPriceXvat] = useState('')
 
   function handleDownChange(event) {
     //console.log(event.target.value);
     setDown(event.target.value)
   }
   function handleInterestChange(event) {
-    let bankInterest = '3.5'
-    if (event.target.value == 'เกียรตินาคิน') {
-      bankInterest = '2.5'
-    } else if (event.target.value == 'ทีทีบี') {
-      bankInterest = '2.6'
-    } else if (event.target.value == 'ทิสโก้') {
-      bankInterest = '2.7'
-    } else if (event.target.value == 'กสิกรไทย') {
-      bankInterest = '2.8'
-    } else if (event.target.value == 'ไทยพาณิชย์') {
-      bankInterest = '2.9'
-    }
+    // let bankInterest = '3.5'
+    // if (event.target.value == 'เกียรตินาคิน') {
+    //   bankInterest = '2.5'
+    // } else if (event.target.value == 'ทีทีบี') {
+    //   bankInterest = '2.6'
+    // } else if (event.target.value == 'ทิสโก้') {
+    //   bankInterest = '2.7'
+    // } else if (event.target.value == 'กสิกรไทย') {
+    //   bankInterest = '2.8'
+    // } else if (event.target.value == 'ไทยพาณิชย์') {
+    //   bankInterest = '2.9'
+    // }
     //console.log(bankInterest);
-    setInterest(bankInterest)
+    setInterest(event.target.value)
   }
   function handlePeriodChange(event) {
     // console.log(event.target.value);
     setPeriod(event.target.value)
+    const PriceXDown =
+      (parseInt(car_pricex) - parseInt(Down)) * (parseInt(Interest) / 100)
+    const intye = PriceXDown * parseInt(event.target.value)
+    const PriceXvat = parseInt(intye) + parseInt(car_pricex)
+    const PriceXintye = PriceXvat / (parseInt(event.target.value) * 12)
+    //const PriceXvatXinx = PriceXvat + Interest - DownBt;
+    //console.log(intye)
+    setPeriod(PriceXintye.toFixed(2))
+    setPriceXvat(PriceXvat)
   }
+
   return (
     <section className="rounded-md bg-gray-50 p-4">
       <div>
@@ -95,7 +107,7 @@ export default function Loan({ car_pricex, car_title }) {
         >
           ไฟแนนซ์
         </label>
-        <div className="relative mt-1 rounded-md shadow-sm grid-cols-2">
+        <div className="relative mt-1 grid grid-cols-2 gap-2 rounded-md shadow-sm">
           {/* <div className="absolute inset-y-0 left-0 flex items-center">
             <label htmlFor="finance" className="sr-only">
               ไฟแนนซ์
@@ -114,23 +126,32 @@ export default function Loan({ car_pricex, car_title }) {
               <option>ไทยพาณิชย์</option>
             </select>
           </div> */}
-          <input
-            type="number"
-            name="finance"
-            id="finance"
-            onChange={handlePeriodChange}
-            className="block w-full rounded-md border-gray-300 pl-32 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="ใส่จำนวนปี"
-          />
-
-          <input
-            type="number"
-            name="period"
-            id="period"
-            onChange={handlePeriodChange}
-            className="block w-full rounded-md border-gray-300 pl-32 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="ใส่จำนวนปี"
-          />
+          <div>
+            <label htmlFor="interest" className="text-xs text-gray-500">
+              ดอกเบี้ย
+            </label>
+            <input
+              type="number"
+              name="interest"
+              id="interest"
+              onChange={handleInterestChange}
+              className="block w-full rounded-md border-gray-300 pl-32 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="อัตราดอกเบี้ย"
+            />
+          </div>
+          <div>
+            <label htmlFor="period" className="text-xs text-gray-500">
+              จำนวนปี
+            </label>
+            <input
+              type="number"
+              name="period"
+              id="period"
+              onChange={handlePeriodChange}
+              className="block w-full rounded-md border-gray-300 pl-32 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="ใส่จำนวนปี"
+            />
+          </div>
         </div>
       </div>
       <div className="block w-full py-4">
@@ -155,7 +176,10 @@ export default function Loan({ car_pricex, car_title }) {
         <p className="text-end text-lg font-bold text-red-500">
           <span className="text-base text-gray-800">ยอดจัด</span>{' '}
           <CurrencyFormat
-            value={Interest * Period + (car_pricex - Down)}
+            value={
+              parseInt(Interest) * parseInt(Period) +
+              (parseInt(car_pricex) - parseInt(Down))
+            }
             displayType={'text'}
             thousandSeparator={true}
             prefix={'฿'}
@@ -172,11 +196,11 @@ export default function Loan({ car_pricex, car_title }) {
           {/* {((parseInt(car_pricex.replace(/,/g, "")) * 7) / 100 +
             parseInt(car_pricex.replace(/,/g, "")) / 72).toFixed(2)}{" "} */}
           <CurrencyFormat
-            value={(
-              (Interest * Period + (car_pricex - Down) * 7) / 100 +
-              Interest * Period +
-              (car_pricex - Down) / (Period * 12)
-            ).toFixed(2)}
+            // value={(
+            //   (parseInt(Interest) * parseInt(Period) + (parseInt(car_pricex) - parseInt(Down)) * 7) / 100 +
+            //   parseInt(Interest) * parseInt(Period) + (parseInt(car_pricex) - parseInt(Down)) / (parseInt(Period) * 12)
+            // ).toFixed(2)}
+            value={PriceXvat}
             displayType={'text'}
             thousandSeparator={true}
             prefix={'฿'}
