@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import CurrencyFormat from 'react-currency-format'
 
 export default function Loan({ car_pricex, car_title }) {
   const [Down, setDown] = useState('')
@@ -50,7 +51,7 @@ export default function Loan({ car_pricex, car_title }) {
             name="price"
             id="price"
             className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="0.00"
+            
             defaultValue={car_pricex}
             aria-describedby="price-currency"
           />
@@ -77,7 +78,7 @@ export default function Loan({ car_pricex, car_title }) {
             name="price"
             id="price"
             className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="10000"
+            placeholder="เงินดาวน์"
             onChange={handleDownChange}
             aria-describedby="price-currency"
           />
@@ -125,30 +126,59 @@ export default function Loan({ car_pricex, car_title }) {
         </div>
       </div>
       <div className="block w-full py-4">
-        <p className="text-xs text-gray-500">
+        <div className="text-xs text-gray-500">
           ราคารถยนต์{' '}
           <span className="font-semibold text-gray-800">
-            {(parseInt(car_pricex) * 7) / 100 + parseInt(car_pricex)}
+            <CurrencyFormat
+              value={(parseInt(car_pricex) * 7) / 100 + parseInt(car_pricex)}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'฿'}
+              renderText={(value) => (
+                <p>
+                  {value} <span className="text-xs">บาท</span>
+                </p>
+              )}
+            />
           </span>{' '}
           ราคารวมภาษี 7%
-        </p>
+        </div>
 
         <p className="text-end text-lg font-bold text-red-500">
           <span className="text-base text-gray-800">ยอดจัด</span>{' '}
-          {Interest * Period + (car_pricex - Down)}{' '}
-          <span className="text-xs text-gray-800">บาท</span>
+          <CurrencyFormat
+            value={Interest * Period + (car_pricex - Down)}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'฿'}
+            renderText={(value) => (
+              <p>
+                {value} <span className="text-xs">บาท</span>
+              </p>
+            )}
+          />
+         
         </p>
 
         <p className="text-end text-3xl font-bold text-red-500">
           <span className="text-base text-gray-800">ยอดผ่อน</span>{' '}
           {/* {((parseInt(car_pricex.replace(/,/g, "")) * 7) / 100 +
             parseInt(car_pricex.replace(/,/g, "")) / 72).toFixed(2)}{" "} */}
-          {(
-            (Interest * Period + (car_pricex - Down) * 7) / 100 +
-            Interest * Period +
-            (car_pricex - Down) / (Period * 12)
-          ).toFixed(2)}
-          <span className="text-xs text-gray-800">เดือน</span>
+          <CurrencyFormat
+            value={(
+              (Interest * Period + (car_pricex - Down) * 7) / 100 +
+              Interest * Period +
+              (car_pricex - Down) / (Period * 12)
+            ).toFixed(2)}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'฿'}
+            renderText={(value) => (
+              <p>
+                {value} <span className="text-xs">เดือน</span>
+              </p>
+            )}
+          />
         </p>
       </div>
     </section>
