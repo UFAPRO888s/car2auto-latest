@@ -95,7 +95,7 @@ export default function Loan({ car_pricex, car_title }) {
         >
           ไฟแนนซ์
         </label>
-        <div className="relative mt-1 rounded-md shadow-sm">
+        <div className="relative mt-1 rounded-md shadow-sm grid-cols-2">
           {/* <div className="absolute inset-y-0 left-0 flex items-center">
             <label htmlFor="finance" className="sr-only">
               ไฟแนนซ์

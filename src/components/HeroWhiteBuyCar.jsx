@@ -155,7 +155,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                       prefix={''}
                       renderText={(value) => (
                         <p>
-                          {value} <span className="text-xs">บาท</span>
+                         <span className="text-xs">ราคา</span> {value} <span className="text-xs">บาท</span>
                         </p>
                       )}
                     /> 

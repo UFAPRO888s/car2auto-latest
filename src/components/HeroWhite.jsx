@@ -152,7 +152,7 @@ export function HeroWhite() {
               </div>
               
               <div className="bg-[#1b65a6] py-2">
-                <div className="flex justify-between px-4 text-white">
+                <div className="flex justify-end px-4 text-white">
                   <div className="text-2xl font-bold ">
                     {' '}
                     <CurrencyFormat
@@ -162,7 +162,7 @@ export function HeroWhite() {
                       prefix={''}
                       renderText={(value) => (
                         <p>
-                          {value} <span className="text-xs">บาท</span>
+                          <span className="text-xs">ราคา</span> {value} <span className="text-xs">บาท</span>
                         </p>
                       )}
                     />
