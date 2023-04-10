@@ -116,17 +116,18 @@ function MobileNavigation({ UserXDisplayName }) {
 }
 
 export function Header() {
+  const { user } = useUser()
   const router = useRouter()
   const [UserEmail, setUserEmail] = useState('')
   const [UserId, setUserUid] = useState('')
   const [UserDisplayName, setUserDisplayName] = useState('')
 
   useEffect(() => {
-    const storedgetUser = getUserFromCookie()
-    if (storedgetUser) {
-      setUserUid(storedgetUser.uid)
-      setUserEmail(storedgetUser.email)
-      setUserDisplayName(storedgetUser.displayName)
+   // const storedgetUser = getUserFromCookie()
+    if (user) {
+      setUserUid(user.id)
+      setUserEmail(user.email)
+      setUserDisplayName(user.name)
     }
   }, [])
 
@@ -167,7 +168,7 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            {!UserDisplayName ? (
+            {!user ? (
               <>
                 <div className="hidden md:block">
                   <NavLink href="/login">เข้าสู่ระบบ</NavLink>
@@ -179,11 +180,11 @@ export function Header() {
                 </Button>
               </>
             ) : null}
-            {UserDisplayName ? (
+            {user ? (
               <>
                 <div className="hidden grid-cols-1 md:grid">
                   <small className="text-xs text-black/50">
-                    {UserDisplayName}
+                    {user.name}
                   </small>
                   <Button href="/add-cars/" color="blue" className="rounded-md">
                     ลงขายรถ

@@ -31,7 +31,7 @@ export default function Loan({ car_pricex, car_title }) {
     setPeriod(event.target.value)
   }
   return (
-    <section className="rounded-md bg-gray-200 p-2">
+    <section className="rounded-md bg-gray-50 p-4">
       <div>
         <h3 className="text-3xl font-bold">คำนวณสินเชื่อ</h3>
       </div>

@@ -9,7 +9,7 @@ import UptoHost from '@/components/UptoHost'
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import { Button } from '@/components/Button'
-import FileUploadMultiple from '@/components/FileUploadMultiple'
+
 export default function AddCars() {
   const router = useRouter()
   const [UserUEmail, setUUserEmail] = useState('')
@@ -89,13 +89,11 @@ export default function AddCars() {
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="col-span-2">
+              <div className="col-span-5">
                 <UptoHost />
               </div>
-              <div className="col-span-2">
-                
-              </div>
-              <div className="col-span-2">
+              
+              <div className="col-span-1">
                
               </div>
             </div>
