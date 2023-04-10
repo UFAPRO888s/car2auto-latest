@@ -1055,7 +1055,7 @@ export default function AddCars() {
               </RadioGroup>
             </div>
             {/* uploadimage */}
-            <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
+            <div className="grid grid-cols-1 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-1 md:col-span-5">
                 <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
                   <div className="space-y-1 text-center">
