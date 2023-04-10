@@ -1056,7 +1056,7 @@ export default function AddCars() {
             </div>
             {/* uploadimage */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="col-span-5">
+              <div className="col-span-1 md:col-span-5">
                 <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
                   <div className="space-y-1 text-center">
                     <div className="grid grid-cols-1 text-sm text-gray-600">
@@ -1123,7 +1123,7 @@ export default function AddCars() {
                   </div>
                 </div>
               </div>
-              <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
+              <div className="hidden md:flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
                 <div className="text-center">
                   <p className="text-xs">
                     ขั้นตอนง่ายกับการขายรถที่ CAR2AUTOBUY
