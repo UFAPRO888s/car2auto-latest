@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-
+import Image from 'next/image'
 const people = [
   {
     id: 1,
@@ -85,6 +85,9 @@ export default function ModelCars() {
                 <Image
                   src={selected.avatar}
                   alt={selected.name}
+                  width={100}
+                  height={100}
+                  layout='fixed'
                   className="h-6 w-6 flex-shrink-0 rounded-full"
                 />
                 <span className="ml-3 block truncate">{selected.name}</span>

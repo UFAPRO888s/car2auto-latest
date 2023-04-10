@@ -110,11 +110,11 @@ export default function Car_Recommendations_grid() {
                 <span className="flex min-w-0 flex-1 items-center space-x-3">
                   <span className="block flex-shrink-0">
                     <Image
-                      className="h-10 w-10 rounded-full"
+                      className="h-5 w-5 rounded-full"
                       src={Brand.imgpath}
                       alt={Brand.brand}
-                      width={100}
-                      height={100}
+                      width={50}
+                      height={50}
                       layout='fixed'
                     />
                   </span>
