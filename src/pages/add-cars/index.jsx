@@ -15,9 +15,6 @@ export default function AddCars() {
   const [UserUEmail, setUUserEmail] = useState('')
   const [UserUId, setUUserUid] = useState('')
   const [UserUDisplayName, setUUserDisplayName] = useState('')
-  const [file, setFile] = useState('')
-  const [data, getFile] = useState({ name: '', path: '' })
-  const [progress, setProgess] = useState(0)
 
   const el = useRef()
 
@@ -26,9 +23,9 @@ export default function AddCars() {
     if (!storedgetUser) {
       router.push('/')
     }
-    setUUserUid(storedgetUser.uid)
+    setUUserUid(storedgetUser.id)
     setUUserEmail(storedgetUser.email)
-    setUUserDisplayName(storedgetUser.displayName)
+    setUUserDisplayName(storedgetUser.name)
   }, [])
   //console.log(UserUId)
   const handleChange = (e) => {
@@ -38,26 +35,6 @@ export default function AddCars() {
     setFile(file)
   }
 
-  const uploadFile = () => {
-    const formData = new FormData()
-    formData.append('file', file)
-    axios
-      .post('https://storage.car2autobuy.com/upload', formData, {
-        onUploadProgress: (ProgressEvent) => {
-          let progress =
-            Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) + '%'
-          setProgess(progress)
-        },
-      })
-      .then((res) => {
-        console.log(res)
-        getFile({
-          name: res.data.name,
-          path: 'https://storage.car2autobuy.com' + res.data.path,
-        })
-      })
-      .catch((err) => console.log(err))
-  }
   const current = new Date()
   const dateTimeAB = `${current.getDate()} - ${
     current.getMonth() + 1
@@ -87,15 +64,16 @@ export default function AddCars() {
             <div className="py-4 text-center">
               <h1 className="text-3xl font-bold">ลงประกาศขายรถมือสอง</h1>
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
+              <p className="text-base font-semibold">
+                รหัสประกาศหมายเลข {UserUId}
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-5">
                 <UptoHost />
               </div>
-              
-              <div className="col-span-1">
-               
-              </div>
+
+              <div className="col-span-1"></div>
             </div>
             {/* ing */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">

@@ -33,7 +33,6 @@ export default function Home() {
       <main>
         <HeroNewCars />
         <HeroWhite />
-
         <BrandCards />
         <SecondaryHero />
         <SecondaryBuySale />
