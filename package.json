@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint --fix --dir src"
   },
-  "browserslist": "defaults, not ie <= 11",
+  
   "dependencies": {
     "@headlessui/react": "^1.7.0",
     "@heroicons/react": "^2.0.17",
