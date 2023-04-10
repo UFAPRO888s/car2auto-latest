@@ -458,3 +458,7 @@
 .add-fav input[type="checkbox"]:checked + .icon-heart .icon-plus-sign {
   display: none;
 }
+
+iframe{
+  width: 100%;
+}

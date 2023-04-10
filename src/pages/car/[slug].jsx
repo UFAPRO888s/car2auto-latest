@@ -250,9 +250,9 @@ export default function CarDetailing({ DataCar }) {
                       thousandSeparator={true}
                       prefix={''}
                       renderText={(value) => (
-                        <p>
+                        <div>
                           {value} <span className="text-xs">กม.</span>
-                        </p>
+                        </div>
                       )}
                     />
                   </div>
