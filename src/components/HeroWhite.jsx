@@ -11,18 +11,18 @@ import FavoriteButton from '@/components/FavoriteButton'
 
 export function HeroWhite() {
   const [postNum, setPostNum] = useState(8) // Default number of posts dislplayed
-  const [SaveClicks, setSaveClicks] = useState()
+  //const [SaveClicks, setSaveClicks] = useState()
   
   function handleClick() {
     setPostNum((prevPostNum) => prevPostNum + 4) // 3 is the number of posts you want to load per click
   }
 
   
-    useEffect(() => {
-      localStorage.setItem('favorite', JSON.stringify({CarID: SaveClicks}))
-      const stored = localStorage.getItem('favorite')
-     // console.log(stored)
-    }, [])
+    // useEffect(() => {
+    //   localStorage.setItem('favorite', JSON.stringify({CarID: SaveClicks}))
+    //   const stored = localStorage.getItem('favorite')
+    //  // console.log(stored)
+    // }, [])
   
   
  

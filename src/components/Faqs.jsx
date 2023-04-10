@@ -68,8 +68,9 @@ export function Faqs() {
         className="absolute left-1/2 top-0 max-w-none -translate-y-1/4 translate-x-[-30%]"
         src={backgroundImage}
         alt="คำถามที่พบบ่อย"
-        width={1558}
-        height={946}
+        width={100}
+        height={20}
+        layout="responsive"
         unoptimized
       />
 
@@ -81,8 +82,8 @@ export function Faqs() {
           คำถามที่พบบ่อย
         </h2>
         <p className="mt-4 text-lg tracking-tight text-slate-700">
-          หากคุณไม่พบสิ่งที่ต้องการ โปรดส่งอีเมลถึงทีมสนับสนุนของเรา
-          และ จะมีพนักงาานติดต่อกลับมาหาคุณ
+          หากคุณไม่พบสิ่งที่ต้องการ โปรดส่งอีเมลถึงทีมสนับสนุนของเรา และ
+          จะมีพนักงาานติดต่อกลับมาหาคุณ
         </p>
       </div>
       <ul
