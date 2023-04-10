@@ -6,7 +6,7 @@ import carData from '@/data/carlist'
 import CurrencyFormat from 'react-currency-format'
 import Link from 'next/link'
 import FavoriteButton from '@/components/FavoriteButton'
-import Counter from '@/components/realtimeDatabase/Counter'
+
 
 
 export function HeroWhite() {

@@ -43,7 +43,8 @@ const useUser = () => {
 
     const userFromCookie = getUserFromCookie()
     if (!userFromCookie) {
-      router.push('/')
+      //router.push('/')
+      console.log("NO-M")
       return
     }
     setUser(userFromCookie)

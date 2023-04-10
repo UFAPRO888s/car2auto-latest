@@ -105,7 +105,6 @@ function MobileNavigation({ UserXDisplayName }) {
                   ลงขายรถ
                 </Button>
                 <small className="text-center">{UserXDisplayName.name}</small>
-                
               </>
             ) : null}
           </Popover.Panel>
@@ -123,11 +122,12 @@ export function Header() {
   const [UserDisplayName, setUserDisplayName] = useState('')
 
   useEffect(() => {
-   // const storedgetUser = getUserFromCookie()
-    if (user) {
-      setUserUid(user.id)
-      setUserEmail(user.email)
-      setUserDisplayName(user.name)
+    const storedgetUser = getUserFromCookie()
+    //console.log(storedgetUser)
+    if (storedgetUser) {
+      setUserUid(storedgetUser?.uid)
+      setUserEmail(storedgetUser?.email)
+      setUserDisplayName(storedgetUser?.UserDisplayName)
     }
   }, [])
 
@@ -183,17 +183,13 @@ export function Header() {
             {user ? (
               <>
                 <div className="hidden grid-cols-1 md:grid">
-                  <small className="text-xs text-black/50">
-                    {user.name}
-                  </small>
+                  <small className="text-xs text-black/50">{user.name}</small>
                   <Button href="/add-cars/" color="blue" className="rounded-md">
                     ลงขายรถ
                   </Button>
                 </div>
                 <div className="hidden md:block">
-                  <NavLink href="/login" onClick={handlesignOut}>
-                    ออกจากระบบ
-                  </NavLink>
+                  <NavLink href="/login">ออกจากระบบ</NavLink>
                 </div>
               </>
             ) : null}
