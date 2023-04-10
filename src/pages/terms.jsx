@@ -8,6 +8,7 @@ import { Button } from '@/components/Button'
 import { GridPattern } from '@/components/GridPattern'
 import { StarRating } from '@/components/StarRating'
 import coverImage from '@/images/car-silver.webp'
+import { Faqs } from '@/components/Faqs'
 
 export default function Terms() {
   return (
@@ -155,15 +156,15 @@ export default function Terms() {
                   <li>
                     5.4. การรับรอง - บริษัทฯ
                     ไม่รับรองว่าบริการและเนื้อหาที่เผยแพร่ผ่านบริการจะ
-                    <li>
+                    <p>
                       5.4.1. ถูกต้องสมบูรณ์ ไม่บกพร่อง
                       หรือสมตามความประสงค์ของผู้ใช้บริการ
                       ไม่ว่าจะเป็นในด้านเทคนิคหรือด้านใดๆ ก็ตาม
-                    </li>
-                    <li>
+                    </p>
+                    <p>
                       5.4.2. มีความเหมาะสม (ไม่ว่าจะในด้านใดๆ ก็ตาม)
                       สำหรับผู้ใช้บริการและบุคคลทั่วไป
-                    </li>
+                    </p>
                   </li>
                   <li>
                     5.4.3. ไม่ละเมิดสิทธิใด ๆ
@@ -273,7 +274,7 @@ export default function Terms() {
                   <li>
                     12.1. เพื่อให้ข้อมูลเกี่ยวกับการซื้อขายและแคมเปญต่างๆ
                     กับลูกค้าทางออนไลน์
-                  </li>{' '}
+                  </li>
                   <li>12.2. เพื่อยืนยันการซื้อขายผลิตภัณฑ์ </li>
                   <li>
                     12.3.
@@ -347,6 +348,7 @@ export default function Terms() {
             </div>
           </div>
         </div>
+        <Faqs />
       </Container>
       <Footer />
     </>

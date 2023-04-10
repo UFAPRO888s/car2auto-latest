@@ -39,7 +39,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="text-white hover:text-orange-500" href={'#'}>
+                <Link className="text-white hover:text-orange-500" href={'/terms'}>
                   คำถามที่พบบ่อย
                 </Link>
               </li>
