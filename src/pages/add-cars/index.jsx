@@ -9,14 +9,89 @@ import UptoHost from '@/components/UptoHost'
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import { Button } from '@/components/Button'
+import { useUser } from '@/lib/firebase/useUser'
+import { initFirebase } from '@/lib/firebase/initFirebase'
+import { db } from '@/lib/firebase/initFirebase'
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  collection,
+  Timestamp,
+  GeoPoint,
+} from 'firebase/firestore'
+
+function uuidv4() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  )
+}
 
 export default function AddCars() {
+  const { user } = useUser()
   const router = useRouter()
   const [UserUEmail, setUUserEmail] = useState('')
   const [UserUId, setUUserUid] = useState('')
   const [UserUDisplayName, setUUserDisplayName] = useState('')
+  const [Add_Name, setAdd_Name] = useState('')
+  const [Add_Line, setAdd_Line] = useState('')
+  const [Add_Tel, setAdd_Tel] = useState('')
+  const [GcarAddID, setIDGcarID] = useState('')
 
-  const el = useRef()
+  const uniqueId = () => {
+    const dateString = Date.now().toString(36);
+    const randomness = Math.random().toString(36).substr(2);
+    return dateString + randomness;
+  };
+
+  const current = new Date()
+  const dateTimeAB = `${current.getDate()} - ${
+    current.getMonth() + 1
+  } - ${current.getFullYear()}`
+
+  //const el = useRef()
+  
+  
+
+  
+  
+  
+
+  useEffect(() => {
+    (async () => {
+      const UXIDCAR = uniqueId()
+      setIDGcarID(UXIDCAR)
+    })();
+  
+    return () => {
+      // this now gets called when the component unmounts
+    };
+  }, []);
+
+  //console.log(GcarAddID)
+  const sendData = async () => {
+   // const GcarIDX = uuidv4()
+    try {
+      const userDoc = doc(db, 'car2autobuy', user.id)
+      await updateDoc(userDoc, GcarAddID, {
+        car_ID: GcarAddID,
+        userId: user.id,
+        Add_Name: Add_Name,
+        Add_Line: Add_Line,
+        Add_Tel: Add_Tel,
+        Add_Email: UserUEmail,
+        Add_DisplayName: UserUDisplayName,
+        current: current,
+      })
+      alert('Data was successfully sent to cloud firestore!')
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
 
   useEffect(() => {
     const storedgetUser = getUserFromCookie()
@@ -28,17 +103,7 @@ export default function AddCars() {
     setUUserDisplayName(storedgetUser.name)
   }, [])
   //console.log(UserUId)
-  const handleChange = (e) => {
-    setProgess(0)
-    const file = e.target.files
-    //console.log(file)
-    setFile(file)
-  }
 
-  const current = new Date()
-  const dateTimeAB = `${current.getDate()} - ${
-    current.getMonth() + 1
-  } - ${current.getFullYear()}`
   return (
     <>
       <PageSEO
@@ -60,17 +125,17 @@ export default function AddCars() {
           className="z-0"
         />
         <Container>
-          <div>
+          <div className="py-4">
             <div className="py-4 text-center">
               <h1 className="text-3xl font-bold">ลงประกาศขายรถมือสอง</h1>
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
               <p className="text-base font-semibold">
-                รหัสประกาศหมายเลข {UserUId}
+                ลงประกาศขายรถมือสอง CAR2AUTOBUY
               </p>
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-5">
-                <UptoHost />
+                <UptoHost car_IDX={GcarAddID} />
               </div>
 
               <div className="col-span-1"></div>
@@ -90,6 +155,7 @@ export default function AddCars() {
                   id="name"
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="ชื่อผู้ลงประกาศ"
+                  onChange={(event) => setAdd_Name(event.target.value)}
                 />
               </div>
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
@@ -105,6 +171,7 @@ export default function AddCars() {
                   id="tel"
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="เบอร์โทรศัพท์"
+                  onChange={(event) => setAdd_Tel(event.target.value)}
                 />
               </div>
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
@@ -120,6 +187,7 @@ export default function AddCars() {
                   id="line_id"
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
                   placeholder="LINE ID"
+                  onChange={(event) => setAdd_Line(event.target.value)}
                 />
               </div>
             </div>
@@ -174,6 +242,9 @@ export default function AddCars() {
               </div>
             </div>
             {/* ing */}
+            <Button className={'rounded-md'} onClick={sendData}>
+              SAVE
+            </Button>
           </div>
         </Container>
       </main>

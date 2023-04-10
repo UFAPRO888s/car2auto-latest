@@ -109,7 +109,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {DataCars.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}

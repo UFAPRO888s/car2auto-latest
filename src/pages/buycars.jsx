@@ -28,7 +28,7 @@ export default function BuyCars({DataCar,textRxSx,contexzt}) {
         />
       </Head>
       <Header />
-      <SwiperSlideXbuy />
+      {/* <SwiperSlideXbuy /> */}
       <main>
         <Container>
           <Car_Recommendations_grid />

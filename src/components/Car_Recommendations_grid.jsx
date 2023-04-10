@@ -42,7 +42,7 @@ const people = [
 
 export default function Car_Recommendations_grid() {
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto w-full mt-10">
       <div>
         <div className="text-center">
           <Image
@@ -96,7 +96,7 @@ export default function Car_Recommendations_grid() {
           </div>
         </form>
       </div>
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <h3 className="text-sm font-medium text-gray-500">
           ยี่ห้อรถยนต์มือสองแนะนำ
         </h3>
@@ -123,7 +123,7 @@ export default function Car_Recommendations_grid() {
                       {Brand.brand}
                     </span>
                     <span className="block truncate text-sm font-medium text-gray-500">
-                      {/* {Brand.count} */}
+                     
                     </span>
                   </span>
                 </span>
@@ -137,7 +137,7 @@ export default function Car_Recommendations_grid() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   )
 }

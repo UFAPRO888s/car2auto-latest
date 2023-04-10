@@ -4,55 +4,32 @@ import Image from 'next/image'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { useUser } from '@/lib/firebase/useUser'
-function UptoHost() {
+import { db } from '@/lib/firebase/initFirebase'
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  collection,
+  Timestamp,
+  GeoPoint,
+} from 'firebase/firestore'
+//import WriteToCloudFirestore from '@/components/cloudFirestore/Write'
+
+function UptoHost({ car_IDX }) {
   const { user } = useUser()
   const [file, setFile] = useState('')
   const [fileList, setFileList] = useState(null)
-  const [dataImg, getFile] = useState({name:'',path: ''})
+  const [dataImg, getFile] = useState({ name: '', path: '' })
   const [progress, setProgess] = useState(0)
 
-  const el = useRef()
-  //console.log(user)
+  //const el = useRef()
+
   const handleChange = (e) => {
     setProgess(0)
-    // const file = e.target.files
-    // console.log(file)
-    // console.log(e.target.files)
-    // setFile(URL.createObjectURL(e.target.files[0]));
-    //for (let i = 0; i < e.target.files?.length; i++) {
-    //console.log(e.target.files)
     setFileList(e.target.files)
-    //}
-    //setFileList(e.target.files);
   }
 
-  const uploadFile = () => {
-    // const data = new FormData();
-    // file.forEach((filex, i) => {
-    //   data.append(`file-${i}`, filex, filex.name);
-    // });
-
-    // console.log(formData)
-    //formData.append('file', file)
-
-    // axios
-    //   .post('https://storage.car2autobuy.com/upload', formData, {
-    //     onUploadProgress: (ProgressEvent) => {
-    //       let progress =
-    //         Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) + '%'
-    //       setProgess(progress)
-    //     },
-    //   })
-    //   .then((res) => {
-    //     //console.log(res)
-    //     getFile({
-    //       name: res.data.name,
-    //       path: 'https://storage.car2autobuy.com' + res.data.path,
-    //     })
-    //   })
-    //   .catch((err) => console.log(err))
-
-    /// console.log(fileList[i])
+  const uploadFile = async () => {
     const PathImg = []
     for (let i = 0; i < fileList?.length; i++) {
       const formData = new FormData()
@@ -80,18 +57,25 @@ function UptoHost() {
           //   })
           // }
           PathImg.push(res.data)
-
-          
         })
         .catch((err) => console.log(err))
     }
     getFile(PathImg)
-    //console.log(PathImg)
+    console.log(PathImg)
+
+    try {
+      const userDoc = doc(db, 'car2autobuy', user.id)
+      await updateDoc(userDoc, car_IDX, { Gimg: PathImg })
+      alert('Data was successfully sent to cloud firestore!')
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
   }
   const files = fileList ? [...fileList] : []
   //let datax = [];
 
- //console.log(data)
+  //console.log(data)
 
   return (
     <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
