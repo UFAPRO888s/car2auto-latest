@@ -6,26 +6,30 @@ import carData from '@/data/carlist'
 import CurrencyFormat from 'react-currency-format'
 import Link from 'next/link'
 import FavoriteButton from '@/components/FavoriteButton'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import "swiper/css/autoplay";
+import { Pagination, Navigation } from 'swiper'
 
 
 export function HeroWhite() {
   const [postNum, setPostNum] = useState(8) // Default number of posts dislplayed
   //const [SaveClicks, setSaveClicks] = useState()
-  
+
   function handleClick() {
     setPostNum((prevPostNum) => prevPostNum + 4) // 3 is the number of posts you want to load per click
   }
 
-  
-    // useEffect(() => {
-    //   localStorage.setItem('favorite', JSON.stringify({CarID: SaveClicks}))
-    //   const stored = localStorage.getItem('favorite')
-    //  // console.log(stored)
-    // }, [])
-  
-  
- 
+  // useEffect(() => {
+  //   localStorage.setItem('favorite', JSON.stringify({CarID: SaveClicks}))
+  //   const stored = localStorage.getItem('favorite')
+  //  // console.log(stored)
+  // }, [])
+
   return (
     <>
       <Container className="pb-16 pt-5 text-center md:pt-10">
@@ -114,7 +118,7 @@ export function HeroWhite() {
             </p>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {carData.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
@@ -122,7 +126,7 @@ export function HeroWhite() {
               className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
               <div className="relative overflow-hidden rounded-t-lg">
-                <Link
+                {/* <Link
                   href={
                     '/car/' +
                     carDataUP.make +
@@ -132,8 +136,8 @@ export function HeroWhite() {
                     carDataUP.appointmentId
                   }
                   title={carDataUP?.variant}
-                >
-                  <Image
+                > */}
+                {/* <Image
                     src={
                       'https://fastly-production.24c.in/' +
                       carDataUP.mainImage.path
@@ -143,14 +147,44 @@ export function HeroWhite() {
                     width={100}
                     height={60}
                     className="h-auto w-full rounded-t-lg object-cover"
-                  />
-                </Link>
+                  /> */}
+                <Swiper
+                  className="heroCarouselSwiper"
+                  loop={true}
+                  modules={[Pagination, Navigation]}
+                  navigation={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  autoplay={{
+                    delay: 5000,
+                  }}
+                  slidesPerView={1}
+                  spaceBetween={0}
+                >
+                  {carDataUP.gallery.map((groupgallery, groupIndex) => (
+                    <SwiperSlide key={groupIndex}>
+                      <Image
+                        src={
+                          'https://fastly-production.24c.in/' +
+                          groupgallery.path
+                        }
+                        alt={groupgallery.label}
+                        layout="responsive"
+                        width={100}
+                        height={60}
+                        className="overflow-hidden rounded-xl object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                {/* </Link> */}
                 <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                   <div className="h-5 w-auto object-contain"></div>
                   <p className="text-[14px] text-white">รถมาใหม่</p>
                 </div>
               </div>
-              
+
               <div className="bg-[#1b65a6] py-2">
                 <div className="flex justify-end px-4 text-white">
                   <div className="text-2xl font-bold ">
@@ -162,7 +196,8 @@ export function HeroWhite() {
                       prefix={''}
                       renderText={(value) => (
                         <p>
-                          <span className="text-xs">ราคา</span> {value} <span className="text-xs">บาท</span>
+                          <span className="text-xs">ราคา</span> {value}{' '}
+                          <span className="text-xs">บาท</span>
                         </p>
                       )}
                     />
@@ -225,7 +260,7 @@ export function HeroWhite() {
                 <p className="text-lg font-bold">
                   {carDataUP.make} {carDataUP.year}
                 </p>
-                 <FavoriteButton DataList={carDataUP.appointmentId} />
+                <FavoriteButton DataList={carDataUP.appointmentId} />
                 {/* <Button onClick={() => setSaveClicks(carDataUP.appointmentId)}> 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
