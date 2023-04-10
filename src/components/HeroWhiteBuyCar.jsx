@@ -178,7 +178,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                   ))}
                 </Swiper>
                 {/* </Link> */}
-                <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
+                <div className="z-10 absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                   <div className="h-5 w-auto object-contain"></div>
                   <p className="text-[14px] text-white">รถมาใหม่</p>
                 </div>
