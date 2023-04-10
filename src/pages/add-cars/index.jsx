@@ -12,7 +12,7 @@ import { Button } from '@/components/Button'
 import { useUser } from '@/lib/firebase/useUser'
 import { initFirebase } from '@/lib/firebase/initFirebase'
 import { db } from '@/lib/firebase/initFirebase'
-
+import { RadioGroup } from '@headlessui/react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import {
@@ -24,10 +24,54 @@ import {
   GeoPoint,
 } from 'firebase/firestore'
 import formatDate from '@/lib/formatDate'
+import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
+import Cityvalue from '@/data/city'
 
+const TransType = [
+  {
+    name: 'เกียร์อัตโนมัติ',
+    bgColor: 'bg-pink-100/80',
+    selectedColor: 'ring-purple-500',
+    imgp: '/images/cars-at.png',
+  },
+  {
+    name: 'เกียร์ธรรมดา',
+    bgColor: 'bg-pink-100/80',
+    selectedColor: 'ring-purple-500',
+    imgp: '/images/cars-mt.png',
+  },
+]
 
+const colors = [
+  { name: 'Pink', bgColor: 'bg-pink-500', selectedColor: 'ring-pink-500' },
+  {
+    name: 'Purple',
+    bgColor: 'bg-purple-500',
+    selectedColor: 'ring-purple-500',
+  },
+  { name: 'Blue', bgColor: 'bg-blue-500', selectedColor: 'ring-blue-500' },
+  { name: 'Green', bgColor: 'bg-green-500', selectedColor: 'ring-green-500' },
+  {
+    name: 'Yellow',
+    bgColor: 'bg-yellow-500',
+    selectedColor: 'ring-yellow-500',
+  },
 
+  { name: 'Gray', bgColor: 'bg-gray-500', selectedColor: 'ring-gray-500' },
+
+  { name: 'Red', bgColor: 'bg-red-500', selectedColor: 'ring-red-500' },
+  {
+    name: 'Orange',
+    bgColor: 'bg-orange-500',
+    selectedColor: 'ring-orange-500',
+  },
+  { name: 'Cyan', bgColor: 'bg-cyan-500', selectedColor: 'ring-cyan-500' },
+]
+const BookCar = [
+  { id: 'yes', title: 'มีเล่มทะเบียน' },
+  { id: 'no', title: 'ไม่มีเล่มทะเบียน' },
+]
 export default function AddCars() {
   const { user } = useUser()
   const router = useRouter()
@@ -70,6 +114,11 @@ export default function AddCars() {
   const [Add_subHeading_carHighlights, setAdd_subHeading_carHighlights] =
     useState('')
 
+  const [selectedYear, setSelectedYear] = useState(Yearvalue[0])
+  const [selectedCity, setSelectedCity] = useState(Cityvalue[0])
+  const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
+  const [selectedColor, setSelectedColor] = useState(colors[0])
+
   const uniqueId = () => {
     const dateString = Date.now().toString(36)
     const randomness = Math.random().toString(36).substr(2)
@@ -99,7 +148,7 @@ export default function AddCars() {
         appointmentId: GcarAddID,
         make: Add_Make,
         model: Add_Model,
-        year: Add_Year,
+        year: selectedYear,
         variant: Add_Variant,
         targetPrice: Add_targetPrice,
         marketPrice: Add_marketPrice,
@@ -110,7 +159,7 @@ export default function AddCars() {
         chasisNumber: Add_chasisNumber,
         booked: Add_booked,
         listingActive: Add_listingActive,
-        city: Add_city,
+        city: selectedCity,
         warrantyExpiryDate: Add_warrantyExpiryDate,
         engineCc: Add_engineCc,
         mainImage: dataImg[0],
@@ -129,10 +178,11 @@ export default function AddCars() {
         bodyType: Add_bodyType,
         readyForSaleTimestamp: current,
         carTag: null,
+        color: selectedColor,
         price: Add_targetPrice,
         odometerReading: Add_odometerReading,
         ownerNumber: null,
-        transmissionType: Add_transmissionType,
+        transmissionType: selectedTransmission,
         fuelType: Add_fuelType,
         userId: user.id,
         Add_Name: Add_Name,
@@ -203,80 +253,91 @@ export default function AddCars() {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
-  
-  function SelectedCars({DataSet}) {
-    const [selected, setSelected] = useState()
-    
-  
+
+  function SelectedCars({ DataSet }) {
+    const [selected, setSelected] = useState(BrandData[0])
+
     return (
       <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
             {/* <Listbox.Label className="block text-sm font-medium text-gray-700">{LabelX}</Listbox.Label>  */}
-            
-              <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
-                <span className="flex items-center">
-                  <img src={selected?.imgpath} alt={selected?.name} className="h-6 w-6 flex-shrink-0 rounded-full" />
-                  <span className="ml-3 block truncate">{selected?.name}</span>
-                </span>
-                <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                  <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                </span>
-              </Listbox.Button>
-  
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {DataSet.map((perData,indexID) => (
-                    <Listbox.Option
-                      key={indexID}
-                      className={({ active }) =>
-                        classNames(
-                          active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                          'relative cursor-default select-none py-2 pl-3 pr-9'
-                        )
-                      }
-                      value={perData}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <div className="flex items-center">
-                            <img src={perData.imgpath} alt={perData.name} className="h-6 w-6 flex-shrink-0 rounded-full" />
-                            <span
-                              className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
-                            >
-                              {perData.name}
-                            </span>
-                          </div>
-  
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? 'text-white' : 'text-indigo-600',
-                                'absolute inset-y-0 right-0 flex items-center pr-4'
-                              )}
-                            >
-                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            
+
+            <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
+              <span className="flex items-center">
+                <img
+                  src={selected?.imgpath}
+                  alt={selected?.name}
+                  className="h-6 w-6 flex-shrink-0 rounded-full"
+                />
+                <span className="ml-3 block truncate">{selected?.name}</span>
+              </span>
+              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                <ChevronUpDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </span>
+            </Listbox.Button>
+
+            <Transition
+              show={open}
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {DataSet.map((perData, indexID) => (
+                  <Listbox.Option
+                    key={indexID}
+                    className={({ active }) =>
+                      classNames(
+                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                        'relative cursor-default select-none py-2 pl-3 pr-9'
+                      )
+                    }
+                    value={perData}
+                  >
+                    {({ selected, active }) => (
+                      <>
+                        <div className="flex items-center">
+                          <img
+                            src={perData.imgpath}
+                            alt={perData.name}
+                            className="h-6 w-6 flex-shrink-0 rounded-full"
+                          />
+                          <span
+                            className={classNames(
+                              selected ? 'font-semibold' : 'font-normal',
+                              'ml-3 block truncate'
+                            )}
+                          >
+                            {perData.name}
+                          </span>
+                        </div>
+
+                        {selected ? (
+                          <span
+                            className={classNames(
+                              active ? 'text-white' : 'text-indigo-600',
+                              'absolute inset-y-0 right-0 flex items-center pr-4'
+                            )}
+                          >
+                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          </span>
+                        ) : null}
+                      </>
+                    )}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
           </>
         )}
       </Listbox>
     )
   }
-
 
   return (
     <>
@@ -413,7 +474,7 @@ export default function AddCars() {
                   placeholder="ยี่ห้อ"
                   onChange={(event) => setAdd_Make(event.target.value)}
                 /> */}
-                <SelectedCars DataSet={BrandData} LabelX={"ยี่ห้อ"} />
+                <SelectedCars DataSet={BrandData} LabelX={'ยี่ห้อ'} />
               </div>
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
@@ -454,7 +515,134 @@ export default function AddCars() {
 
             {/* ing */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+              <div className="col-span-2">
+                {/* <label
+                  htmlFor="Year"
+                  className="mb-3 block text-sm font-medium text-gray-700"
+                >
+                  ปีรถยนต์
+                </label> */}
+                <label
+                  htmlFor="year"
+                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                >
+                  ปีรถยนต์
+                </label>
+                {/* <YearVValue id="year_car" name="year_car" /> */}
+                <Listbox
+                  value={selectedYear}
+                  onChange={setSelectedYear}
+                  id="year"
+                >
+                  {({ open }) => (
+                    <>
+                      <div className="relative mt-1">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                          <span className="flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="h-6 w-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                              />
+                            </svg>
+                            <span className="ml-3 block truncate">
+                              {selectedYear?.YearName}
+                            </span>
+                          </span>
+                          <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                            <ChevronUpDownIcon
+                              className="h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </Listbox.Button>
+
+                        <Transition
+                          show={open}
+                          as={Fragment}
+                          leave="transition ease-in duration-100"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                        >
+                          <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {Yearvalue.map((YearXData, inyear) => (
+                              <Listbox.Option
+                                key={inyear}
+                                className={({ active }) =>
+                                  classNames(
+                                    active
+                                      ? 'bg-indigo-600 text-white'
+                                      : 'text-gray-900',
+                                    'relative cursor-default select-none py-2 pl-3 pr-9'
+                                  )
+                                }
+                                value={YearXData}
+                              >
+                                {({ selectedYear, active }) => (
+                                  <>
+                                    <div className="flex items-center">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="currentColor"
+                                        className="h-6 w-6"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                                        />
+                                      </svg>
+
+                                      <span
+                                        className={classNames(
+                                          selectedYear
+                                            ? 'font-semibold'
+                                            : 'font-normal',
+                                          'ml-3 block truncate'
+                                        )}
+                                      >
+                                        {YearXData?.YearName}
+                                      </span>
+                                    </div>
+
+                                    {selectedYear ? (
+                                      <span
+                                        className={classNames(
+                                          active
+                                            ? 'text-white'
+                                            : 'text-indigo-600',
+                                          'absolute inset-y-0 right-0 flex items-center pr-4'
+                                        )}
+                                      >
+                                        <CheckIcon
+                                          className="h-5 w-5"
+                                          aria-hidden="true"
+                                        />
+                                      </span>
+                                    ) : null}
+                                  </>
+                                )}
+                              </Listbox.Option>
+                            ))}
+                          </Listbox.Options>
+                        </Transition>
+                      </div>
+                    </>
+                  )}
+                </Listbox>
+              </div>
+              {/* <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
                   htmlFor="year"
                   className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
@@ -470,7 +658,7 @@ export default function AddCars() {
                   placeholder="ปีรถยนต์"
                   onChange={(event) => setAdd_Year(event.target.value)}
                 />
-              </div>
+              </div> */}
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
                   htmlFor="targetPrice"
@@ -484,7 +672,7 @@ export default function AddCars() {
                   id="targetPrice"
                   value={Add_targetPrice}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="รุ่น"
+                  placeholder="ราคา"
                   onChange={(event) => setAdd_targetPrice(event.target.value)}
                 />
               </div>
@@ -501,7 +689,7 @@ export default function AddCars() {
                   id="engineNumber"
                   value={Add_engineNumber}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
-                  //placeholder="LINE ID"
+                  placeholder="เลขเครื่องยนต์"
                   onChange={(event) => setAdd_engineNumber(event.target.value)}
                 />
               </div>
@@ -510,56 +698,177 @@ export default function AddCars() {
 
             {/* ing */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                <label
-                  htmlFor="chasisNumber"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  เลขตัวถัง
-                </label>
-                <input
-                  type="text"
-                  name="chasisNumber"
-                  id="chasisNumber"
-                  value={Add_chasisNumber}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="เลขตัวถัง"
-                  onChange={(event) => setAdd_chasisNumber(event.target.value)}
-                />
+              <div className='col-span-2 grid grid-rows-2 gap-2'>
+                <div className="relative rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+                  <label
+                    htmlFor="chasisNumber"
+                    className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                  >
+                    เลขตัวถัง
+                  </label>
+                  <input
+                    type="text"
+                    name="chasisNumber"
+                    id="chasisNumber"
+                    value={Add_chasisNumber}
+                    className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                    placeholder="เลขตัวถัง"
+                    onChange={(event) =>
+                      setAdd_chasisNumber(event.target.value)
+                    }
+                  />
+                </div>
+                <div className="">
+                  <label
+                    htmlFor="city"
+                    className="absolute -top-2 left-2 -mt-px inline-block px-1 text-xs font-medium text-gray-900"
+                  >
+                    จังหวัด
+                  </label>
+                  {/* <CityCars id="city_car" name="city_car" /> */}
+                  <Listbox value={selectedCity} onChange={setSelectedCity}>
+                    {({ open }) => (
+                      <>
+                        <div className="relative mt-1">
+                          <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                            <span className="flex items-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className="h-6 w-6"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
+                                />
+                              </svg>
+
+                              <span className="ml-3 block truncate">
+                                {selectedCity?.CityName}
+                              </span>
+                            </span>
+                            <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                              <ChevronUpDownIcon
+                                className="h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          </Listbox.Button>
+
+                          <Transition
+                            show={open}
+                            as={Fragment}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              {Cityvalue.map((CityXData) => (
+                                <Listbox.Option
+                                  key={CityXData?.CityId}
+                                  className={({ active }) =>
+                                    classNames(
+                                      active
+                                        ? 'bg-indigo-600 text-white'
+                                        : 'text-gray-900',
+                                      'relative cursor-default select-none py-2 pl-3 pr-9'
+                                    )
+                                  }
+                                  value={CityXData}
+                                >
+                                  {({ selectedCity, active }) => (
+                                    <>
+                                      <div className="flex items-center">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          strokeWidth="1.5"
+                                          stroke="currentColor"
+                                          className="h-6 w-6"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
+                                          />
+                                        </svg>
+
+                                        <span
+                                          className={classNames(
+                                            selectedCity
+                                              ? 'font-semibold'
+                                              : 'font-normal',
+                                            'ml-3 block truncate'
+                                          )}
+                                        >
+                                          {CityXData?.CityName}
+                                        </span>
+                                      </div>
+
+                                      {selectedCity ? (
+                                        <span
+                                          className={classNames(
+                                            active
+                                              ? 'text-white'
+                                              : 'text-indigo-600',
+                                            'absolute inset-y-0 right-0 flex items-center pr-4'
+                                          )}
+                                        >
+                                          <CheckIcon
+                                            className="h-5 w-5"
+                                            aria-hidden="true"
+                                          />
+                                        </span>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </div>
+                      </>
+                    )}
+                  </Listbox>
+                </div>
               </div>
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                <label
-                  htmlFor="booked"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
+              <div className="col-span-2">
+                <label className="text-base font-medium text-gray-900">
                   เล่มทะเบียน
                 </label>
-                <input
-                  type="text"
-                  name="booked"
-                  id="booked"
-                  value={Add_booked}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="เล่มทะเบียน"
-                  onChange={(event) => setAdd_booked(event.target.value)}
-                />
-              </div>
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                <label
-                  htmlFor="city"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  เมือง
-                </label>
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  value={Add_city}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
-                  placeholder="เมือง"
-                  onChange={(event) => setAdd_city(event.target.value)}
-                />
+                <p className="text-sm leading-5 text-gray-500">
+                  รถยนต์มีเล่มทะเบียนมาด้วยหรือไม่
+                </p>
+                <fieldset className="mt-4">
+                  <legend className="sr-only">เล่มทะเบียน</legend>
+                  <div className="space-y-4">
+                    {BookCar.map((BookCarMethod) => (
+                      <div key={BookCarMethod.id} className="flex items-center">
+                        <input
+                          id={BookCarMethod.id}
+                          name="notification-method"
+                          type="radio"
+                          defaultChecked={BookCarMethod.id === 'no'}
+                          onChange={(event) =>
+                            setAdd_booked(event.target.value)
+                          }
+                          className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <label
+                          htmlFor={BookCarMethod.id}
+                          className="ml-3 block text-sm font-medium text-gray-700"
+                        >
+                          {BookCarMethod.title}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
               </div>
             </div>
             {/* ing */}
@@ -644,23 +953,51 @@ export default function AddCars() {
                 />
               </div>
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                <label
-                  htmlFor="transmissionType"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                <RadioGroup
+                  value={selectedTransmission}
+                  onChange={setSelectedTransmission}
                 >
-                  ประเภทเกียร์
-                </label>
-                <input
-                  type="text"
-                  name="transmissionType"
-                  id="transmissionType"
-                  value={Add_transmissionType}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="ประเภทเกียร์"
-                  onChange={(event) =>
-                    setAdd_transmissionType(event.target.value)
-                  }
-                />
+                  <RadioGroup.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 text-sm text-xs font-medium font-medium text-gray-700 text-gray-900">
+                    ประเภทเกียร์
+                  </RadioGroup.Label>
+                  <div className="mt-4 flex items-center space-x-3">
+                    {TransType.map((Trans) => (
+                      <RadioGroup.Option
+                        key={Trans.name}
+                        value={Trans}
+                        className={({ active, checked }) =>
+                          classNames(
+                            Trans.selectedColor,
+                            active && checked ? 'ring ring-offset-1' : '',
+                            !active && checked ? 'ring-2' : '',
+                            'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
+                          )
+                        }
+                      >
+                        <RadioGroup.Label as="span" className="sr-only">
+                          {Trans.name}
+                        </RadioGroup.Label>
+
+                        <span
+                          aria-hidden="true"
+                          className={classNames(
+                            Trans.bgColor,
+                            'h-10 w-10 rounded-full border border-black border-opacity-10'
+                          )}
+                        >
+                          <Image
+                            src={Trans.imgp}
+                            alt={Trans.name}
+                            layout="responsive"
+                            width={100}
+                            height={100}
+                            className="object-contain"
+                          />
+                        </span>
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
               </div>
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
@@ -681,7 +1018,42 @@ export default function AddCars() {
               </div>
             </div>
             {/* ing */}
-
+            <div className="grid grid-cols-1 gap-2 py-2">
+              {/* <ColorPicker id="color_car" name="color_car" /> */}
+              <RadioGroup value={selectedColor} onChange={setSelectedColor}>
+                <RadioGroup.Label className="block text-sm font-medium text-gray-700">
+                  สีตัวรถ
+                </RadioGroup.Label>
+                <div className="mt-4 flex flex-wrap items-center justify-around gap-2 space-x-3 md:flex md:flex-nowrap">
+                  {colors.map((color) => (
+                    <RadioGroup.Option
+                      key={color.name}
+                      value={color}
+                      className={({ active, checked }) =>
+                        classNames(
+                          color.selectedColor,
+                          active && checked ? 'ring ring-offset-1' : '',
+                          !active && checked ? 'ring-2' : '',
+                          'relative -m-0.5 flex cursor-pointer flex-col items-center justify-center rounded-full p-0.5 focus:outline-none'
+                        )
+                      }
+                    >
+                      <RadioGroup.Label as="span" className="sr-only">
+                        {color.name}
+                      </RadioGroup.Label>
+                      <span
+                        aria-hidden="true"
+                        className={classNames(
+                          color.bgColor,
+                          'h-8 w-8 rounded-full border border-black border-opacity-10'
+                        )}
+                      />
+                      <span className="text-[10px]">{color.name}</span>
+                    </RadioGroup.Option>
+                  ))}
+                </div>
+              </RadioGroup>
+            </div>
             {/* uploadimage */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-5">

@@ -1,5 +1,12 @@
 export const BrandData = [
   {
+    name: 'เลือกยี่ห้อรถ',
+    count: 4652,
+    imgpath: '/images/Car2autobuy-01.png',
+    href: '#',
+    bgcolor: 'bg-purple-600',
+  },
+  {
     name: 'Toyota',
     count: 4652,
     imgpath: '/images/brands/toyota.png',
