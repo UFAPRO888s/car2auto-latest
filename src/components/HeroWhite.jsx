@@ -2,21 +2,30 @@ import { Fragment, useEffect, useId, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-// import logoLaravel from '@/images/logos/laravel.svg'
-// import logoMirage from '@/images/logos/mirage.svg'
-// import logoStatamic from '@/images/logos/statamic.svg'
-// import logoStaticKit from '@/images/logos/statickit.svg'
-// import logoTransistor from '@/images/logos/transistor.svg'
-// import logoTuple from '@/images/logos/tuple.svg'
 import carData from '@/data/carlist'
 import CurrencyFormat from 'react-currency-format'
 import Link from 'next/link'
 import FavoriteButton from '@/components/FavoriteButton'
+import Counter from '@/components/realtimeDatabase/Counter'
+
+
 export function HeroWhite() {
   const [postNum, setPostNum] = useState(8) // Default number of posts dislplayed
+  const [SaveClicks, setSaveClicks] = useState()
+  
   function handleClick() {
     setPostNum((prevPostNum) => prevPostNum + 4) // 3 is the number of posts you want to load per click
   }
+
+  
+    useEffect(() => {
+      localStorage.setItem('favorite', JSON.stringify({CarID: SaveClicks}))
+      const stored = localStorage.getItem('favorite')
+     // console.log(stored)
+    }, [])
+  
+  
+ 
   return (
     <>
       <Container className="pb-16 pt-5 text-center md:pt-10">
@@ -105,38 +114,43 @@ export function HeroWhite() {
             </p>
           </div>
         </div>
+        
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {carData.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}
               className="overflow-hidden rounded-lg bg-white py-4 shadow-md hover:shadow-lg"
             >
-              <div className="relative rounded-t-lg overflow-hidden">
-                <Link href={
+              <div className="relative overflow-hidden rounded-t-lg">
+                <Link
+                  href={
                     '/car/' +
                     carDataUP.make +
                     '-' +
                     carDataUP.model +
                     '-' +
                     carDataUP.appointmentId
-                  } title={carDataUP?.variant} >
-                <Image
-                  src={
-                    'https://fastly-production.24c.in/' +
-                    carDataUP.mainImage.path
                   }
-                  alt={carDataUP.variant}
-                  layout="responsive"
-                  width={100}
-                  height={60}
-                  className="h-auto w-full rounded-t-lg object-cover"
-                  
-                /></Link>
+                  title={carDataUP?.variant}
+                >
+                  <Image
+                    src={
+                      'https://fastly-production.24c.in/' +
+                      carDataUP.mainImage.path
+                    }
+                    alt={carDataUP.variant}
+                    layout="responsive"
+                    width={100}
+                    height={60}
+                    className="h-auto w-full rounded-t-lg object-cover"
+                  />
+                </Link>
                 <div className="absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                   <div className="h-5 w-auto object-contain"></div>
                   <p className="text-[14px] text-white">รถมาใหม่</p>
                 </div>
               </div>
+              
               <div className="bg-[#1b65a6] py-2">
                 <div className="flex justify-between px-4 text-white">
                   <div className="text-2xl font-bold ">
@@ -211,7 +225,23 @@ export function HeroWhite() {
                 <p className="text-lg font-bold">
                   {carDataUP.make} {carDataUP.year}
                 </p>
-                <FavoriteButton DataList={carDataUP.appointmentId}/>
+                 <FavoriteButton DataList={carDataUP.appointmentId} />
+                {/* <Button onClick={() => setSaveClicks(carDataUP.appointmentId)}> 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-6 w-6 text-red-500"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                    />
+                  </svg>
+                </Button>*/}
               </div>
               <div className="grid grid-cols-4 divide-x divide-gray-200 px-2">
                 <p className="line-clamp-1 text-xs">{carDataUP.model}</p>

@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import "swiper/css/autoplay";
 import HeroImg1 from '../images/slidex/preview-banner-01.jpg'
 import HeroImg2 from '../images/slidex/preview-banner-02.jpg'
 import LogoColor from '@/images/logos/Car2autobuy-Preview-01.svg'

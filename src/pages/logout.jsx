@@ -8,6 +8,17 @@ import { SelectField, TextField } from '@/components/Fields'
 import { Logo } from '@/components/Logo'
 
 
+export const signOut = () => (dispatch, getState) => {
+  localStorage.removeItem('refresh')
+  dispatch({
+    type: 'SIGN_OUT'
+  })
+  dispatch({
+    type: 'FETCH_BETS',
+    payload: []
+  })
+}
+
 export default function LogoutX() {
   const router = useRouter()
  

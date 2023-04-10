@@ -5,6 +5,7 @@ import Image from 'next/image'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
+import "swiper/css/autoplay";
 
 // import required modules
 import { Mousewheel, Pagination } from 'swiper'

@@ -17,7 +17,7 @@ const post = async (req, res) => {
 
 const saveFile = async (file) => {
   const data = fs.readFileSync(file.path);
-  fs.writeFileSync(`https://storage.car2autobuy.com:3030/uploads/${file.name}`, data);
+  fs.writeFileSync(`https://storage.car2autobuy.com/uploads/${file.name}`, data);
   await fs.unlinkSync(file.path);
   return;
 };

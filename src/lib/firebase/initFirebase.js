@@ -6,6 +6,8 @@ import { getDatabase } from '@firebase/database'
 const clientCredentials = {
   apiKey: 'AIzaSyBwESi48cGjKDDpkdl_FJqP60IbuuW1hiY',
   authDomain: 'car2auto-2023.firebaseapp.com',
+  //databaseURL:
+  //  'https://car2auto-2023-default-rtdb.asia-southeast1.firebasedatabase.app',
   projectId: 'car2auto-2023',
   storageBucket: 'car2auto-2023.appspot.com',
   messagingSenderId: '198431939068',
@@ -25,6 +27,5 @@ const app = initializeApp(clientCredentials)
 const db = getFirestore(app)
 
 const realDB = getDatabase(app)
-
 
 export { initFirebase, db, realDB }

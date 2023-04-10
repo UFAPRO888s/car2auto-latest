@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import 'firebase/database'
 import { realDB } from '@/lib/firebase/initFirebase'
 import { ref, onValue, off } from "firebase/database"
-import Button from 'react-bootstrap/Button'
+import { Button } from '@/components/Button'
 
 const Counter = ({ id }) => {
     const [count, setCount] = useState('')

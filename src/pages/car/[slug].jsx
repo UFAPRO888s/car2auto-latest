@@ -29,6 +29,7 @@ import CenteredSingleAction from '@/components/CenteredSingleAction'
 import LoanX from '@/components/LoanX'
 import { PageSEO } from '@/components/SEO'
 import Link from 'next/link'
+import Loan from '@/components/Loan'
 
 export default function CarDetailing({ DataCar }) {
   const [XDownBt, setxDownBt] = useState('')
@@ -570,15 +571,16 @@ export default function CarDetailing({ DataCar }) {
             </div>
             <div className="w-full rounded-lg bg-white px-4 py-4 md:px-8">
               <div className="mx-auto grid grid-cols-1">
-                <h4 className="text-2xl font-bold">
+                {/* <h4 className="text-2xl font-bold">
                   คำนวนสินเชื่อ
                   <br />
                   <span className="text-lg">
                     {DataCar?.make} {DataCar?.model}
                   </span>
                 </h4>
-                <div className="rounded-lg md:col-span-8">
-                  <div className="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-2">
+                <div className="rounded-lg md:col-span-8"> */}
+                  <Loan car_pricex={DataCar?.price} car_title={DataCar?.make+" "+DataCar?.model+" "+DataCar?.variant} />
+                  {/* <div className="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-2">
                     <div className="text-3xl font-semibold">
                       <CurrencyFormat
                         value={DataCar?.price}
@@ -665,10 +667,10 @@ export default function CarDetailing({ DataCar }) {
                             6
                           </div>
                         </div>
-                      </div>
+                      </div> 
                     </div>
-                  </div>
-                  <small>ประเมินค่าผ่อนชำระรายเดือน:</small>
+                  </div>*/}
+                  {/* <small>ประเมินค่าผ่อนชำระรายเดือน:</small>
                   <div className="text-2xl font-bold text-red-500">
                     <CurrencyFormat
                       value={XPeriod}
@@ -682,7 +684,7 @@ export default function CarDetailing({ DataCar }) {
                       )}
                     />
                    <span className='text-xs font-normal text-black'>ต้องการคำนวน ภาษี7% คำนวนยอดผ่อนชำระรถยนต์ รายปี ตามอัตราดอกเบี้ยที่กำหนดได้เอง <Link className='text-red-500' href={"/loancalc"} title='คำนวนยอดผ่อนชำระรถยนต์'>คำนวนยอดผ่อนชำระรถยนต์</Link></span>
-                  </div>
+                  </div> */}
                   {/*<div className="mx-4 my-4 rounded-lg">
                      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
                       <div>
@@ -766,7 +768,7 @@ export default function CarDetailing({ DataCar }) {
                       </div>
                     </div> 
                   </div>*/}
-                </div>
+                {/* </div> */}
                 {/* <div className="grid grid content-center justify-items-center md:col-span-4">
                   <div className="mx-4 my-4 rounded-lg bg-[#ECF3F9] px-4 py-4">
                     <small>ยอดจัดรวม:</small>

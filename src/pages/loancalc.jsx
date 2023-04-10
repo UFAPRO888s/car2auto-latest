@@ -13,45 +13,45 @@ import { TextField } from '@/components/Fields'
 import CurrencyFormat from 'react-currency-format'
 import LoanX from '@/components/LoanX'
 export default function LoanCalc() {
-  const [DownBt, setDownBt] = useState('')
-  const [DownPr, setDownPr] = useState('')
-  const [Interest, setInterest] = useState('')
-  const [Period, setPeriod] = useState('')
-  const [Price, setPrice] = useState('')
-  const [PriceXvat, setPriceXvat] = useState('')
+  // const [DownBt, setDownBt] = useState('')
+  // const [DownPr, setDownPr] = useState('')
+  // const [Interest, setInterest] = useState('')
+  // const [Period, setPeriod] = useState('')
+  // const [Price, setPrice] = useState('')
+  // const [PriceXvat, setPriceXvat] = useState('')
 
-  function handlePriceChange(event) {
-    //   console.log(event.target.value)
-    setPrice(event.target.value)
-  }
+  // function handlePriceChange(event) {
+  //     console.log(event.target.value)
+  //   setPrice(event.target.value)
+  // }
 
-  function handleDownBtChange(event) {
-    //  console.log(event.target.value)
-    setDownBt(event.target.value)
-  }
-  function handlePerDownChange(event) {
-    //  console.log(event.target.value)
-    setDownPr(event.target.value)
-    //const prx = "0."+event.target.value
-    const prtobt = (Price * event.target.value) / 100
-    // console.log(prtobt)
-    setDownBt(prtobt)
-  }
-  function handleinterestChange(event) {
-    // console.log(event.target.value)
-    setInterest(event.target.value)
-  }
-  function PricePeriod(value) {
-    // console.log(value)
-    const PriceXDown = (Price - DownBt) * (Interest / 100)
-    const intye = PriceXDown * value
-    const PriceXvat = Number(intye) + Number(Price)
-    const PriceXintye = PriceXvat / (value * 12)
-    //const PriceXvatXinx = PriceXvat + Interest - DownBt;
-    //console.log(intye)
-    setPeriod(PriceXintye.toFixed(2))
-    setPriceXvat(PriceXvat)
-  }
+  // function handleDownBtChange(event) {
+  //    console.log(event.target.value)
+  //   setDownBt(event.target.value)
+  // }
+  // function handlePerDownChange(event) {
+  //    console.log(event.target.value)
+  //   setDownPr(event.target.value)
+  //   const prx = "0."+event.target.value
+  //   const prtobt = (Price * event.target.value) / 100
+  //   console.log(prtobt)
+  //   setDownBt(prtobt)
+  // }
+  // function handleinterestChange(event) {
+  //   console.log(event.target.value)
+  //   setInterest(event.target.value)
+  // }
+  // function PricePeriod(value) {
+  //   console.log(value)
+  //   const PriceXDown = (Price - DownBt) * (Interest / 100)
+  //   const intye = PriceXDown * value
+  //   const PriceXvat = Number(intye) + Number(Price)
+  //   const PriceXintye = PriceXvat / (value * 12)
+  //   const PriceXvatXinx = PriceXvat + Interest - DownBt;
+  //   console.log(intye)
+  //   setPeriod(PriceXintye.toFixed(2))
+  //   setPriceXvat(PriceXvat)
+  // }
 
   return (
     <>

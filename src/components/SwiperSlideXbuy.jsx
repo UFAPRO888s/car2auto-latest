@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
+import "swiper/css/autoplay";
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
