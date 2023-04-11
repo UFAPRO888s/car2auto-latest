@@ -135,7 +135,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
-                            
+                            priority
                           />
                         </div>
                         <div className="h-auto w-full">
@@ -146,7 +146,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
-                            
+                            priority
                           />
                         </div>
                         <div className="h-auto w-full">
@@ -157,7 +157,7 @@ export default function CarDetailing({ DataCar }) {
                             width={50}
                             height={50}
                             layout="fixed"
-                            
+                            priority
                           />
                         </div>
                       </div>
@@ -250,9 +250,9 @@ export default function CarDetailing({ DataCar }) {
                       thousandSeparator={true}
                       prefix={''}
                       renderText={(value) => (
-                        <div>
+                        <p>
                           {value} <span className="text-xs">กม.</span>
-                        </div>
+                        </p>
                       )}
                     />
                   </div>
@@ -268,9 +268,9 @@ export default function CarDetailing({ DataCar }) {
                   thousandSeparator={true}
                   prefix={''}
                   renderText={(value) => (
-                    <div className="flex flex-row py-0">
+                    <p className="flex flex-row py-0">
                       {value} <span>บาท</span>
-                    </div>
+                    </p>
                   )}
                 />
                 <div className="text-xs">
@@ -283,9 +283,9 @@ export default function CarDetailing({ DataCar }) {
                     thousandSeparator={true}
                     prefix={''}
                     renderText={(value) => (
-                      <div className="flex flex-row py-0">
+                      <p className="flex flex-row py-0">
                         {value} <span>บาท (รวมภาษี7%)</span>
-                      </div>
+                      </p>
                     )}
                   />
                 </div>

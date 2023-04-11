@@ -173,7 +173,7 @@ export default function Loan({ car_pricex, car_title }) {
           ราคารวมภาษี 7%
         </div>
 
-        <p className="text-end text-lg font-bold text-red-500">
+        <div className="text-end text-lg font-bold text-red-500">
           <span className="text-base text-gray-800">ยอดจัด</span>{' '}
           <CurrencyFormat
             value={
@@ -189,9 +189,9 @@ export default function Loan({ car_pricex, car_title }) {
               </p>
             )}
           />
-        </p>
+        </div>
 
-        <p className="text-end text-3xl font-bold text-red-500">
+        <div className="text-end text-3xl font-bold text-red-500">
           <span className="text-base text-gray-800">ยอดผ่อน</span>{' '}
           {/* {((parseInt(car_pricex.replace(/,/g, "")) * 7) / 100 +
             parseInt(car_pricex.replace(/,/g, "")) / 72).toFixed(2)}{" "} */}
@@ -210,7 +210,7 @@ export default function Loan({ car_pricex, car_title }) {
               </p>
             )}
           />
-        </p>
+        </div>
       </div>
     </section>
   )
