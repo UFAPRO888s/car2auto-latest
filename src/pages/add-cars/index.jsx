@@ -15,6 +15,7 @@ import { db } from '@/lib/firebase/initFirebase'
 import { RadioGroup } from '@headlessui/react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import User_Borders from '@/components/User_Borders'
 import {
   doc,
   setDoc,
@@ -445,20 +446,35 @@ export default function AddCars() {
       />
       <Header />
       <main>
-        <Image
-          src={'/images/banner1920x9152.jpg'}
-          alt="ลงประกาศขายรถมือสอง"
-          width={100}
-          height={50}
-          layout="responsive"
-          className="z-0"
-        />
+        <div className="relative">
+          <Image
+            src={'/images/banner1920x9152.jpg'}
+            alt="ลงประกาศขายรถมือสอง"
+            width={100}
+            height={50}
+            layout="responsive"
+            className="z-0"
+          />
+          <div className="relative md:absolute md:right-10 md:bottom-32">
+            <h1 className="text-3xl font-bold text-white md:text-5xl">
+              ขายรถมือสอง<span>ประกาศขายรถ</span>
+            </h1>
+            <p className="text-base text-gray-100">
+              แหล่งรวม<strong className="text-orange-500">รถยนต์มือสอง</strong>
+              คุณภาพดี ตรวจสอบประวัติย้อนหลังได้ ในราคาที่ดีที่สุด
+              เช่าซื้อได้ทุกอาชีพ ไฟแนนซ์ผ่านง่าย ผ่อนนาน
+            </p>
+            <div>
+              <User_Borders />
+            </div>
+          </div>
+        </div>
         <Container>
           <div className="py-4">
             <div className="py-4 text-center">
-              <h1 className="text-2xl font-bold md:text-3xl">
+              <h2 className="text-2xl font-bold md:text-3xl">
                 ลงประกาศขายรถมือสอง
-              </h1>
+              </h2>
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
               <p className="text-base font-semibold">
                 ลงประกาศขายรถมือสอง CAR2AUTOBUY
