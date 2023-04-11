@@ -155,13 +155,13 @@ export default function SaleCars() {
     e.preventDefault()
     if (
       selectedYear?.YearName != '' ||
-      selectedMake?.brand != '' ||
+      selectedMake?.name != '' ||
       valueImgss != ''
     ) {
-      const res = await fetch(`/api/linenotify`, {
+      const res = await fetch(`https://storage.car2autobuy.com/linenotify`, {
         body: JSON.stringify({
           selYear: selectedYear?.YearName,
-          selMake: selectedMake?.brand,
+          selMake: selectedMake?.name,
           selModel: selectedModel,
           selNameUs: selectedNameUs,
           selTel: selectedTel,
@@ -178,7 +178,7 @@ export default function SaleCars() {
       })
 
       const { error } = await res.json()
-      let mxmsg = `NEW ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.brand} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
+      let mxmsg = `NEW ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.name} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`
       if (error) {
         setError(true)
         setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
@@ -404,11 +404,11 @@ export default function SaleCars() {
                               <span className="flex items-center">
                                 <img
                                   src={selectedMake?.imgpath}
-                                  alt={selectedMake?.brand}
+                                  alt={selectedMake?.name}
                                   className="h-6 w-6 flex-shrink-0 rounded-full"
                                 />
                                 <span className="ml-3 block truncate">
-                                  {selectedMake?.brand}
+                                  {selectedMake?.name}
                                 </span>
                               </span>
                               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -427,9 +427,9 @@ export default function SaleCars() {
                               leaveTo="opacity-0"
                             >
                               <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {BrandData.map((BrandXData) => (
+                                {BrandData.map((BrandXData,inedex) => (
                                   <Listbox.Option
-                                    key={BrandXData?.brand}
+                                    key={inedex}
                                     className={({ active }) =>
                                       classNames(
                                         active
@@ -445,7 +445,7 @@ export default function SaleCars() {
                                         <div className="flex items-center">
                                           <img
                                             src={BrandXData?.imgpath}
-                                            alt={BrandXData?.brand}
+                                            alt={BrandXData?.name}
                                             className="h-6 w-6 flex-shrink-0 rounded-full"
                                           />
                                           <span
@@ -456,7 +456,7 @@ export default function SaleCars() {
                                               'ml-3 block truncate'
                                             )}
                                           >
-                                            {BrandXData?.brand}
+                                            {BrandXData?.name}
                                           </span>
                                         </div>
 

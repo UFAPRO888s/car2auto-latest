@@ -1,48 +1,10 @@
 import Image from 'next/image'
 import { PlusIcon } from '@heroicons/react/20/solid'
 import { BrandData } from '@/data/brand'
-const people = [
-  {
-    name: 'Lindsay Walton',
-    role: 'Front-end Developer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Courtney Henry',
-    role: 'Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Tom Cook',
-    role: 'Director, Product Development',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Whitney Francis',
-    role: 'Copywriter',
-    imageUrl:
-      'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Leonard Krasner',
-    role: 'Senior Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Floyd Miles',
-    role: 'Principal Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-]
 
 export default function Car_Recommendations_grid() {
   return (
-    <div className="mx-auto w-full mt-10">
+    <div className="mx-auto mt-10 w-full">
       <div>
         <div className="text-center">
           <Image
@@ -96,48 +58,6 @@ export default function Car_Recommendations_grid() {
           </div>
         </form>
       </div>
-      {/* <div className="mt-10">
-        <h3 className="text-sm font-medium text-gray-500">
-          ยี่ห้อรถยนต์มือสองแนะนำ
-        </h3>
-        <ul role="list" className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-4">
-          {BrandData.slice(0,12).map((Brand, BrandIdx) => (
-            <li key={BrandIdx}>
-              <button
-                type="button"
-                className="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <span className="flex min-w-0 flex-1 items-center space-x-3">
-                  <span className="block flex-shrink-0">
-                    <Image
-                      className="h-5 w-5 rounded-full"
-                      src={Brand.imgpath}
-                      alt={Brand.brand}
-                      width={50}
-                      height={50}
-                      layout='fixed'
-                    />
-                  </span>
-                  <span className="block min-w-0 flex-1">
-                    <span className="block truncate text-sm font-medium text-gray-900">
-                      {Brand.brand}
-                    </span>
-                    <span className="block truncate text-sm font-medium text-gray-500">
-                     
-                    </span>
-                  </span>
-                </span>
-                <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center">
-                  <PlusIcon
-                    className="h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div> */}
     </div>
   )
 }
