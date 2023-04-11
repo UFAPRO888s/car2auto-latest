@@ -204,6 +204,8 @@ export default function AddCars() {
   //const [Add_transmissionType, setAdd_transmissionType] = useState('')
   //const [Add_fuelType, setAdd_fuelType] = useState('')
   const [Add_Door, setAdd_Door] = useState('')
+  const [RxData, setRxData] = useState('')
+  
 
   const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState('')
   const [Add_key_carHighlights, setAdd_key_carHighlights] = useState('')
@@ -255,21 +257,25 @@ export default function AddCars() {
 
   useEffect(() => {
     ;(async () => {
-      //console.log(UserUId)
+      console.log(UserUId)
       const UserGquery = query(
         collection(db, 'car2autobuy'),
-        where('uid', '==', UserUId)
+        where('Add_Email', '==', UserUEmail)
       )
 
       const querySnapshot = await getDocs(UserGquery)
       //console.log(querySnapshot)
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data())
+        setRxData(doc.data())
+        //console.log(doc.id, ' => ', doc.data())
+       // console.log(doc.data().count)
       })
     })()
 
     return () => {}
   }, [])
+
+  //const qNook = query(collection(db, "car2autobuy"), where("capital", "==", true));
 
   //console.log(selected.name,Add_Model,selectedCarType.name,selectedCity.CityName, selectedYear.YearCode,Add_Variant,Add_targetPrice,Add_engineNumber,Add_chasisNumber,Add_booked)
   const sendData = async () => {
@@ -1408,9 +1414,10 @@ export default function AddCars() {
               SAVE
             </Button>
           </div>
+          
         </Container>
       </main>
-
+                    
       <Footer />
     </>
   )
