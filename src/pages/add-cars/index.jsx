@@ -170,9 +170,9 @@ const BookCar = [
 export default function AddCars() {
   const { user } = useUser()
   const router = useRouter()
-  const [UserUEmail, setUUserEmail] = useState('')
-  const [UserUId, setUUserUid] = useState('')
-  const [UserUDisplayName, setUUserDisplayName] = useState('')
+  const [UserUEmail, setUUserEmail] = useState(null)
+  const [UserUId, setUUserUid] = useState(null)
+  const [UserUDisplayName, setUUserDisplayName] = useState(null)
   const [Add_Name, setAdd_Name] = useState('')
   const [Add_Line, setAdd_Line] = useState('')
   const [Add_Tel, setAdd_Tel] = useState('')
@@ -203,6 +203,8 @@ export default function AddCars() {
   const [Add_odometerReading, setAdd_odometerReading] = useState(null)
   //const [Add_transmissionType, setAdd_transmissionType] = useState('')
   //const [Add_fuelType, setAdd_fuelType] = useState('')
+  const [Add_Door, setAdd_Door] = useState('')
+  
   const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState(null)
   const [Add_key_carHighlights, setAdd_key_carHighlights] = useState(null)
   const [Add_Description_carHighlights, setAdd_Description_carHighlights] =
@@ -222,17 +224,19 @@ export default function AddCars() {
     const randomness = Math.random().toString(36).substr(2)
     return dateString + randomness
   }
-
-  useEffect(() => {
-    const storedgetUser = getUserFromCookie()
+ 
+  
+   useEffect(() => {
+     const storedgetUser = getUserFromCookie()
     
     if (!storedgetUser) {
-      router.push('/')
+       router.push('/')
     }
-    setUUserUid(storedgetUser.id)
-    setUUserEmail(storedgetUser.email)
-    setUUserDisplayName(storedgetUser.name)
-  }, [])
+    console.log(storedgetUser)
+     setUUserUid(storedgetUser.id)
+     setUUserEmail(storedgetUser.email)
+     setUUserDisplayName(storedgetUser.name)
+   }, [])
 
   const current = new Date()
   const dateTimeAB = `${current.getDate()}${current.getMonth() + 1}${current.getFullYear()}`
@@ -248,16 +252,15 @@ export default function AddCars() {
     return () => {}
   }, [])
 
-  //console.log(UserUId)
+  
   useEffect(() => {
     ;(async () => {
-      
-      const UserGquery = query(collection(db, "/car2autobuy"), where("userId", "==", "e0c4h0aAyESzWw6kbjNGeA75j0U2"));
+      //console.log(UserUId)
+      const UserGquery = query(collection(db, "car2autobuy"), where("uid", "==", UserUId));
       
       const querySnapshot = await getDocs(UserGquery);
       //console.log(querySnapshot)
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
       });
     })()
@@ -341,6 +344,7 @@ export default function AddCars() {
         city: selectedCity.CityName,
         warrantyExpiryDate: Add_warrantyExpiryDate,
         engineCc: Add_engineCc,
+        door: Add_Door,
         mainImage: {
           path: dataImg[0].path,
           vehicleImageCategory: dataImg[0].name,
@@ -371,6 +375,7 @@ export default function AddCars() {
         Add_Line: Add_Line,
         Add_Tel: Add_Tel,
         Add_Email: UserUEmail,
+        Add_uid: UserUId,
         Add_DisplayName: UserUDisplayName,
         current: current,
      };
@@ -448,6 +453,7 @@ export default function AddCars() {
             height={50}
             layout="responsive"
             className="z-0"
+            priority
           />
           <div className="relative md:absolute md:bottom-32 md:right-10">
             <h1 className="px-4 text-3xl font-bold text-gray-700 md:text-5xl md:text-white">
@@ -1137,6 +1143,23 @@ export default function AddCars() {
                     ))}
                   </div>
                 </RadioGroup>
+              </div>
+              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+                <label
+                  htmlFor="door"
+                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                >
+                  ประตู
+                </label>
+                <input
+                  type="number"
+                  name="door"
+                  id="door"
+                  value={Add_Model}
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  placeholder="ประตู"
+                  onChange={(event) => setAdd_Door(event.target.value)}
+                />
               </div>
             </div>
             {/* ing */}
