@@ -82,18 +82,18 @@ export default function User_Borders() {
         {stats.map((item) => (
           <div
             key={item.id}
-            className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
+            className="relative overflow-hidden rounded-lg bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
           >
             <dt>
               <div className="absolute rounded-md bg-indigo-500 p-3">
                 <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
-              <p className="ml-16 truncate text-sm font-medium text-gray-500">
+              <p className="ml-16 truncate text-sm font-medium text-gray-100">
                 {item.name}
               </p>
             </dt>
             <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-              <p className="text-2xl font-semibold text-gray-900">
+              <p className="text-2xl font-semibold text-gray-100">
                 {item.stat}
               </p>
               <p
@@ -125,8 +125,8 @@ export default function User_Borders() {
                 </span>
                 {item.change}
               </p>
-              <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
-                <p className='font-medium text-indigo-600 text-xs'>{item.detailsText}</p>
+              <div className="absolute inset-x-0 bottom-0 px-4 py-4 sm:px-6">
+                <p className='font-medium text-indigo-100 text-xs'>{item.detailsText}</p>
                 <div className="text-sm">
                   <a
                     href="#"
