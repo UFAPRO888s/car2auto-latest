@@ -167,20 +167,21 @@ export default function AddCars() {
   const { user } = useUser()
   const router = useRouter()
   const [UserUEmail, setUUserEmail] = useState('')
-  const [UserUId, setUUserUid] = useState('')
+  const [UserUId, setUUserUid] = useState(null)
   const [UserUDisplayName, setUUserDisplayName] = useState('')
   const [Add_Name, setAdd_Name] = useState('')
   const [Add_Line, setAdd_Line] = useState('')
   const [Add_Tel, setAdd_Tel] = useState('')
-  const [imgxUP, setimgxUP] = useState('')
+  //const [imgxUP, setimgxUP] = useState(null)
   const [GcarAddID, setIDGcarID] = useState('')
   const [fileList, setFileList] = useState(null)
   const [dataImg, getFile] = useState([])
   const [progress, setProgess] = useState(0)
 
+  const [selected, setSelected] = useState(BrandData[0])
   const [Add_Make, setAdd_Make] = useState('')
   const [Add_Model, setAdd_Model] = useState('')
-  const [Add_Year, setAdd_Year] = useState('')
+  //const [Add_Year, setAdd_Year] = useState('')
   const [Add_Variant, setAdd_Variant] = useState('')
   const [Add_targetPrice, setAdd_targetPrice] = useState('')
   const [Add_marketPrice, setAdd_marketPrice] = useState('')
@@ -190,20 +191,20 @@ export default function AddCars() {
   const [Add_engineNumber, setAdd_engineNumber] = useState('')
   const [Add_chasisNumber, setAdd_chasisNumber] = useState('')
   const [Add_booked, setAdd_booked] = useState('')
-  const [Add_listingActive, setAdd_listingActive] = useState('')
-  const [Add_city, setAdd_city] = useState('')
-  const [Add_warrantyExpiryDate, setAdd_warrantyExpiryDate] = useState('')
-  const [Add_engineCc, setAdd_engineCc] = useState('')
-  const [Add_bodyType, setAdd_bodyType] = useState('')
-  const [Add_odometerReading, setAdd_odometerReading] = useState('')
-  const [Add_transmissionType, setAdd_transmissionType] = useState('')
-  const [Add_fuelType, setAdd_fuelType] = useState('')
-  const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState('')
-  const [Add_key_carHighlights, setAdd_key_carHighlights] = useState('')
+  const [Add_listingActive, setAdd_listingActive] = useState(null)
+  //const [Add_city, setAdd_city] = useState('')
+  const [Add_warrantyExpiryDate, setAdd_warrantyExpiryDate] = useState(null)
+  const [Add_engineCc, setAdd_engineCc] = useState(null)
+  //const [Add_bodyType, setAdd_bodyType] = useState('')
+  const [Add_odometerReading, setAdd_odometerReading] = useState(null)
+  //const [Add_transmissionType, setAdd_transmissionType] = useState('')
+  //const [Add_fuelType, setAdd_fuelType] = useState('')
+  const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState(null)
+  const [Add_key_carHighlights, setAdd_key_carHighlights] = useState(null)
   const [Add_Description_carHighlights, setAdd_Description_carHighlights] =
-    useState('')
+    useState(null)
   const [Add_subHeading_carHighlights, setAdd_subHeading_carHighlights] =
-    useState('')
+    useState(null)
 
   const [selectedYear, setSelectedYear] = useState(Yearvalue[0])
   const [selectedCity, setSelectedCity] = useState(Cityvalue[0])
@@ -239,7 +240,7 @@ export default function AddCars() {
       const userDoc = doc(db, 'car2autobuy', user.id)
       await updateDoc(userDoc, GcarAddID, {
         appointmentId: GcarAddID,
-        make: Add_Make.name,
+        make: selected.name,
         model: Add_Model,
         year: selectedYear.YearCode,
         variant: Add_Variant,
@@ -347,93 +348,7 @@ export default function AddCars() {
     return classes.filter(Boolean).join(' ')
   }
 
-  function SelectedCars({ DataSet, LabelX }) {
-    const [selected, setSelected] = useState(BrandData[0])
-
-    return (
-      <Listbox value={selected} onChange={setSelected}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              {LabelX}
-            </Listbox.Label>
-
-            <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
-              <span className="flex items-center">
-                <img
-                  src={selected?.imgpath}
-                  alt={selected?.name}
-                  className="h-6 w-6 flex-shrink-0 rounded-full"
-                />
-                <span className="ml-3 block truncate">{selected?.name}</span>
-              </span>
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </span>
-            </Listbox.Button>
-
-            <Transition
-              show={open}
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {DataSet.map((perData, indexID) => (
-                  <Listbox.Option
-                    key={indexID}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-                        'relative cursor-default select-none py-2 pl-3 pr-9'
-                      )
-                    }
-                    value={perData}
-                  >
-                    {({ selected, active }) => (
-                      <>
-                        <div className="flex items-center">
-                          <img
-                            src={perData.imgpath}
-                            alt={perData.name}
-                            className="h-6 w-6 flex-shrink-0 rounded-full"
-                          />
-                          <span
-                            className={classNames(
-                              selected ? 'font-semibold' : 'font-normal',
-                              'ml-3 block truncate'
-                            )}
-                          >
-                            {perData.name}
-                          </span>
-                        </div>
-
-                        {selected ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </>
-        )}
-      </Listbox>
-    )
-  }
-
+  
   return (
     <>
       <PageSEO
@@ -455,11 +370,11 @@ export default function AddCars() {
             layout="responsive"
             className="z-0"
           />
-          <div className="relative md:absolute md:right-10 md:bottom-32">
-            <h1 className="text-3xl font-bold text-white md:text-5xl">
+          <div className="relative md:absolute md:bottom-32 md:right-10">
+            <h1 className="px-4 text-3xl font-bold text-gray-700 md:text-5xl md:text-white">
               ขายรถมือสอง<span>ประกาศขายรถ</span>
             </h1>
-            <p className="text-base text-gray-100">
+            <p className="px-4 text-base text-gray-700 md:text-gray-100">
               แหล่งรวม<strong className="text-orange-500">รถยนต์มือสอง</strong>
               คุณภาพดี ตรวจสอบประวัติย้อนหลังได้ ในราคาที่ดีที่สุด
               เช่าซื้อได้ทุกอาชีพ ไฟแนนซ์ผ่านง่าย ผ่อนนาน
@@ -531,7 +446,98 @@ export default function AddCars() {
               </div>
 
               <div className="relative col-span-4 rounded-md py-2">
-                <SelectedCars DataSet={BrandData} LabelX={'ยี่ห้อ'} />
+                {/* <SelectedCars DataSet={BrandData} LabelX={'ยี่ห้อ'} /> */}
+                <Listbox value={selected} onChange={setSelected}>
+                  {({ open }) => (
+                    <>
+                      <Listbox.Label className="block text-sm font-medium text-gray-700">
+                        ยี่ห้อ
+                      </Listbox.Label>
+
+                      <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
+                        <span className="flex items-center">
+                          <img
+                            src={selected?.imgpath}
+                            alt={selected?.name}
+                            className="h-6 w-6 flex-shrink-0 rounded-full"
+                          />
+                          <span className="ml-3 block truncate">
+                            {selected?.name}
+                          </span>
+                        </span>
+                        <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                          <ChevronUpDownIcon
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </Listbox.Button>
+
+                      <Transition
+                        show={open}
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {BrandData.map((perData, indexID) => (
+                            <Listbox.Option
+                              key={indexID}
+                              className={({ active }) =>
+                                classNames(
+                                  active
+                                    ? 'bg-indigo-600 text-white'
+                                    : 'text-gray-900',
+                                  'relative cursor-default select-none py-2 pl-3 pr-9'
+                                )
+                              }
+                              value={perData}
+                            >
+                              {({ selected, active }) => (
+                                <>
+                                  <div className="flex items-center">
+                                    <img
+                                      src={perData.imgpath}
+                                      alt={perData.name}
+                                      className="h-6 w-6 flex-shrink-0 rounded-full"
+                                    />
+                                    <span
+                                      className={classNames(
+                                        selected
+                                          ? 'font-semibold'
+                                          : 'font-normal',
+                                        'ml-3 block truncate'
+                                      )}
+                                    >
+                                      {perData.name}
+                                    </span>
+                                  </div>
+
+                                  {selected ? (
+                                    <span
+                                      className={classNames(
+                                        active
+                                          ? 'text-white'
+                                          : 'text-indigo-600',
+                                        'absolute inset-y-0 right-0 flex items-center pr-4'
+                                      )}
+                                    >
+                                      <CheckIcon
+                                        className="h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </>
+                  )}
+                </Listbox>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
@@ -698,7 +704,7 @@ export default function AddCars() {
                   ราคา
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="targetPrice"
                   id="targetPrice"
                   value={Add_targetPrice}
@@ -923,7 +929,7 @@ export default function AddCars() {
                     ความจุเครื่องยนต์(cc)
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="engineCc"
                     id="engineCc"
                     value={Add_engineCc}
@@ -940,7 +946,7 @@ export default function AddCars() {
                     ระยะไมล์
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="odometerReading"
                     id="odometerReading"
                     value={Add_odometerReading}

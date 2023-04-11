@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useUser } from '@/lib/firebase/useUser'
+import { Container } from './Container'
 
 const stats = [
   {
@@ -46,9 +47,9 @@ function classNames(...classes) {
 
 export default function User_Borders() {
   const { user } = useUser()
-  console.log(user)
+  //console.log(user)
   return (
-    <div>
+    <Container>
       <div className="flex py-4">
         <div className="mr-4 flex-shrink-0">
           {user?.profilePic ? (
@@ -71,29 +72,29 @@ export default function User_Borders() {
             />
           )}
         </div>
-        <div className='text-gray-100'>
+        <div className='text-gray-700 md:text-gray-100'>
           <h4 className="text-lg font-bold">สรุป {user?.name}</h4>
           <p className="mt-1">
             รายการลงประกาศของผู้ใช้ {user?.name}
           </p>
         </div>
       </div>
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 px-2 ">
         {stats.map((item) => (
           <div
             key={item.id}
-            className="relative overflow-hidden rounded-lg bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
+            className="relative overflow-hidden rounded-lg bg-gray-200 md:bg-gray-800 bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
           >
             <dt>
               <div className="absolute rounded-md bg-indigo-500 p-3">
                 <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
-              <p className="ml-16 truncate text-sm font-medium text-gray-100">
+              <p className="ml-16 truncate text-sm font-medium text-gray-700 md:text-gray-100">
                 {item.name}
               </p>
             </dt>
             <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-              <p className="text-2xl font-semibold text-gray-100">
+              <p className="text-2xl font-semibold text-gray-700 md:text-gray-100">
                 {item.stat}
               </p>
               <p
@@ -141,6 +142,6 @@ export default function User_Borders() {
           </div>
         ))}
       </dl>
-    </div>
+    </Container>
   )
 }
