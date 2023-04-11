@@ -98,7 +98,7 @@ export default function User_Borders() {
     return () => {}
   }, [])
 
-  console.log(UserRxData)
+  //console.log(UserRxData)
   return (
     <Container>
       <div className="flex py-4">
