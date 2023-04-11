@@ -186,7 +186,7 @@ export default function AddCars() {
   const [Add_targetPrice, setAdd_targetPrice] = useState('')
   const [Add_marketPrice, setAdd_marketPrice] = useState('')
   const [Add_marketPriceDiff, setAdd_marketPriceDiff] = useState('')
-  const [Add_discount, setAdd_discount] = useState('')
+  const [Add_discount, setAdd_discount] = useState(null)
   const [Add_processingFee, setAdd_processingFee] = useState('')
   const [Add_engineNumber, setAdd_engineNumber] = useState('')
   const [Add_chasisNumber, setAdd_chasisNumber] = useState('')
@@ -234,10 +234,11 @@ export default function AddCars() {
 
     return () => {}
   }, [])
-
+  console.log(selected.name,Add_Model,selectedCarType.name,selectedCity.CityName, selectedYear.YearCode,Add_Variant,Add_targetPrice,Add_engineNumber,Add_chasisNumber,Add_booked)
   const sendData = async () => {
     try {
       const userDoc = doc(db, 'car2autobuy', user.id)
+      
       await updateDoc(userDoc, GcarAddID, {
         appointmentId: GcarAddID,
         make: selected.name,
@@ -245,10 +246,10 @@ export default function AddCars() {
         year: selectedYear.YearCode,
         variant: Add_Variant,
         targetPrice: Add_targetPrice,
-        marketPrice: Add_marketPrice,
-        marketPriceDiff: Add_marketPriceDiff,
-        discount: Add_discount,
-        processingFee: Add_processingFee,
+        marketPrice: null,
+        marketPriceDiff: null,
+        discount: null,
+        processingFee: null,
         engineNumber: Add_engineNumber,
         chasisNumber: Add_chasisNumber,
         booked: Add_booked,
@@ -256,28 +257,31 @@ export default function AddCars() {
         city: selectedCity.CityName,
         warrantyExpiryDate: Add_warrantyExpiryDate,
         engineCc: Add_engineCc,
-        mainImage: dataImg[0],
-        carHighlights: [
-          {
-            name: Add_Name_carHighlights,
-            key: Add_key_carHighlights,
-            description: Add_Description_carHighlights,
-            subHeading: Add_subHeading_carHighlights,
-          },
-        ],
+        mainImage: {
+          path: dataImg[0].path,
+          vehicleImageCategory: dataImg[0].name,
+          label: dataImg[0].name,
+        },
+        carHighlights: {
+          name: Add_Name_carHighlights,
+          key: Add_key_carHighlights,
+          description: Add_Description_carHighlights,
+          subHeading: Add_subHeading_carHighlights,
+        },
+
         gallery: [dataImg],
         promoType: null,
         publishedType: 'READY_FOR_SALE',
         lang: 'th',
-        bodyType: selectedCarType,
+        bodyType: selectedCarType.name,
         readyForSaleTimestamp: current,
         carTag: null,
-        color: selectedColor,
+        color: selectedColor.name,
         price: Add_targetPrice,
         odometerReading: Add_odometerReading,
         ownerNumber: null,
         transmissionType: selectedTransmission.name,
-        fuelType: selectedfuelType,
+        fuelType: selectedfuelType.name,
         userId: user.id,
         Add_Name: Add_Name,
         Add_Line: Add_Line,
@@ -348,7 +352,6 @@ export default function AddCars() {
     return classes.filter(Boolean).join(' ')
   }
 
-  
   return (
     <>
       <PageSEO
@@ -741,7 +744,7 @@ export default function AddCars() {
                   type="text"
                   name="chasisNumber"
                   id="chasisNumber"
-                  value={Add_chasisNumber}
+                  defaultValue={Add_chasisNumber}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
                   placeholder="เลขตัวถัง"
                   onChange={(event) => setAdd_chasisNumber(event.target.value)}
@@ -776,7 +779,7 @@ export default function AddCars() {
                               </svg>
 
                               <span className="ml-3 block truncate">
-                                {selectedCity?.CityName}
+                                {selectedCity.CityName}
                               </span>
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -797,7 +800,7 @@ export default function AddCars() {
                             <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                               {Cityvalue.map((CityXData) => (
                                 <Listbox.Option
-                                  key={CityXData?.CityId}
+                                  key={CityXData.CityId}
                                   className={({ active }) =>
                                     classNames(
                                       active
@@ -834,7 +837,7 @@ export default function AddCars() {
                                             'ml-3 block truncate'
                                           )}
                                         >
-                                          {CityXData?.CityName}
+                                          {CityXData.CityName}
                                         </span>
                                       </div>
 
@@ -875,7 +878,7 @@ export default function AddCars() {
                     type="date"
                     name="warrantyExpiryDate"
                     id="warrantyExpiryDate"
-                    value={Add_warrantyExpiryDate}
+                    defaultValue={Add_warrantyExpiryDate}
                     className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     placeholder="วันหมดประกัน"
                     onChange={(event) =>
@@ -898,8 +901,8 @@ export default function AddCars() {
                     {BookCar.map((BookCarMethod) => (
                       <div key={BookCarMethod.id} className="flex items-center">
                         <input
-                          id={BookCarMethod.id}
-                          name="notification-method"
+                          id="BookCarMethod-method"
+                          name="BookCarMethod-method"
                           type="radio"
                           defaultChecked={BookCarMethod.id === 'no'}
                           onChange={(event) =>
@@ -932,7 +935,7 @@ export default function AddCars() {
                     type="number"
                     name="engineCc"
                     id="engineCc"
-                    value={Add_engineCc}
+                    defaultValue={Add_engineCc}
                     className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     placeholder="ความจุเครื่องยนต์"
                     onChange={(event) => setAdd_engineCc(event.target.value)}
@@ -949,7 +952,7 @@ export default function AddCars() {
                     type="number"
                     name="odometerReading"
                     id="odometerReading"
-                    value={Add_odometerReading}
+                    defaultValue={Add_odometerReading}
                     className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     placeholder="ระยะไมล์"
                     onChange={(event) =>
@@ -1199,7 +1202,7 @@ export default function AddCars() {
                   type="text"
                   name="name"
                   id="name"
-                  value={Add_Name}
+                  defaultValue={Add_Name}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="ชื่อผู้ลงประกาศ"
                   onChange={(event) => setAdd_Name(event.target.value)}
@@ -1216,7 +1219,7 @@ export default function AddCars() {
                   type="tel"
                   name="tel"
                   id="tel"
-                  value={Add_Tel}
+                  defaultValue={Add_Tel}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="เบอร์โทรศัพท์"
                   onChange={(event) => setAdd_Tel(event.target.value)}
@@ -1233,7 +1236,7 @@ export default function AddCars() {
                   type="text"
                   name="line_id"
                   id="line_id"
-                  value={Add_Line}
+                  defaultValue={Add_Line}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
                   placeholder="LINE ID"
                   onChange={(event) => setAdd_Line(event.target.value)}
