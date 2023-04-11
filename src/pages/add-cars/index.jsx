@@ -170,47 +170,47 @@ const BookCar = [
 export default function AddCars() {
   const { user } = useUser()
   const router = useRouter()
-  const [UserUEmail, setUUserEmail] = useState(null)
-  const [UserUId, setUUserUid] = useState(null)
-  const [UserUDisplayName, setUUserDisplayName] = useState(null)
+  const [UserUEmail, setUUserEmail] = useState('')
+  const [UserUId, setUUserUid] = useState('')
+  const [UserUDisplayName, setUUserDisplayName] = useState('')
   const [Add_Name, setAdd_Name] = useState('')
   const [Add_Line, setAdd_Line] = useState('')
   const [Add_Tel, setAdd_Tel] = useState('')
   //const [imgxUP, setimgxUP] = useState(null)
   const [GcarAddID, setIDGcarID] = useState('')
-  const [fileList, setFileList] = useState(null)
+  const [fileList, setFileList] = useState('')
   const [dataImg, getFile] = useState([])
   const [progress, setProgess] = useState(0)
 
   const [selected, setSelected] = useState(BrandData[0])
-  const [Add_Make, setAdd_Make] = useState('')
+  //const [Add_Make, setAdd_Make] = useState('')
   const [Add_Model, setAdd_Model] = useState('')
   //const [Add_Year, setAdd_Year] = useState('')
   const [Add_Variant, setAdd_Variant] = useState('')
   const [Add_targetPrice, setAdd_targetPrice] = useState('')
   const [Add_marketPrice, setAdd_marketPrice] = useState('')
   const [Add_marketPriceDiff, setAdd_marketPriceDiff] = useState('')
-  const [Add_discount, setAdd_discount] = useState(null)
+  const [Add_discount, setAdd_discount] = useState('')
   const [Add_processingFee, setAdd_processingFee] = useState('')
   const [Add_engineNumber, setAdd_engineNumber] = useState('')
   const [Add_chasisNumber, setAdd_chasisNumber] = useState('')
   const [Add_booked, setAdd_booked] = useState('')
-  const [Add_listingActive, setAdd_listingActive] = useState(null)
+  const [Add_listingActive, setAdd_listingActive] = useState('')
   //const [Add_city, setAdd_city] = useState('')
-  const [Add_warrantyExpiryDate, setAdd_warrantyExpiryDate] = useState(null)
-  const [Add_engineCc, setAdd_engineCc] = useState(null)
+  const [Add_warrantyExpiryDate, setAdd_warrantyExpiryDate] = useState('')
+  const [Add_engineCc, setAdd_engineCc] = useState('')
   //const [Add_bodyType, setAdd_bodyType] = useState('')
-  const [Add_odometerReading, setAdd_odometerReading] = useState(null)
+  const [Add_odometerReading, setAdd_odometerReading] = useState('')
   //const [Add_transmissionType, setAdd_transmissionType] = useState('')
   //const [Add_fuelType, setAdd_fuelType] = useState('')
   const [Add_Door, setAdd_Door] = useState('')
-  
-  const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState(null)
-  const [Add_key_carHighlights, setAdd_key_carHighlights] = useState(null)
+
+  const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState('')
+  const [Add_key_carHighlights, setAdd_key_carHighlights] = useState('')
   const [Add_Description_carHighlights, setAdd_Description_carHighlights] =
-    useState(null)
+    useState('')
   const [Add_subHeading_carHighlights, setAdd_subHeading_carHighlights] =
-    useState(null)
+    useState('')
 
   const [selectedYear, setSelectedYear] = useState(Yearvalue[0])
   const [selectedCity, setSelectedCity] = useState(Cityvalue[0])
@@ -224,22 +224,23 @@ export default function AddCars() {
     const randomness = Math.random().toString(36).substr(2)
     return dateString + randomness
   }
- 
-  
-   useEffect(() => {
-     const storedgetUser = getUserFromCookie()
-    
+
+  useEffect(() => {
+    const storedgetUser = getUserFromCookie()
+
     if (!storedgetUser) {
-       router.push('/')
+      router.push('/')
     }
     console.log(storedgetUser)
-     setUUserUid(storedgetUser.id)
-     setUUserEmail(storedgetUser.email)
-     setUUserDisplayName(storedgetUser.name)
-   }, [])
+    setUUserUid(storedgetUser.id)
+    setUUserEmail(storedgetUser.email)
+    setUUserDisplayName(storedgetUser.name)
+  }, [])
 
   const current = new Date()
-  const dateTimeAB = `${current.getDate()}${current.getMonth() + 1}${current.getFullYear()}`
+  const dateTimeAB = `${current.getDate()}${
+    current.getMonth() + 1
+  }${current.getFullYear()}`
 
   // const inputEl = useRef()
 
@@ -252,17 +253,19 @@ export default function AddCars() {
     return () => {}
   }, [])
 
-  
   useEffect(() => {
     ;(async () => {
       //console.log(UserUId)
-      const UserGquery = query(collection(db, "car2autobuy"), where("uid", "==", UserUId));
-      
-      const querySnapshot = await getDocs(UserGquery);
+      const UserGquery = query(
+        collection(db, 'car2autobuy'),
+        where('uid', '==', UserUId)
+      )
+
+      const querySnapshot = await getDocs(UserGquery)
       //console.log(querySnapshot)
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
+        console.log(doc.id, ' => ', doc.data())
+      })
     })()
 
     return () => {}
@@ -333,14 +336,14 @@ export default function AddCars() {
         year: selectedYear.YearCode,
         variant: Add_Variant,
         targetPrice: Add_targetPrice,
-        marketPrice: null,
-        marketPriceDiff: null,
-        discount: null,
-        processingFee: null,
+        marketPrice: '',
+        marketPriceDiff: '',
+        discount: '',
+        processingFee: '',
         engineNumber: Add_engineNumber,
         chasisNumber: Add_chasisNumber,
         booked: Add_booked,
-        listingActive: null,
+        listingActive: '',
         city: selectedCity.CityName,
         warrantyExpiryDate: Add_warrantyExpiryDate,
         engineCc: Add_engineCc,
@@ -363,7 +366,7 @@ export default function AddCars() {
         lang: 'th',
         bodyType: selectedCarType.name,
         readyForSaleTimestamp: current,
-        carTag: null,
+        carTag: '',
         color: selectedColor.name,
         price: Add_targetPrice,
         odometerReading: Add_odometerReading,
@@ -378,8 +381,11 @@ export default function AddCars() {
         Add_uid: UserUId,
         Add_DisplayName: UserUDisplayName,
         current: current,
-     };
-     await setDoc(doc(db, "car2autobuy", GcarAddID+"-"+dateTimeAB), docData);
+      }
+      await setDoc(
+        doc(db, 'car2autobuy', GcarAddID + '-' + dateTimeAB),
+        docData
+      )
       alert('Data successfully sent to cloud firestore!')
       //router.push('/add-cars')
       //setAdd_Name('')
@@ -393,8 +399,6 @@ export default function AddCars() {
       alert(error)
     }
   }
-
- 
 
   const handleChange = (e) => {
     setProgess(0)
@@ -541,10 +545,14 @@ export default function AddCars() {
 
                       <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
                         <span className="flex items-center">
-                          <img
+                          <Image
                             src={selected?.imgpath}
                             alt={selected?.name}
-                            className="h-6 w-6 flex-shrink-0 rounded-full"
+                            layout="fixed"
+                            width={30}
+                            height={30}
+                            className="h-6 w-6 flex-shrink-0 rounded-full object-contain"
+                            priority
                           />
                           <span className="ml-3 block truncate">
                             {selected?.name}
@@ -582,10 +590,14 @@ export default function AddCars() {
                               {({ selected, active }) => (
                                 <>
                                   <div className="flex items-center">
-                                    <img
+                                    <Image
                                       src={perData.imgpath}
                                       alt={perData.name}
-                                      className="h-6 w-6 flex-shrink-0 rounded-full"
+                                      layout="fixed"
+                                      width={30}
+                                      height={30}
+                                      className="h-6 w-6 flex-shrink-0 rounded-full object-contain"
+                                      priority
                                     />
                                     <span
                                       className={classNames(
@@ -1155,7 +1167,7 @@ export default function AddCars() {
                   type="number"
                   name="door"
                   id="door"
-                  value={Add_Model}
+                  value={Add_Door}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="ประตู"
                   onChange={(event) => setAdd_Door(event.target.value)}
@@ -1398,7 +1410,7 @@ export default function AddCars() {
           </div>
         </Container>
       </main>
-      
+
       <Footer />
     </>
   )
