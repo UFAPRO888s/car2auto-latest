@@ -5,12 +5,12 @@ import { Header } from '@/components/Header'
 import { PageSEO } from '@/components/SEO'
 import { getUserFromCookie } from '@/lib/firebase/userCookies'
 import { useRouter } from 'next/router'
-import UptoHost from '@/components/UptoHost'
+
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import { Button } from '@/components/Button'
 import { useUser } from '@/lib/firebase/useUser'
-import { initFirebase } from '@/lib/firebase/initFirebase'
+
 import { db } from '@/lib/firebase/initFirebase'
 import { RadioGroup } from '@headlessui/react'
 import { Listbox, Transition } from '@headlessui/react'
@@ -32,7 +32,7 @@ import formatDate from '@/lib/formatDate'
 import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
-import ReadDataFromCloudFirestore from '@/components/cloudFirestore/Read'
+
 const TransType = [
   {
     name: 'เกียร์อัตโนมัติ',
@@ -195,7 +195,7 @@ export default function AddCars() {
   const [Add_engineNumber, setAdd_engineNumber] = useState('')
   const [Add_chasisNumber, setAdd_chasisNumber] = useState('')
   const [Add_booked, setAdd_booked] = useState('')
-  const [Add_listingActive, setAdd_listingActive] = useState('')
+  //const [Add_listingActive, setAdd_listingActive] = useState('')
   //const [Add_city, setAdd_city] = useState('')
   const [Add_warrantyExpiryDate, setAdd_warrantyExpiryDate] = useState('')
   const [Add_engineCc, setAdd_engineCc] = useState('')
@@ -233,7 +233,7 @@ export default function AddCars() {
     if (!storedgetUser) {
       router.push('/')
     }
-    console.log(storedgetUser)
+   // console.log(storedgetUser)
     setUUserUid(storedgetUser.id)
     setUUserEmail(storedgetUser.email)
     setUUserDisplayName(storedgetUser.name)
@@ -255,25 +255,6 @@ export default function AddCars() {
     return () => {}
   }, [])
 
-  useEffect(() => {
-    ;(async () => {
-      console.log(UserUId)
-      const UserGquery = query(
-        collection(db, 'car2autobuy'),
-        where('Add_Email', '==', UserUEmail)
-      )
-
-      const querySnapshot = await getDocs(UserGquery)
-      //console.log(querySnapshot)
-      querySnapshot.forEach((doc) => {
-        setRxData(doc.data())
-        //console.log(doc.id, ' => ', doc.data())
-       // console.log(doc.data().count)
-      })
-    })()
-
-    return () => {}
-  }, [])
 
   //const qNook = query(collection(db, "car2autobuy"), where("capital", "==", true));
 

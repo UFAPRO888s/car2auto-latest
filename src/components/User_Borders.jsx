@@ -1,3 +1,4 @@
+import { Fragment, useEffect, useId, useRef, useState } from 'react'
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 import {
   CursorArrowRaysIcon,
@@ -7,6 +8,21 @@ import {
 import Image from 'next/image'
 import { useUser } from '@/lib/firebase/useUser'
 import { Container } from './Container'
+import { db } from '@/lib/firebase/initFirebase'
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  collection,
+  Timestamp,
+  getDoc,
+  GeoPoint,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore'
+import { setUserCookie, getUserFromCookie } from '@/lib/firebase/userCookies'
+
 
 const stats = [
   {
@@ -16,7 +32,7 @@ const stats = [
     icon: EnvelopeOpenIcon,
     change: '0',
     changeType: 'increase',
-    hrefLink: '#'
+    hrefLink: '#',
     //detailsText: '<a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">ดูทั้งหมด<span className="sr-only"> {item.name} ดูทั้งหมด</span></a>'
   },
   {
@@ -27,7 +43,7 @@ const stats = [
     change: '5.4%',
     changeType: 'increase',
     detailsText: 'จากจำนวนผู้เข้าชมทั้งหมด/รายเดือน',
-    hrefLink: '#'
+    hrefLink: '#',
   },
   {
     id: 3,
@@ -37,7 +53,7 @@ const stats = [
     change: '3.2%',
     changeType: 'decrease',
     detailsText: 'จำนวนคลิกติดต่อ',
-    hrefLink: '#'
+    hrefLink: '#',
   },
 ]
 
@@ -47,7 +63,42 @@ function classNames(...classes) {
 
 export default function User_Borders() {
   const { user } = useUser()
-  //console.log(user)
+
+  const [UserRxData, setRxData] = useState('')
+  const [UserEmail, setUserEmail] = useState('')
+  const [UserId, setUserUid] = useState('')
+  const [UserDisplayName, setUserDisplayName] = useState('')
+
+
+  useEffect(() => {
+    const storedgetUser = getUserFromCookie()
+    //console.log(storedgetUser)
+    if (storedgetUser) {
+      setUserUid(storedgetUser?.uid)
+      setUserEmail(storedgetUser?.email)
+      setUserDisplayName(storedgetUser?.UserDisplayName)
+    }
+  }, [])
+
+  useEffect(() => {
+    
+    const getUsers = async () => {
+      const UserGquery = query(
+        collection(db, 'car2autobuy'),
+        where('Add_Email', '==', UserEmail)
+      )
+      const querySnapshot = await getDocs(UserGquery)
+      querySnapshot.forEach((doc) => {
+        setRxData(doc.data())
+      })
+    }
+
+    getUsers()
+
+    return () => {}
+  }, [])
+
+  console.log(UserRxData)
   return (
     <Container>
       <div className="flex py-4">
@@ -59,7 +110,7 @@ export default function User_Borders() {
               width={60}
               height={60}
               layout="fixed"
-              className="w-6 h-6 rounded-full"
+              className="h-6 w-6 rounded-full"
             />
           ) : (
             <Image
@@ -72,18 +123,16 @@ export default function User_Borders() {
             />
           )}
         </div>
-        <div className='text-gray-700 md:text-gray-100'>
+        <div className="text-gray-700 md:text-gray-100">
           <h4 className="text-lg font-bold">สรุป {user?.name}</h4>
-          <p className="mt-1">
-            รายการลงประกาศของผู้ใช้ {user?.name}
-          </p>
+          <p className="mt-1">รายการลงประกาศของผู้ใช้ {user?.name}</p>
         </div>
       </div>
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 px-2 ">
+      <dl className="mt-5 grid grid-cols-1 gap-5 px-2 sm:grid-cols-2 lg:grid-cols-3 ">
         {stats.map((item) => (
           <div
             key={item.id}
-            className="relative overflow-hidden rounded-lg bg-gray-200 md:bg-gray-800 bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
+            className="relative overflow-hidden rounded rounded-lg bg-gray-200 bg-opacity-20 px-4 pb-12 pt-5 shadow drop-shadow-lg backdrop-blur-lg sm:px-6 sm:pt-6 md:bg-gray-800"
           >
             <dt>
               <div className="absolute rounded-md bg-indigo-500 p-3">
@@ -127,14 +176,17 @@ export default function User_Borders() {
                 {item.change}
               </p>
               <div className="absolute inset-x-0 bottom-0 px-4 py-4 sm:px-6">
-                <p className='font-medium text-indigo-100 text-xs'>{item.detailsText}</p>
+                <p className="text-xs font-medium text-indigo-100">
+                  {item.detailsText}
+                </p>
                 <div className="text-sm">
                   <a
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     {' '}
-                    ดูทั้งหมด<span className="sr-only"> {item.name} ดูทั้งหมด</span>
+                    ดูทั้งหมด
+                    <span className="sr-only"> {item.name} ดูทั้งหมด</span>
                   </a>
                 </div>
               </div>
