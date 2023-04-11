@@ -26,7 +26,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { db } from '@/lib/firebase/initFirebase'
-import { doc, setDoc, Timestamp, GeoPoint } from 'firebase/firestore'
+import { doc, setDoc, Timestamp, GeoPoint ,updateDoc} from 'firebase/firestore'
 
 initFirebase()
 
@@ -35,7 +35,33 @@ export default function Login() {
   const [Password, setPassword] = useState('')
   const [Email, setEmail] = useState('')
   const [TextErrorLogin, setErrorLogin] = useState('')
+ // const [DataLogin, setDataLogin] = useState([])
   //const { userx, logout } = useUser()
+
+  
+    const WriteToCloudFirestore = async (DataLogin) => {
+   // const WriteToCloudFirestore = async (DataLogin) => {
+      //const WriteToCloudFirestore = (datax) => {
+      try {
+        const userDoc = doc(db, 'car2users', DataLogin.uid)
+        await setDoc(userDoc, {
+          uid: DataLogin?.uid,
+          photoURL: DataLogin?.photoURL,
+          providerId: DataLogin?.providerId,
+          email: DataLogin?.email,
+          displayName: DataLogin?.displayName,
+          
+        })
+        router.push('/')
+        //alert('Data was successfully ChangYed send to cloud firestore!')
+      } catch (error) {
+        console.log(error)
+        alert(error)
+      }
+    }
+  
+
+
   function handleSubmit(event) {
     event.preventDefault()
     if (Password) {
@@ -45,9 +71,10 @@ export default function Login() {
         .then((userCredential) => {
           const user = userCredential.user
           setUserCookie(user) //console.log(user)
+          //setDataLogin(user)
           WriteToCloudFirestore(user)
           //localStorage.setItem('userdatax', JSON.stringify(user))
-          router.push('/')
+          //router.push('/')
         })
         .catch((error) => {
           const errorCode = error.code
@@ -71,10 +98,11 @@ export default function Login() {
         const token = credential.accessToken
         const user = result.user
         setUserCookie(user)
+        //setDataLogin(user)
         WriteToCloudFirestore(user)
-        // console.log(user)
+        //console.log(user)
         //localStorage.setItem('userdatax', JSON.stringify(user))
-        router.push('/')
+        //router.push('/')
       })
       .catch((error) => {
         const errorCode = error.code
@@ -93,10 +121,11 @@ export default function Login() {
         const token = credential.accessToken
         const user = result.user
         setUserCookie(user)
+        //setDataLogin(user)
         WriteToCloudFirestore(user)
         //console.log(user)
         //localStorage.setItem('userdatax', JSON.stringify(user))
-        router.push('/')
+        //router.push('/')
       })
       .catch((error) => {
         const errorCode = error.code
@@ -105,35 +134,7 @@ export default function Login() {
         const credential = FacebookAuthProvider.credentialFromError(error)
       })
   }
-
-  const WriteToCloudFirestore = async (datax) => {
-    //const WriteToCloudFirestore = (datax) => {
-
-    try {
-      const userDoc = doc(db, 'car2autobuy', datax.uid)
-      await setDoc(userDoc, {
-        uid: datax?.uid,
-        photoURL: datax?.photoURL,
-        providerId: datax?.providerId,
-
-        email: datax?.email,
-        displayName: datax?.displayName,
-
-        // number_data: 2,
-        // boolean_data: true,
-        // map_data: { stringInMap: 'Hi', numberInMap: 7 },
-        // array_data: ['text', 4],
-        // null_data: null,
-        // time_stamp: Timestamp.fromDate(new Date('December 17, 1995 03:24:00')),
-        // geo_point: new GeoPoint(34.714322, -131.468435)
-      })
-      //alert('Data was successfully ChangYed send to cloud firestore!')
-    } catch (error) {
-      console.log(error)
-      alert(error)
-    }
-  }
-
+  
   return (
     <>
       <Head>

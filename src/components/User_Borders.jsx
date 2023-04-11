@@ -56,10 +56,10 @@ export default function User_Borders() {
             <Image
               src={user.profilePic}
               alt="Car2autobuy ลงประกาศขายรถมือสอง"
-              width={100}
-              height={50}
+              width={60}
+              height={60}
               layout="fixed"
-              className="z-0"
+              className="w-6 h-6 rounded-full"
             />
           ) : (
             <Image

@@ -1,13 +1,13 @@
 import { db } from '@/lib/firebase/initFirebase'
 import { doc, getDoc } from "firebase/firestore"
 import { useUser } from '@/lib/firebase/useUser'
-import Button from 'react-bootstrap/Button'
+import { Button } from '@/components/Button'
 
 const ReadDataFromCloudFirestore = () => {
     const { user } = useUser()
     const readData = async () => {
         try {
-            const userDoc = doc(db, "myCollection", user.id)
+            const userDoc = doc(db, "car2autobuy", user.id)
             await getDoc(userDoc).then((doc) => {
                 if (doc.exists()) {
                     console.log(doc.data())

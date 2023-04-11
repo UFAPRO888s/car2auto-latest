@@ -17,6 +17,7 @@ const nextConfig = {
     domains: [
       'archive.car2autobuy.com',
       'storage.car2autobuy.com',
+      'lh3.googleusercontent.com',
       'car2autobuy.com',
       'fastly-production.24c.in',
       'firebasestorage.googleapis.com',

@@ -22,13 +22,17 @@ import {
   updateDoc,
   collection,
   Timestamp,
+  getDoc,
   GeoPoint,
+  getDocs,
+  query,
+  where,
 } from 'firebase/firestore'
 import formatDate from '@/lib/formatDate'
 import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
-
+import ReadDataFromCloudFirestore from '@/components/cloudFirestore/Read'
 const TransType = [
   {
     name: 'เกียร์อัตโนมัติ',
@@ -167,7 +171,7 @@ export default function AddCars() {
   const { user } = useUser()
   const router = useRouter()
   const [UserUEmail, setUUserEmail] = useState('')
-  const [UserUId, setUUserUid] = useState(null)
+  const [UserUId, setUUserUid] = useState('')
   const [UserUDisplayName, setUUserDisplayName] = useState('')
   const [Add_Name, setAdd_Name] = useState('')
   const [Add_Line, setAdd_Line] = useState('')
@@ -219,12 +223,21 @@ export default function AddCars() {
     return dateString + randomness
   }
 
-  const current = new Date()
-  const dateTimeAB = `${current.getDate()} - ${
-    current.getMonth() + 1
-  } - ${current.getFullYear()}`
+  useEffect(() => {
+    const storedgetUser = getUserFromCookie()
+    
+    if (!storedgetUser) {
+      router.push('/')
+    }
+    setUUserUid(storedgetUser.id)
+    setUUserEmail(storedgetUser.email)
+    setUUserDisplayName(storedgetUser.name)
+  }, [])
 
-  const inputEl = useRef()
+  const current = new Date()
+  const dateTimeAB = `${current.getDate()}${current.getMonth() + 1}${current.getFullYear()}`
+
+  // const inputEl = useRef()
 
   useEffect(() => {
     ;(async () => {
@@ -234,12 +247,83 @@ export default function AddCars() {
 
     return () => {}
   }, [])
+
+  //console.log(UserUId)
+  useEffect(() => {
+    ;(async () => {
+      
+      const UserGquery = query(collection(db, "/car2autobuy"), where("userId", "==", "e0c4h0aAyESzWw6kbjNGeA75j0U2"));
+      
+      const querySnapshot = await getDocs(UserGquery);
+      //console.log(querySnapshot)
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+    })()
+
+    return () => {}
+  }, [])
+
   //console.log(selected.name,Add_Model,selectedCarType.name,selectedCity.CityName, selectedYear.YearCode,Add_Variant,Add_targetPrice,Add_engineNumber,Add_chasisNumber,Add_booked)
   const sendData = async () => {
     try {
-      const userDoc = doc(db, 'car2autobuy', user.id)
-      
-      await updateDoc(userDoc, GcarAddID, {
+      //const userDoc = doc(db, 'car2autobuy',GcarAddID+'-'+dateTimeAB)
+
+      // await setDoc(userDoc, GcarAddID, {
+      //   appointmentId: GcarAddID,
+      //   make: selected.name,
+      //   model: Add_Model,
+      //   year: selectedYear.YearCode,
+      //   variant: Add_Variant,
+      //   targetPrice: Add_targetPrice,
+      //   marketPrice: null,
+      //   marketPriceDiff: null,
+      //   discount: null,
+      //   processingFee: null,
+      //   engineNumber: Add_engineNumber,
+      //   chasisNumber: Add_chasisNumber,
+      //   booked: Add_booked,
+      //   listingActive: null,
+      //   city: selectedCity.CityName,
+      //   warrantyExpiryDate: Add_warrantyExpiryDate,
+      //   engineCc: Add_engineCc,
+      //   mainImage: {
+      //     path: dataImg[0].path,
+      //     vehicleImageCategory: dataImg[0].name,
+      //     label: dataImg[0].name,
+      //   },
+      //   carHighlights: {
+      //     name: Add_Name_carHighlights,
+      //     key: Add_key_carHighlights,
+      //     description: Add_Description_carHighlights,
+      //     subHeading: Add_subHeading_carHighlights,
+      //   },
+
+      //   gallery: dataImg,
+      //   promoType: null,
+      //   publishedType: 'READY_FOR_SALE',
+      //   lang: 'th',
+      //   bodyType: selectedCarType.name,
+      //   readyForSaleTimestamp: current,
+      //   carTag: null,
+      //   color: selectedColor.name,
+      //   price: Add_targetPrice,
+      //   odometerReading: Add_odometerReading,
+      //   ownerNumber: null,
+      //   transmissionType: selectedTransmission.name,
+      //   fuelType: selectedfuelType.name,
+      //   userId: user.id,
+      //   Add_Name: Add_Name,
+      //   Add_Line: Add_Line,
+      //   Add_Tel: Add_Tel,
+      //   Add_Email: UserUEmail,
+      //   Add_DisplayName: UserUDisplayName,
+      //   current: current,
+      //   //imagesG: dataImg,
+      // },{ merge: true })
+
+      const docData = {
         appointmentId: GcarAddID,
         make: selected.name,
         model: Add_Model,
@@ -253,7 +337,7 @@ export default function AddCars() {
         engineNumber: Add_engineNumber,
         chasisNumber: Add_chasisNumber,
         booked: Add_booked,
-        listingActive: Add_listingActive,
+        listingActive: null,
         city: selectedCity.CityName,
         warrantyExpiryDate: Add_warrantyExpiryDate,
         engineCc: Add_engineCc,
@@ -269,7 +353,7 @@ export default function AddCars() {
           subHeading: Add_subHeading_carHighlights,
         },
 
-        gallery: [dataImg],
+        gallery: dataImg,
         promoType: null,
         publishedType: 'READY_FOR_SALE',
         lang: 'th',
@@ -289,8 +373,8 @@ export default function AddCars() {
         Add_Email: UserUEmail,
         Add_DisplayName: UserUDisplayName,
         current: current,
-        imagesG: dataImg,
-      })
+     };
+     await setDoc(doc(db, "car2autobuy", GcarAddID+"-"+dateTimeAB), docData);
       alert('Data successfully sent to cloud firestore!')
       //router.push('/add-cars')
       //setAdd_Name('')
@@ -305,15 +389,7 @@ export default function AddCars() {
     }
   }
 
-  useEffect(() => {
-    const storedgetUser = getUserFromCookie()
-    if (!storedgetUser) {
-      router.push('/')
-    }
-    setUUserUid(storedgetUser.id)
-    setUUserEmail(storedgetUser.email)
-    setUUserDisplayName(storedgetUser.name)
-  }, [])
+ 
 
   const handleChange = (e) => {
     setProgess(0)
@@ -1299,6 +1375,7 @@ export default function AddCars() {
           </div>
         </Container>
       </main>
+      
       <Footer />
     </>
   )
