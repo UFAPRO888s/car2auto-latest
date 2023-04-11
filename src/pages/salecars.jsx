@@ -90,14 +90,14 @@ export default function SaleCars() {
   const [message, setMessage] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
-  const [selectedYear, setSelectedYear] = useState(Yearvalue[0].YearName)
-  const [selectedMake, setSelectedMake] = useState('')
+  const [selectedYear, setSelectedYear] = useState(Yearvalue[0])
+  const [selectedMake, setSelectedMake] = useState(BrandData[0])
   const [selectedModel, setSelectedModel] = useState('')
   const [selectedNameUs, setSelectedNameUs] = useState('')
   const [selectedTel, setSelectedTel] = useState('')
   const [selectedLineId, setSelectedLineId] = useState('')
 
-  const [selectedCity, setSelectedCity] = useState('')
+  const [selectedCity, setSelectedCity] = useState(Cityvalue[0])
   const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
   const [selectedColor, setSelectedColor] = useState(colors[0])
 
@@ -158,7 +158,7 @@ export default function SaleCars() {
       selectedMake?.name != '' ||
       valueImgss != ''
     ) {
-      const res = await fetch(`https://storage.car2autobuy.com/linenotify`, {
+      const res = await fetch(`/api/linenotify`, {
         body: JSON.stringify({
           selYear: selectedYear?.YearName,
           selMake: selectedMake?.name,
@@ -171,6 +171,7 @@ export default function SaleCars() {
           selColor: selectedColor?.name,
           URLimage: valueImgss,
         }),
+        //body: JSON.stringify({msgSX:`NEW ปีรถ: ${selectedYear?.YearName} ยี่ห้อ: ${selectedMake?.name} รุ่น: ${selectedModel} เกียร์: ${selectedTransmission?.name} สีตัวรถ: ${selectedColor?.name} ชื่อติดต่อ: ${selectedNameUs} เบอร์โทร: ${selectedTel} line: ${selectedLineId} จังหวัด: ${selectedCity?.CityName}`}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -563,9 +564,9 @@ export default function SaleCars() {
                               leaveTo="opacity-0"
                             >
                               <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {Cityvalue.map((CityXData) => (
+                                {Cityvalue.map((CityXData,indexsa) => (
                                   <Listbox.Option
-                                    key={CityXData?.CityId}
+                                    key={indexsa}
                                     className={({ active }) =>
                                       classNames(
                                         active
@@ -645,9 +646,9 @@ export default function SaleCars() {
                         ประเภทเกียร์
                       </RadioGroup.Label>
                       <div className="mt-4 flex items-center space-x-3">
-                        {TransType.map((Trans) => (
+                        {TransType.map((Trans,indexTrans) => (
                           <RadioGroup.Option
-                            key={Trans.name}
+                            key={indexTrans}
                             value={Trans}
                             className={({ active, checked }) =>
                               classNames(
@@ -691,9 +692,9 @@ export default function SaleCars() {
                       สีตัวรถ
                     </RadioGroup.Label>
                     <div className="mt-4 flex flex-wrap items-center justify-around gap-2 space-x-3 md:flex md:flex-nowrap">
-                      {colors.map((color) => (
+                      {colors.map((color,indexcolor) => (
                         <RadioGroup.Option
-                          key={color.name}
+                          key={indexcolor}
                           value={color}
                           className={({ active, checked }) =>
                             classNames(
