@@ -346,14 +346,16 @@ export default function AddCars() {
     return classes.filter(Boolean).join(' ')
   }
 
-  function SelectedCars({ DataSet ,LabelX}) {
+  function SelectedCars({ DataSet, LabelX }) {
     const [selected, setSelected] = useState(BrandData[0])
 
     return (
       <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">{LabelX}</Listbox.Label>
+            <Listbox.Label className="block text-sm font-medium text-gray-700">
+              {LabelX}
+            </Listbox.Label>
 
             <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
               <span className="flex items-center">
@@ -454,7 +456,9 @@ export default function AddCars() {
         <Container>
           <div className="py-4">
             <div className="py-4 text-center">
-              <h1 className="text-2xl md:text-3xl font-bold">ลงประกาศขายรถมือสอง</h1>
+              <h1 className="text-2xl font-bold md:text-3xl">
+                ลงประกาศขายรถมือสอง
+              </h1>
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
               <p className="text-base font-semibold">
                 ลงประกาศขายรถมือสอง CAR2AUTOBUY
@@ -470,7 +474,7 @@ export default function AddCars() {
                   <RadioGroup.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 text-sm text-xs font-medium font-medium text-gray-700 text-gray-900">
                     ประเภทรถยนต์
                   </RadioGroup.Label>
-                  <div className="mt-4 flex items-center flex-wrap gap-2 md:space-x-3">
+                  <div className="mt-4 flex flex-wrap items-center gap-2 md:space-x-3">
                     {carDataType.map((TypesCar) => (
                       <RadioGroup.Option
                         key={TypesCar.id}
@@ -515,64 +519,18 @@ export default function AddCars() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
-                  htmlFor="model"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  รุ่น
-                </label>
-                <input
-                  type="text"
-                  name="model"
-                  id="model"
-                  value={Add_Model}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="รุ่น"
-                  onChange={(event) => setAdd_Model(event.target.value)}
-                />
-              </div>
-              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                <label
-                  htmlFor="variant"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  รุ่นย่อย
-                </label>
-                <input
-                  type="text"
-                  name="variant"
-                  id="variant"
-                  value={Add_Variant}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
-                  placeholder="รุ่นย่อย"
-                  onChange={(event) => setAdd_Variant(event.target.value)}
-                />
-              </div>
-            </div>
-            {/* ing */}
-
-            {/* ing */}
-            <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="col-span-2">
-                {/* <label
                   htmlFor="Year"
-                  className="mb-3 block text-sm font-medium text-gray-700"
-                >
-                  ปีรถยนต์
-                </label> */}
-                {/* <label
-                  htmlFor="year"
                   className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
                 >
-                  ปีรถยนต์
-                </label> */}
-                {/* <YearVValue id="year_car" name="year_car" /> */}
+                  ปีจดทะเบียน
+                </label>
                 <Listbox value={selectedYear} onChange={setSelectedYear}>
                   {({ open }) => (
                     <>
                       <div className="relative mt-1">
-                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-9 text-left shadow-sm sm:text-sm">
                           <span className="flex items-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -677,23 +635,45 @@ export default function AddCars() {
                   )}
                 </Listbox>
               </div>
-              {/* <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
-                  htmlFor="year"
+                  htmlFor="model"
                   className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
                 >
-                  ปีรถยนต์
+                  รุ่น
                 </label>
                 <input
                   type="text"
-                  name="year"
-                  id="year"
-                  value={Add_Year}
+                  name="model"
+                  id="model"
+                  value={Add_Model}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="ปีรถยนต์"
-                  onChange={(event) => setAdd_Year(event.target.value)}
+                  placeholder="รุ่น"
+                  onChange={(event) => setAdd_Model(event.target.value)}
                 />
-              </div> */}
+              </div>
+              <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+                <label
+                  htmlFor="variant"
+                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                >
+                  รุ่นย่อย
+                </label>
+                <input
+                  type="text"
+                  name="variant"
+                  id="variant"
+                  value={Add_Variant}
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
+                  placeholder="รุ่นย่อย"
+                  onChange={(event) => setAdd_Variant(event.target.value)}
+                />
+              </div>
+            </div>
+            {/* ing */}
+
+            {/* ing */}
+            <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
                   htmlFor="targetPrice"
@@ -728,149 +708,138 @@ export default function AddCars() {
                   onChange={(event) => setAdd_engineNumber(event.target.value)}
                 />
               </div>
+              <div className="relative rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
+                <label
+                  htmlFor="chasisNumber"
+                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
+                >
+                  เลขตัวถัง
+                </label>
+                <input
+                  type="text"
+                  name="chasisNumber"
+                  id="chasisNumber"
+                  value={Add_chasisNumber}
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  placeholder="เลขตัวถัง"
+                  onChange={(event) => setAdd_chasisNumber(event.target.value)}
+                />
+              </div>
             </div>
             {/* ing */}
 
             {/* ing */}
             <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="col-span-2 grid grid-rows-2 gap-2">
-                <div className="relative rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
-                  <label
-                    htmlFor="chasisNumber"
-                    className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                  >
-                    เลขตัวถัง
-                  </label>
-                  <input
-                    type="text"
-                    name="chasisNumber"
-                    id="chasisNumber"
-                    value={Add_chasisNumber}
-                    className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    placeholder="เลขตัวถัง"
-                    onChange={(event) =>
-                      setAdd_chasisNumber(event.target.value)
-                    }
-                  />
-                </div>
-                <div className="relative">
-                  {/* <label
-                    htmlFor="city"
-                    className="absolute -top-2 left-2 -mt-px inline-block px-1 text-xs font-medium text-gray-900"
-                  >
-                    จังหวัด
-                  </label> */}
-                  {/* <CityCars id="city_car" name="city_car" /> */}
-                  <Listbox value={selectedCity} onChange={setSelectedCity}>
-                    {({ open }) => (
-                      <>
-                        <div className="relative mt-1">
-                          <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-                            <span className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="h-6 w-6"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                                />
-                              </svg>
-
-                              <span className="ml-3 block truncate">
-                                {selectedCity?.CityName}
-                              </span>
-                            </span>
-                            <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                              <ChevronUpDownIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
+              <div className="relative col-span-2">
+                <Listbox value={selectedCity} onChange={setSelectedCity}>
+                  {({ open }) => (
+                    <>
+                      <div className="relative mt-1">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                          <span className="flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="h-6 w-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
                               />
+                            </svg>
+
+                            <span className="ml-3 block truncate">
+                              {selectedCity?.CityName}
                             </span>
-                          </Listbox.Button>
+                          </span>
+                          <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                            <ChevronUpDownIcon
+                              className="h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </Listbox.Button>
 
-                          <Transition
-                            show={open}
-                            as={Fragment}
-                            leave="transition ease-in duration-100"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {Cityvalue.map((CityXData) => (
-                                <Listbox.Option
-                                  key={CityXData?.CityId}
-                                  className={({ active }) =>
-                                    classNames(
-                                      active
-                                        ? 'bg-indigo-600 text-white'
-                                        : 'text-gray-900',
-                                      'relative cursor-default select-none py-2 pl-3 pr-9'
-                                    )
-                                  }
-                                  value={CityXData}
-                                >
-                                  {({ selectedCity, active }) => (
-                                    <>
-                                      <div className="flex items-center">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          strokeWidth="1.5"
-                                          stroke="currentColor"
-                                          className="h-6 w-6"
-                                        >
-                                          <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                                          />
-                                        </svg>
+                        <Transition
+                          show={open}
+                          as={Fragment}
+                          leave="transition ease-in duration-100"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                        >
+                          <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {Cityvalue.map((CityXData) => (
+                              <Listbox.Option
+                                key={CityXData?.CityId}
+                                className={({ active }) =>
+                                  classNames(
+                                    active
+                                      ? 'bg-indigo-600 text-white'
+                                      : 'text-gray-900',
+                                    'relative cursor-default select-none py-2 pl-3 pr-9'
+                                  )
+                                }
+                                value={CityXData}
+                              >
+                                {({ selectedCity, active }) => (
+                                  <>
+                                    <div className="flex items-center">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="currentColor"
+                                        className="h-6 w-6"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
+                                        />
+                                      </svg>
 
-                                        <span
-                                          className={classNames(
-                                            selectedCity
-                                              ? 'font-semibold'
-                                              : 'font-normal',
-                                            'ml-3 block truncate'
-                                          )}
-                                        >
-                                          {CityXData?.CityName}
-                                        </span>
-                                      </div>
+                                      <span
+                                        className={classNames(
+                                          selectedCity
+                                            ? 'font-semibold'
+                                            : 'font-normal',
+                                          'ml-3 block truncate'
+                                        )}
+                                      >
+                                        {CityXData?.CityName}
+                                      </span>
+                                    </div>
 
-                                      {selectedCity ? (
-                                        <span
-                                          className={classNames(
-                                            active
-                                              ? 'text-white'
-                                              : 'text-indigo-600',
-                                            'absolute inset-y-0 right-0 flex items-center pr-4'
-                                          )}
-                                        >
-                                          <CheckIcon
-                                            className="h-5 w-5"
-                                            aria-hidden="true"
-                                          />
-                                        </span>
-                                      ) : null}
-                                    </>
-                                  )}
-                                </Listbox.Option>
-                              ))}
-                            </Listbox.Options>
-                          </Transition>
-                        </div>
-                      </>
-                    )}
-                  </Listbox>
-                </div>
+                                    {selectedCity ? (
+                                      <span
+                                        className={classNames(
+                                          active
+                                            ? 'text-white'
+                                            : 'text-indigo-600',
+                                          'absolute inset-y-0 right-0 flex items-center pr-4'
+                                        )}
+                                      >
+                                        <CheckIcon
+                                          className="h-5 w-5"
+                                          aria-hidden="true"
+                                        />
+                                      </span>
+                                    ) : null}
+                                  </>
+                                )}
+                              </Listbox.Option>
+                            ))}
+                          </Listbox.Options>
+                        </Transition>
+                      </div>
+                    </>
+                  )}
+                </Listbox>
               </div>
               <div className="col-span-2">
                 <label className="text-base font-medium text-gray-900">
