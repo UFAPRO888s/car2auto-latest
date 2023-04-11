@@ -45,21 +45,21 @@ const TransType = [
 
 const fuelDataType = [
   {
-    id:1,
+    id: 1,
     name: 'เบนซิน',
     imgp: '/images/fuelType/Petrol.png',
     selectedColor: 'bg-blue-100/80',
     bgColor: 'bg-blue-100/80',
   },
   {
-    id:2,
+    id: 2,
     name: 'ดีเซล',
     imgp: '/images/fuelType/Diesel.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:3,
+    id: 3,
     name: 'Hybrid',
     imgp: '/images/fuelType/Hybrid.png',
     selectedColor: 'bg-red-100/80',
@@ -69,63 +69,63 @@ const fuelDataType = [
 
 const carDataType = [
   {
-    id:1,
+    id: 1,
     name: '2-ประตู',
     imgp: '/images/car_type/2-ประตู.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:2,
+    id: 2,
     name: '4-ประตู',
     imgp: '/images/car_type/4-ประตู.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:3,
+    id: 3,
     name: '5-ประตู',
     imgp: '/images/car_type/5-ประตู.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:4,
+    id: 4,
     name: 'SUV',
     imgp: '/images/car_type/SUV.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:5,
+    id: 5,
     name: 'มินิเเวน',
     imgp: '/images/car_type/มินิเเวน.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:6,
+    id: 6,
     name: 'รถกระบะ',
     imgp: '/images/car_type/รถกระบะ.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:7,
+    id: 7,
     name: 'รถตู้',
     imgp: '/images/car_type/รถตู้.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:8,
+    id: 8,
     name: 'รถยนตร์ไฟฟ้า-EV',
     imgp: '/images/car_type/รถยนตร์ไฟฟ้า-EV.png',
     selectedColor: 'bg-gray-100/80',
     bgColor: 'bg-gray-100/80',
   },
   {
-    id:9,
+    id: 9,
     name: 'รถสปอร์ต',
     imgp: '/images/car_type/รถสปอร์ต.png',
     selectedColor: 'bg-gray-100/80',
@@ -287,10 +287,10 @@ export default function AddCars() {
       })
       alert('Data successfully sent to cloud firestore!')
       //router.push('/add-cars')
-      setAdd_Name('')
-      setAdd_Line('')
-      setAdd_Tel('')
-      setimgxUP('')
+      //setAdd_Name('')
+      //setAdd_Line('')
+      //setAdd_Tel('')
+      //setimgxUP('')
 
       router.push('/')
     } catch (error) {
@@ -346,14 +346,14 @@ export default function AddCars() {
     return classes.filter(Boolean).join(' ')
   }
 
-  function SelectedCars({ DataSet }) {
+  function SelectedCars({ DataSet ,LabelX}) {
     const [selected, setSelected] = useState(BrandData[0])
 
     return (
       <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            {/* <Listbox.Label className="block text-sm font-medium text-gray-700">{LabelX}</Listbox.Label>  */}
+            <Listbox.Label className="block text-sm font-medium text-gray-700">{LabelX}</Listbox.Label>
 
             <Listbox.Button className="relative w-full cursor-default rounded-md py-2 pl-3 pr-10 text-left shadow-sm sm:text-sm">
               <span className="flex items-center">
@@ -454,111 +454,23 @@ export default function AddCars() {
         <Container>
           <div className="py-4">
             <div className="py-4 text-center">
-              <h1 className="text-3xl font-bold">ลงประกาศขายรถมือสอง</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">ลงประกาศขายรถมือสอง</h1>
               <p className="text-base">ลงขายรถ ง่าย ไว 24ชม.</p>
               <p className="text-base font-semibold">
                 ลงประกาศขายรถมือสอง CAR2AUTOBUY
               </p>
             </div>
-            {/* uploadimage */}
-            {/* <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="col-span-5">
-                <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
-                  <div className="space-y-1 text-center">
-                    <div className="grid grid-cols-1 text-sm text-gray-600">
-                      <label
-                        htmlFor="file-upload"
-                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
-                      >
-                        <span>รูปภาพ</span>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                          className="sr-only"
-                          onChange={handleChange}
-                          multiple
-                        />
-                      </label>
-                      <div className="pl-1">
-                        <div className="progessBar">{progress}</div>
-                        <Button onClick={uploadFile} className="rounded-md">
-                          Upload
-                        </Button>
-                      </div>
-                    </div>
-                    <p className="text-xs text-gray-500">
-                      อัพโหลดรูปฟรี 24ชั่วโมงไม่เว้นวันหยุดราชการ
-                    </p>
-                  </div>
-                  <div className="w-full">
-                    <ul className="grid grid-cols-4 gap-2">
-                      {dataImg?.map((file, i) => (
-                        <li key={i}>
-                          <div>
-                            {file.path ? (
-                              <Image
-                                src={file.path}
-                                alt={file.name}
-                                width={100}
-                                height={100}
-                                className="rounded-md object-contain"
-                                layout="fixed"
-                              />
-                            ) : (
-                              <svg
-                                className="mx-auto h-12 w-12 text-gray-400"
-                                stroke="currentColor"
-                                fill="none"
-                                viewBox="0 0 48 48"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                  strokeWidth={2}
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                            <p className="line-clamp-1 text-xs">{file.name}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="flex w-full justify-center gap-4 rounded-md border-2 border-dashed border-gray-300 px-5 pb-6 pt-5">
-                <div className="text-center">
-                  <p className="text-xs">
-                    ขั้นตอนง่ายกับการขายรถที่ CAR2AUTOBUY
-                  </p>
-                  <div className='p-2'>
-                    <Image
-                      src={'/images/Car2autobuy-01.png'}
-                      alt={'ขายรถยนต์'}
-                      width={100}
-                      height={60}
-                      className="rounded-md object-contain"
-                      layout="fixed"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div> */}
-            {/* uploadimage */}
             {/* ing */}
-            <div className="grid grid-cols-1">
-            <div className="relative rounded-md border border-gray-300 px-3 py-2 shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-12">
+              <div className="relative col-span-8 py-2">
                 <RadioGroup
                   value={selectedCarType}
                   onChange={setSelectedCarType}
                 >
                   <RadioGroup.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 text-sm text-xs font-medium font-medium text-gray-700 text-gray-900">
-                    ประเภทเกียร์
+                    ประเภทรถยนต์
                   </RadioGroup.Label>
-                  <div className="mt-4 flex items-center space-x-3">
+                  <div className="mt-4 flex items-center flex-wrap gap-2 md:space-x-3">
                     {carDataType.map((TypesCar) => (
                       <RadioGroup.Option
                         key={TypesCar.id}
@@ -568,7 +480,7 @@ export default function AddCars() {
                             TypesCar.selectedColor,
                             active && checked ? 'ring ring-offset-1' : '',
                             !active && checked ? 'ring-2' : '',
-                            'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
+                            'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-md p-0.5 hover:bg-red-500 focus:outline-none'
                           )
                         }
                       >
@@ -580,7 +492,7 @@ export default function AddCars() {
                           aria-hidden="true"
                           className={classNames(
                             TypesCar.bgColor,
-                            'h-10 w-10 rounded-full border border-black border-opacity-10'
+                            'h-16 w-16 rounded-md border border-black border-opacity-10'
                           )}
                         >
                           <Image
@@ -597,26 +509,12 @@ export default function AddCars() {
                   </div>
                 </RadioGroup>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
-              <div className="relative col-span-2 rounded-md shadow-sm">
-                <label
-                  htmlFor="make"
-                  className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  ยี่ห้อ
-                </label>
-                {/* <input
-                  type="text"
-                  name="make"
-                  id="make"
-                  value={Add_Make}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                  placeholder="ยี่ห้อ"
-                  onChange={(event) => setAdd_Make(event.target.value)}
-                /> */}
+
+              <div className="relative col-span-4 rounded-md py-2">
                 <SelectedCars DataSet={BrandData} LabelX={'ยี่ห้อ'} />
               </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2 py-4 md:grid-cols-6">
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
                 <label
                   htmlFor="model"
@@ -1136,7 +1034,7 @@ export default function AddCars() {
                   </div>
                 </RadioGroup>
               </div>
-              
+
               <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm">
                 <RadioGroup
                   value={selectedfuelType}
@@ -1184,8 +1082,6 @@ export default function AddCars() {
                   </div>
                 </RadioGroup>
               </div>
-
-
             </div>
             {/* ing */}
             <div className="grid grid-cols-1 gap-2 py-2">
@@ -1194,7 +1090,7 @@ export default function AddCars() {
                 <RadioGroup.Label className="block text-sm font-medium text-gray-700">
                   สีตัวรถ
                 </RadioGroup.Label>
-                <div className="mt-4 flex flex-wrap items-center justify-around gap-2 space-x-3 md:flex md:flex-nowrap">
+                <div className="mt-4 flex flex-wrap items-center justify-around gap-2 md:space-x-3">
                   {colors.map((color) => (
                     <RadioGroup.Option
                       key={color.name}
