@@ -234,7 +234,7 @@ export default function AddCars() {
 
     return () => {}
   }, [])
-  console.log(selected.name,Add_Model,selectedCarType.name,selectedCity.CityName, selectedYear.YearCode,Add_Variant,Add_targetPrice,Add_engineNumber,Add_chasisNumber,Add_booked)
+  //console.log(selected.name,Add_Model,selectedCarType.name,selectedCity.CityName, selectedYear.YearCode,Add_Variant,Add_targetPrice,Add_engineNumber,Add_chasisNumber,Add_booked)
   const sendData = async () => {
     try {
       const userDoc = doc(db, 'car2autobuy', user.id)
