@@ -18,11 +18,11 @@ export default function BrandCards({ Maname }) {
         >
           {BrandData.slice(0, 21).map((project) => (
             <li
-              key={project.brand}
+              key={project.name}
               className="col-span-1 flex rounded-md shadow-sm hover:bg-[#130F40] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <Link
-                href={`/buycars/?make=${project.brand}&min=0&max=5000000`}
+                href={`/buycars/?make=${project.name}`}
                 className="h-auto w-full"
               >
                 <div
@@ -33,13 +33,13 @@ export default function BrandCards({ Maname }) {
                   <Image
                     className="block h-8 w-auto object-cover object-center"
                     src={project.imgpath}
-                    alt={project.brand}
+                    alt={project.name}
                     layout="fixed"
                     width={80}
                     height={80}
                   />
 
-                  {project.brand}
+                  {project.name}
                   <p className="font-normal text-gray-500">
                     {/* {project.count} คัน */}
                   </p>
