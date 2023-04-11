@@ -118,7 +118,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {DataCars.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}
@@ -184,7 +184,7 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                 </div>
               </div>
               <div className="bg-[#1b65a6] py-2">
-                <div className="flex justify-between px-4 text-white">
+                <div className="flex justify-end px-4 text-white">
                   <div className="text-2xl font-bold ">
                     {' '}
                     <CurrencyFormat
@@ -255,9 +255,16 @@ export function HeroWhiteBuyCar({ DataCars, textDis, ConTex }) {
                 </div>
               </div>
               <div className="flex justify-between px-4 py-2">
-                <p className="text-lg font-bold">
+                <Link href={
+                    '/car/' +
+                    carDataUP.make +
+                    '-' +
+                    carDataUP.model +
+                    '-' +
+                    carDataUP.appointmentId
+                  }><p className="text-lg font-bold">
                   {carDataUP.make} {carDataUP.year}
-                </p>
+                </p></Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

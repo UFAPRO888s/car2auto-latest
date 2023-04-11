@@ -12,9 +12,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import "swiper/css/autoplay";
+import 'swiper/css/autoplay'
 import { Pagination, Navigation } from 'swiper'
-
 
 export function HeroWhite() {
   const [postNum, setPostNum] = useState(8) // Default number of posts dislplayed
@@ -119,7 +118,7 @@ export function HeroWhite() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {carData.slice(0, postNum).map((carDataUP, carDataIndex) => (
             <div
               key={carDataIndex}
@@ -179,7 +178,7 @@ export function HeroWhite() {
                   ))}
                 </Swiper>
                 {/* </Link> */}
-                <div className="z-10 absolute right-0 top-0 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
+                <div className="absolute right-0 top-0 z-10 flex flex flex h-10 w-20 items-center justify-center rounded-bl-2xl bg-[#E20919]">
                   <div className="h-5 w-auto object-contain"></div>
                   <p className="text-[14px] text-white">รถมาใหม่</p>
                 </div>
@@ -257,9 +256,20 @@ export function HeroWhite() {
                 </div>
               </div>
               <div className="flex justify-between px-4 py-2">
-                <p className="text-lg font-bold">
-                  {carDataUP.make} {carDataUP.year}
-                </p>
+                <Link
+                  href={
+                    '/car/' +
+                    carDataUP.make +
+                    '-' +
+                    carDataUP.model +
+                    '-' +
+                    carDataUP.appointmentId
+                  }
+                >
+                  <p className="text-lg font-bold">
+                    {carDataUP.make} {carDataUP.year}
+                  </p>
+                </Link>
                 <FavoriteButton DataList={carDataUP.appointmentId} />
                 {/* <Button onClick={() => setSaveClicks(carDataUP.appointmentId)}> 
                   <svg
