@@ -140,6 +140,8 @@ const carDataType = [
 
 const colors = [
   { name: 'Pink', bgColor: 'bg-pink-500', selectedColor: 'ring-pink-500' },
+  { name: 'White', bgColor: 'bg-gray-100', selectedColor: 'ring-gray-500' },
+  { name: 'Black', bgColor: 'bg-gray-800', selectedColor: 'ring-orange-500' },
   {
     name: 'Purple',
     bgColor: 'bg-purple-500',
@@ -188,10 +190,10 @@ export default function AddCars() {
   //const [Add_Year, setAdd_Year] = useState('')
   const [Add_Variant, setAdd_Variant] = useState('')
   const [Add_targetPrice, setAdd_targetPrice] = useState('')
-  const [Add_marketPrice, setAdd_marketPrice] = useState('')
-  const [Add_marketPriceDiff, setAdd_marketPriceDiff] = useState('')
-  const [Add_discount, setAdd_discount] = useState('')
-  const [Add_processingFee, setAdd_processingFee] = useState('')
+  // const [Add_marketPrice, setAdd_marketPrice] = useState('')
+  // const [Add_marketPriceDiff, setAdd_marketPriceDiff] = useState('')
+  // const [Add_discount, setAdd_discount] = useState('')
+  // const [Add_processingFee, setAdd_processingFee] = useState('')
   const [Add_engineNumber, setAdd_engineNumber] = useState('')
   const [Add_chasisNumber, setAdd_chasisNumber] = useState('')
   const [Add_booked, setAdd_booked] = useState('')
@@ -374,11 +376,7 @@ export default function AddCars() {
         docData
       )
       alert('Data successfully sent to cloud firestore!')
-      //router.push('/add-cars')
-      //setAdd_Name('')
-      //setAdd_Line('')
-      //setAdd_Tel('')
-      //setimgxUP('')
+      
 
       router.push('/')
     } catch (error) {
