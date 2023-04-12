@@ -16,7 +16,7 @@ export default function BrandCards({ Maname }) {
           role="list"
           className="mt-3 grid grid-cols-3 gap-1 sm:grid-cols-2 sm:gap-6 lg:grid-cols-7"
         >
-          {BrandData.slice(0, 21).map((project) => (
+          {BrandData.slice(1, 22).map((project) => (
             <li
               key={project.name}
               className="col-span-1 flex rounded-md shadow-sm hover:bg-[#130F40] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
