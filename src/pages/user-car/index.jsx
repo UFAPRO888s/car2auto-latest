@@ -68,7 +68,7 @@ export default function UserMag() {
             <Iframe
               url="https://sale.car2autobuy.com/cars-add-new/"
               width="100%"
-              height="320px"
+              height="100%"
               id="add_car"
               className="aspect-auto w-full h-[80rem]"
               display="block"
