@@ -65,7 +65,7 @@ export function HeroNewCars() {
   return (
     <>
       <div className="bg-[url('/images/banner1920x9152.jpg')] bg-cover bg-center bg-no-repeat">
-        <div className="bg-blue-600/30 backdrop-brightness-75">
+        <div className="bg-blue-200/50 backdrop-brightness-95">
           <Container className="pb-10 pt-4 text-center md:pt-10 ">
             <div className="rounded-xl bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-6 py-4 shadow-lg">
               <div className="grid grid-cols-1 md:flex md:flex md:items-stretch justify-between gap-2">
