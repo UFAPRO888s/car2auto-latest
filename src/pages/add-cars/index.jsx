@@ -142,6 +142,9 @@ const colors = [
   { name: 'Pink', bgColor: 'bg-pink-500', selectedColor: 'ring-pink-500' },
   { name: 'White', bgColor: 'bg-gray-100', selectedColor: 'ring-gray-500' },
   { name: 'Black', bgColor: 'bg-gray-800', selectedColor: 'ring-orange-500' },
+  { name: 'Gold', bgColor: 'bg-[#fde68a]', selectedColor: 'ring-[#fde68a]' },
+  { name: 'Silver', bgColor: 'bg-slate-300', selectedColor: 'ring-slate-300' },
+  
   {
     name: 'Purple',
     bgColor: 'bg-purple-500',
