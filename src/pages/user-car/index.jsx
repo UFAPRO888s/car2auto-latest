@@ -64,13 +64,13 @@ export default function UserMag() {
       <SwiperSlideX />
       <main>
         <Container>
-          <div className="flex py-8 h-[85rem] hidden md:flex">
+          <div className="flex py-8 h-[95rem] hidden md:flex">
             <Iframe
               url="https://sale.car2autobuy.com/cars-add-new/"
               width="100%"
               height="100%"
               id="add_car"
-              className="aspect-auto w-full h-[80rem]"
+              className="aspect-auto w-full h-[90rem]"
               display="block"
               position="relative"
             />
