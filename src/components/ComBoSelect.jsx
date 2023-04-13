@@ -17,6 +17,7 @@ import Image from 'next/image'
 import { Button } from '@/components/Button'
 import axios from 'axios'
 import { useUser } from '@/lib/firebase/useUser'
+import { getUserFromCookie } from '@/lib/firebase/userCookies'
 
 const current = new Date()
 const dateTimeAB = `${current.getDate()}${
@@ -39,10 +40,10 @@ export default function ComBoSelect({ ComboData }) {
   const [selectedPerson, setSelectedPerson] = useState(ComboData[0])
   const [selectedModelX, setModelX] = useState('')
   const [selectedModel_EX, setModel_EX] = useState('')
-  const [selectedCarType, setSelectedCarType] = useState(carDataTypeX[0])
-  const [selectedColor, setSelectedColor] = useState(listcolors[0])
-  const [selectedTransmission, setSelectedTransmission] = useState(TransType[0])
-  const [selectedfuelType, setSelectedfuelType] = useState(fuelDataType[0])
+  const [selectedCarType, setSelectedCarType] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
+  const [selectedTransmission, setSelectedTransmission] = useState('')
+  const [selectedfuelType, setSelectedfuelType] = useState('')
 
   const [fileList, setFileList] = useState('')
   const [dataImg, getFile] = useState([])
@@ -86,15 +87,20 @@ export default function ComBoSelect({ ComboData }) {
   useEffect(() => {
     const UXIDCAR = uniqueId()
     SETIDXCARID(UXIDCAR)
-    
+    const getUserCo = getUserFromCookie()
+    if(getUserCo){
+      
+      setGetUserUid(getUserCo)
+      
+    }
     //setGetUserUid(storedgetUser.id)
     //setGetUserEmail(storedgetUser.email)
     //setGetUserDisplayName(storedgetUser.name)
   }, [])
 
-  
+  //console.log(GetUserUid)
 
-  console.log(IDXCARID)
+  //console.log(IDXCARID)
   const handleChange = (e) => {
     setProgess(0)
     setFileList(e.target.files)
@@ -274,7 +280,7 @@ export default function ComBoSelect({ ComboData }) {
             <RadioGroup.Label className="-mt-px inline-block px-1 text-base font-medium text-gray-700 text-gray-900">
               ประเภทรถยนต์
             </RadioGroup.Label>
-            <div className="mt-4 flex flex-wrap items-center gap-2 md:space-x-3">
+            <div className="mt-4 flex flex-wrap items-center gap-2 md:space-x-2">
               {carDataTypeX?.map((TypesCar, typeIndex) => (
                 <RadioGroup.Option
                   key={typeIndex}
@@ -498,7 +504,7 @@ export default function ComBoSelect({ ComboData }) {
           </label>
           <div className="mt-1">
             <input
-              type="text"
+              type="number"
               name="mileage"
               id="mileage"
               defaultValue=""
@@ -517,7 +523,7 @@ export default function ComBoSelect({ ComboData }) {
           </label>
           <div className="mt-1">
             <input
-              type="text"
+              type="number"
               name="pricex"
               id="pricex"
               defaultValue=""
@@ -769,7 +775,7 @@ export default function ComBoSelect({ ComboData }) {
             name="email"
             id="email"
             className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
-            //defaultValue={UserUEmail}
+            defaultValue={GetUserUid?.email}
           />
         </div>
         <div className="relative col-span-2 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600">
@@ -783,6 +789,7 @@ export default function ComBoSelect({ ComboData }) {
             type="text"
             name="DisplayName"
             id="DisplayName"
+            defaultValue={GetUserUid?.name}
             className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 md:text-sm"
             //defaultValue={UserUDisplayName}
           />
