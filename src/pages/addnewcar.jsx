@@ -16,17 +16,25 @@ import { BrandDataList, CarModelList } from '@/data/brandCars'
 import original from '@/data/OptCars'
 import Yearvalue from '@/data/year'
 import Select_Image from '@/components/Select_Image'
-
+import {getlocalStorage,setlocalStorage} from '@/lib/firebase/localStorage'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function AddNewCar() {
-  const [query, setQuery] = useState('')
-  const [selectedBrandData, setSelectedBrandData] = useState('')
-  const [selectedModelData, setSelectedModelData] = useState('')
-  const [selectedYearData, setSelectedYearData] = useState('')
 
+
+
+
+export default function AddNewCar() {
+  // const [query, setQuery] = useState('')
+  // const [selectedBrandData, setSelectedBrandData] = useState('')
+  // const [selectedModelData, setSelectedModelData] = useState('')
+  // const [selectedYearData, setSelectedYearData] = useState('')
+  var data = [
+    { fname : "John", lname : "Hancock", value : 49.5 },
+    { fname : "John", lname : "Hancock", value : 95.0 }
+    ];
+console.log(setlocalStorage('favorite',JSON.stringify(data)))
   return (
     <>
       <Head>

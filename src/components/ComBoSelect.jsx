@@ -131,7 +131,7 @@ export default function ComBoSelect({ ComboData }) {
     getFile(PathImg)
     alert('อัพโหลดเรียบร้อยครับ!')
   }
-
+  const files = fileList ? [...fileList] : []
   return (
     <div className="py-4">
       <div className="relative flex flex-col justify-between gap-4 py-4 md:flex md:flex-row">
@@ -659,6 +659,7 @@ export default function ComBoSelect({ ComboData }) {
                   type="file"
                   className="sr-only"
                   onChange={handleChange}
+                 
                   multiple
                 />
               </label>
