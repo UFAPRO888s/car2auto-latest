@@ -13,7 +13,7 @@ import { Combobox } from '@headlessui/react'
 import { BrandData } from '@/data/brand'
 import original from '@/data/OptCars'
 import Yearvalue from '@/data/year'
-import Select_Image from '@/components/Select_Image'
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
