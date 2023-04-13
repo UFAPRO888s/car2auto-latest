@@ -178,11 +178,11 @@ export async function getServerSideProps(context) {
   let { clip } = context.query
 
   if (clip == 'รถเก๋ง') {
-    clip = 10
+    clip = 5
   } else if (clip == 'รถสปอร์ต') {
-    clip = 11
+    clip = 6
   } else if (clip == 'รถกระบะ') {
-    clip = 9
+    clip = 7
   }
   const res = await fetch(
     `https://archive.car2autobuy.com/wp-json/wp/v2/posts?categories=${clip}&_embed&per_page=8&_fields=id,date_gmt,modified_gmt,slug,title,content,excerpt,categories,_links`
