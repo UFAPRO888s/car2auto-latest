@@ -32,6 +32,25 @@ import formatDate from '@/lib/formatDate'
 import Yearvalue from '@/data/year'
 import { BrandData } from '@/data/brand'
 import Cityvalue from '@/data/city'
+import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
+
+import {
+  FaceFrownIcon,
+  FaceSmileIcon as FaceSmileIconMini,
+  FireIcon,
+  HandThumbUpIcon,
+  HeartIcon,
+  XMarkIcon,
+} from '@heroicons/react/20/solid'
+
+const moods = [
+  { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
+  { name: 'Loved', value: 'loved', icon: HeartIcon, iconColor: 'text-white', bgColor: 'bg-pink-400' },
+  { name: 'Happy', value: 'happy', icon: FaceSmileIconMini, iconColor: 'text-white', bgColor: 'bg-green-400' },
+  { name: 'Sad', value: 'sad', icon: FaceFrownIcon, iconColor: 'text-white', bgColor: 'bg-yellow-400' },
+  { name: 'Thumbsy', value: 'thumbsy', icon: HandThumbUpIcon, iconColor: 'text-white', bgColor: 'bg-blue-500' },
+  { name: 'I feel nothing', value: null, icon: XMarkIcon, iconColor: 'text-gray-400', bgColor: 'bg-transparent' },
+]
 
 const TransType = [
   {
@@ -144,7 +163,7 @@ const colors = [
   { name: 'Black', bgColor: 'bg-gray-800', selectedColor: 'ring-orange-500' },
   { name: 'Gold', bgColor: 'bg-[#fde68a]', selectedColor: 'ring-[#fde68a]' },
   { name: 'Silver', bgColor: 'bg-slate-300', selectedColor: 'ring-slate-300' },
-  
+
   {
     name: 'Purple',
     bgColor: 'bg-purple-500',
@@ -171,6 +190,19 @@ const colors = [
 const BookCar = [
   { id: 'yes', title: 'มีเล่มทะเบียน' },
   { id: 'no', title: 'ไม่มีเล่มทะเบียน' },
+]
+
+const checklist = [
+  { id: 1, name: 'ถุงลมนิรภัย' },
+  { id: 2, name: 'กล้องถอยหลัง' },
+  { id: 3, name: 'กล้องหน้ารถ' },
+  { id: 4, name: 'คาร์ชีทสำหรับเด็ก' },
+  { id: 5, name: 'เซนเซอร์ถอยหลัง' },
+  { id: 6, name: 'ระบบเบรคอัตโนมัติ' },
+  { id: 7, name: 'คู่มือรถ' },
+  { id: 8, name: 'ประกันรถยนต์' },
+  { id: 9, name: 'กุญแจสำรอง' },
+  { id: 10, name: 'ว่าง' },
 ]
 export default function AddCars() {
   const { user } = useUser()
@@ -210,7 +242,6 @@ export default function AddCars() {
   //const [Add_fuelType, setAdd_fuelType] = useState('')
   const [Add_Door, setAdd_Door] = useState('')
   const [RxData, setRxData] = useState('')
-  
 
   const [Add_Name_carHighlights, setAdd_Name_carHighlights] = useState('')
   const [Add_key_carHighlights, setAdd_key_carHighlights] = useState('')
@@ -238,7 +269,7 @@ export default function AddCars() {
     if (!storedgetUser) {
       router.push('/')
     }
-   // console.log(storedgetUser)
+    // console.log(storedgetUser)
     setUUserUid(storedgetUser.id)
     setUUserEmail(storedgetUser.email)
     setUUserDisplayName(storedgetUser.name)
@@ -259,7 +290,6 @@ export default function AddCars() {
 
     return () => {}
   }, [])
-
 
   //const qNook = query(collection(db, "car2autobuy"), where("capital", "==", true));
 
@@ -379,7 +409,6 @@ export default function AddCars() {
         docData
       )
       alert('Data successfully sent to cloud firestore!')
-      
 
       router.push('/')
     } catch (error) {
@@ -1199,6 +1228,42 @@ export default function AddCars() {
                 </div>
               </RadioGroup>
             </div>
+            <div>
+              <fieldset>
+                <legend className="text-lg font-medium text-gray-900">
+                  อุปกรณ์เสริมรถ
+                </legend>
+                <div className="grid grid-cols-4 gap-4 mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+                  {checklist.map((person, personIdx) => (
+                    <div
+                      key={personIdx}
+                      className="relative flex items-start py-4"
+                    >
+                      <div className="min-w-0 flex-1 text-sm">
+                        <label
+                          htmlFor={`person-${person.id}`}
+                          className="select-none font-medium text-gray-700"
+                        >
+                          {person.name}
+                        </label>
+                      </div>
+                      <div className="ml-3 flex h-5 items-center">
+                        <input
+                          id={`person-${person.id}`}
+                          name={`person-${person.id}`}
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+              
+            </div>
+            <div>
+
+            </div>
             {/* uploadimage */}
             <div className="grid grid-cols-1 gap-2 py-4 md:grid-cols-6">
               <div className="col-span-1 md:col-span-5">
@@ -1396,10 +1461,9 @@ export default function AddCars() {
               SAVE
             </Button>
           </div>
-          
         </Container>
       </main>
-                    
+
       <Footer />
     </>
   )

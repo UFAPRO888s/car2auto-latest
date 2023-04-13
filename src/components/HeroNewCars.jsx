@@ -7,12 +7,6 @@ import 'swiper/css/navigation'
 import GroupBrand from '@/data/groupbrand'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import logoLaravel from '@/images/logos/laravel.svg'
-import logoMirage from '@/images/logos/mirage.svg'
-import logoStatamic from '@/images/logos/statamic.svg'
-import logoStaticKit from '@/images/logos/statickit.svg'
-import logoTransistor from '@/images/logos/transistor.svg'
-import logoTuple from '@/images/logos/tuple.svg'
 import CurrencyFormat from 'react-currency-format'
 import HotIcon from '@/images/hot-icon.svg'
 import Link from 'next/link'
@@ -67,10 +61,10 @@ export function HeroNewCars() {
       <div className="bg-[url('/images/banner1920x9152.jpg')] bg-cover bg-center bg-no-repeat">
         <div className="bg-blue-200/50 backdrop-brightness-95">
           <Container className="pb-10 pt-4 text-center md:pt-10 ">
-            <div className="rounded-xl bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-6 py-4 shadow-lg">
-              <div className="grid grid-cols-1 md:flex md:flex md:items-stretch justify-between gap-2">
+            <div className="rounded rounded-xl bg-white bg-opacity-20 px-6 py-4 shadow-lg drop-shadow-lg backdrop-blur-lg">
+              <div className="grid grid-cols-1 justify-between gap-2 md:flex md:flex md:items-stretch">
                 <div className="self-center px-4">
-                  <h2 className="border-b-4 border-red-500 text-lg font-medium md:text-4xl text-white">
+                  <h2 className="border-b-4 border-red-500 text-lg font-medium text-white md:text-4xl">
                     ยี่ห้อรถยนต์มือสองแนะนำ
                   </h2>
                 </div>
@@ -141,8 +135,8 @@ export function HeroNewCars() {
               >
                 {GroupBrand.map((GroupBrandSL, BrandSlIndex) => (
                   <SwiperSlide key={BrandSlIndex}>
-                    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-                      <div className="relative">
+                    <div className=" rounded-lg bg-white shadow-lg overflow-hidden">
+                      <div className="relative overflow-hidden">
                         <Image
                           src={
                             'https://fastly-production.24c.in/' +
