@@ -16,7 +16,7 @@ import { BrandDataList, CarModelList } from '@/data/brandCars'
 import original from '@/data/OptCars'
 import Yearvalue from '@/data/year'
 
-import {getlocalStorage,setlocalStorage} from '@/lib/firebase/localStorage'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -34,7 +34,7 @@ export default function AddNewCar() {
     { fname : "John", lname : "Hancock", value : 49.5 },
     { fname : "John", lname : "Hancock", value : 95.0 }
     ];
-console.log(setlocalStorage('favorite',JSON.stringify(data)))
+
   return (
     <>
       <Head>
