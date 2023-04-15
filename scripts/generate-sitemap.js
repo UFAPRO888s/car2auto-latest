@@ -10,14 +10,14 @@ const date = `${current.getFullYear()}-${(current.getMonth() + 1)
 ;(async () => {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
-    'pages/*.js',
-    'pages/*.jsx',
+    'src/pages/*.js',
+    'src/pages/*.jsx',
     //'data/blog/**/*.mdx',
     //'data/blog/**/*.md',
     //'public/tags/**/*.xml',
-    '!pages/_*.jsx',
-    '!pages/_*.tsx',
-    '!pages/api',
+    '!src/pages/_*.jsx',
+    '!src/pages/_*.tsx',
+    '!src/pages/api',
   ])
 
   const sitemap = `
@@ -37,7 +37,7 @@ const date = `${current.getFullYear()}-${(current.getMonth() + 1)
                   }
                 }
                 const path = page
-                  .replace('pages/', '/')
+                  .replace('src/pages/', '/')
                   //.replace('data/blog', '/blog')
                   .replace('public/', '/')
                   .replace('.js', '')

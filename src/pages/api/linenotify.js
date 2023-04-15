@@ -1,32 +1,36 @@
-const Cors = require("cors");
+const Cors = require('cors')
 const cors = Cors({
-  methods: ['POST', 'GET', 'HEAD'],
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 })
 
 export const config = {
   api: {
-    bodyParser: true
-  }
-};
+    bodyParser: true,
+  },
+}
 
 const lineNotify = require('line-notify-nodejs')(
   'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'
 )
 
-
+const notify = new lineNotify(`${'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'}`);
 
 export default function handlerLine(req, res) {
-  const { selYear } = req.body
-  const { selMake } = req.body
-  const { selModel } = req.body
-  const { selNameUs } = req.body
-  const { selTel } = req.body
-  const { selLine } = req.body
-  const { selCity } = req.body
-  const { selGear } = req.body
-  const { selColor } = req.body
-  const { URLimage } = req.body
-
+  const {
+    selYear,
+    selMake,
+    selModel,
+    selNameUs,
+    selTel,
+    selLine,
+    selCity,
+    selGear,
+    selColor,
+    URLimage,
+  } = req.body
   if (selTel == '' || selYear == '' || URLimage == '') {
     return res.status(400).json({ error: 'MSG is required' })
   }
@@ -40,9 +44,31 @@ export default function handlerLine(req, res) {
       })
       .then(() => {
         console.log('send completed!')
+        return cors(
+          req,
+          new Response(JSON.stringify({ message: 'send completed!' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          })
+        )
       })
-    return res.status(201).json({ error: '' })
+    return cors(
+      req,
+      new Response(JSON.stringify({ error: '' }), {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    )
   } catch (error) {
-    return res.status(500).json({ error: error.message || error.toString() })
+    return cors(
+      req,
+      new Response(
+        JSON.stringify({ error: error.message || error.toString() }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
+    )
   }
 }

@@ -1,2 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.google.com/schemas/sitemap/0.84"> </urlset>
+<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
+  <url>
+    <loc>https://car2autobuy.com/addnewcarx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/buycarsx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/indexx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/loancalcx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/loginx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/logoutx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/registerx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/salecarsx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://car2autobuy.com/termsx</loc>
+    <lastmod>2023-04-15</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
