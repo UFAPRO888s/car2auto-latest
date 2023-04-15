@@ -59,14 +59,6 @@ export default function ComBoSelect({ ComboData }) {
           return person?.name?.toLowerCase().includes(query.toLowerCase())
         })
 
-  // const filteredModelex =
-  //   selectedModelX === ''
-  //     ? ex_model_Data
-  //     : ex_model_Data.filter((model_DataX) => {
-  //         return model_DataX?.model?.toLowerCase()
-  //           .includes(selectedModelX?.toLowerCase())
-  //       })
-  // console.log(selectedModelX)
   const filteredModelex =
     selectedModelX === ''
       ? ex_model_Data

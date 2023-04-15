@@ -30,10 +30,7 @@ export default function AddNewCar() {
   // const [selectedBrandData, setSelectedBrandData] = useState('')
   // const [selectedModelData, setSelectedModelData] = useState('')
   // const [selectedYearData, setSelectedYearData] = useState('')
-  var data = [
-    { fname : "John", lname : "Hancock", value : 49.5 },
-    { fname : "John", lname : "Hancock", value : 95.0 }
-    ];
+ 
 
   return (
     <>
