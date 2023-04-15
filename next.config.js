@@ -19,6 +19,7 @@ const nextConfig = {
       'storage.car2autobuy.com',
       'lh3.googleusercontent.com',
       'car2autobuy.com',
+      'www.carsome.co.th',
       'fastly-production.24c.in',
       'firebasestorage.googleapis.com',
     ],
