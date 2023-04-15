@@ -123,7 +123,6 @@ export default function CarDetailing({ DataCar }) {
                             alt="car-fb"
                             width={50}
                             height={50}
-                            layout="fixed"
                             priority
                           />
                         </div>
@@ -134,7 +133,6 @@ export default function CarDetailing({ DataCar }) {
                             alt="car-linex"
                             width={50}
                             height={50}
-                            layout="fixed"
                             priority
                           />
                         </div>
@@ -145,7 +143,6 @@ export default function CarDetailing({ DataCar }) {
                             alt="car-youtube"
                             width={50}
                             height={50}
-                            layout="fixed"
                             priority
                           />
                         </div>

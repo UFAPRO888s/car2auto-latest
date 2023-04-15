@@ -6,13 +6,15 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import { AuthLayout } from "@/components/AuthLayout";
-import Img_GG from '@/images/google.png'
-import Img_FB from '@/images/facebook.png'
+import Img_GG from "@/images/google.png";
+import Img_FB from "@/images/facebook.png";
+import { PageSEO } from "@/components/SEO";
+import siteMetadata from "@/data/siteMetadata";
 
 const LoginPage = () => {
   const methods = useForm({ mode: "onBlur" });
   const [errorMessage, setErrorMessage] = useState(null);
-  const { logIn, ProviderSignIn , ProviderFacebookSignIn } = useAuth();
+  const { logIn, ProviderSignIn, ProviderFacebookSignIn } = useAuth();
   const router = useRouter();
 
   const {
@@ -62,6 +64,10 @@ const LoginPage = () => {
 
   return (
     <>
+      <PageSEO
+        title={"เข้าสู่ระบบ "+siteMetadata.title + " | " + siteMetadata.author}
+        description={"เข้าสู่ระบบ "+siteMetadata.description}
+      />
       <AuthLayout>
         <div>
           <div className="mt-10">

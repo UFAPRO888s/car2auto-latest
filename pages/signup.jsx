@@ -8,6 +8,8 @@ import { Button } from "@/components/Button";
 import Img_GG from "@/images/google.png";
 import Img_FB from "@/images/facebook.png";
 import Image from "next/image";
+import { PageSEO } from "@/components/SEO";
+import siteMetadata from "@/data/siteMetadata";
 
 const SignupPage = () => {
   const methods = useForm({ mode: "onBlur" });
@@ -80,16 +82,10 @@ const SignupPage = () => {
 
   return (
     <>
-      <Head>
-        <title>
-          สมัครสมาชิก รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ - รถมือสอง
-          car2autobuy
-        </title>
-        <meta
-          name="description"
-          content="สมัครสมาชิก รถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง"
-        />
-      </Head>
+      <PageSEO
+        title={"สมัครสมาชิก "+siteMetadata.title + " | " + siteMetadata.author}
+        description={"สมัครสมาชิก "+siteMetadata.description}
+      />
       <AuthLayout>
         <div>
           <h2 className="text-center text-2xl font-semibold text-blue-900">
