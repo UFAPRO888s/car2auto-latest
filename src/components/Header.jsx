@@ -131,19 +131,13 @@ export function Header() {
     }
   }, [])
 
-  function handlesignOut() {
-    //const { user, logout } = useUser()
-    const auth = getAuth()
-    signOut(auth)
-      .then(() => {
-        logout()
-        removeUserCookie()
-        cookies.set('auth', JSON.stringify(''))
-        router.push('/')
-      })
-      .catch((error) => {
-        // An error happened.
-      })
+  const handleLogout = async () => {
+    try {
+      await logOut()
+      router.push('/login')
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   return (

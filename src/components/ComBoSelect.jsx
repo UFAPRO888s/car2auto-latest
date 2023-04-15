@@ -37,7 +37,7 @@ function classNames(...classes) {
 export default function ComBoSelect({ ComboData }) {
   const { user } = useUser()
   const [query, setQuery] = useState('')
-  const [selectedPerson, setSelectedPerson] = useState(ComboData[0])
+  const [selectedBrand, setSelectedBrand] = useState(ComboData[0])
   const [selectedModelX, setModelX] = useState('')
   const [selectedModel_EX, setModel_EX] = useState('')
   const [selectedCarType, setSelectedCarType] = useState('')
@@ -52,11 +52,11 @@ export default function ComBoSelect({ ComboData }) {
   const [IDXCARID, SETIDXCARID] = useState('')
   const [GetUserUid, setGetUserUid] = useState()
 
-  const filteredPeople =
+  const filteredBrand =
     query === ''
       ? ComboData
-      : ComboData.filter((person) => {
-          return person?.name?.toLowerCase().includes(query.toLowerCase())
+      : ComboData.filter((Brand) => {
+          return Brand?.name?.toLowerCase().includes(query.toLowerCase())
         })
 
   const filteredModelex =
@@ -130,8 +130,8 @@ export default function ComBoSelect({ ComboData }) {
         <div className="w-full">
           <Combobox
             as="div"
-            value={selectedPerson}
-            onChange={setSelectedPerson}
+            value={selectedBrand}
+            onChange={setSelectedBrand}
           >
             <Combobox.Label className="block text-sm font-medium text-gray-700">
               ยี่ห้อรถยนต์
@@ -149,9 +149,9 @@ export default function ComBoSelect({ ComboData }) {
                 />
               </Combobox.Button>
 
-              {filteredPeople.length > 0 && (
+              {filteredBrand.length > 0 && (
                 <Combobox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {filteredPeople.map((person, indexIDS) => (
+                  {filteredBrand.map((person, indexIDS) => (
                     <Combobox.Option
                       key={indexIDS}
                       value={person}
@@ -217,7 +217,7 @@ export default function ComBoSelect({ ComboData }) {
             onChange={(event) => setModelX(event.target.value)}
             //displayValue={(person) => person?.name}
           >
-            {CarModelList[selectedPerson?.name?.toUpperCase()]?.map(
+            {CarModelList[selectedBrand?.name?.toUpperCase()]?.map(
               (CarModel, indexCarModel) => (
                 <option key={indexCarModel}>{CarModel}</option>
               )
