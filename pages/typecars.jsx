@@ -450,7 +450,7 @@ export default function TypeCarsPage() {
                 <div className="hidden grid-cols-3 gap-2 py-4 md:grid ">
                   {MakeBrand.map((MakeBrandUP, MakeIndex) => (
                     <Button
-                      //href={`/buycars/?make=${MakeBrandUP.brand}`}
+                      href={`/buycars/?make=${MakeBrandUP.brand}`}
                       variant="outline"
                       key={MakeIndex}
                       className="rounded-lg  bg-white/50"

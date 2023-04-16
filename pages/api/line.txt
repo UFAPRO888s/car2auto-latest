@@ -1,0 +1,24 @@
+import { NextResponse } from 'next/server'
+export const config = {
+  runtime: 'edge',
+}
+export default function MyEdgeFunction(request, context) {
+    const {
+        selYear,
+        selMake,
+        selModel,
+        selNameUs,
+        selTel,
+        selLine,
+        selCity,
+        pricereq,
+        selModelex,
+        URLimage,
+      } = context.query
+      
+      let mxmsg = `NEW\nปีรถ: ${selYear}\nยี่ห้อ: ${selMake}\nรุ่น: ${selModel}\nราคา: ${pricereq}\nโฉมรถ: ${selModelex}\nชื่อติดต่อ: ${selNameUs}\nเบอร์โทร: ${selTel}\nline: ${selLine}\nจังหวัด: ${selCity}`
+      console.log(mxmsg)
+      return NextResponse.json({
+    name: `Hello, from ${request.url}I'm an Edge Function!`,
+  })
+}

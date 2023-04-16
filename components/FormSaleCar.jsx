@@ -19,6 +19,7 @@ import Image from 'next/image'
 import { Button } from '@/components/Button'
 import axios from 'axios'
 
+
 const current = new Date()
 const dateTimeAB = `${current.getDate()}${current.getMonth() + 1}${current.getFullYear()}`
 
@@ -135,7 +136,7 @@ export default function FormSaleCar() {
   //console.log(IDXCARID)
   //brand_car=Honda&model_car=BRIO&modelex_car=1.2V&year_minor_car=2011-2016&first-name=AVFREE
   //&price-req=50000&tel=069-555-6666&line=ygfff&file-upload=สนุกกับBMW.png
-
+ 
   const subscribe = async (e) => {
     e.preventDefault()
     if (
@@ -209,7 +210,7 @@ export default function FormSaleCar() {
   const files = fileList ? [...fileList] : []
   return (
     <>
-      <form className="space-y-8 divide-y divide-gray-200">
+      <form className="space-y-8 divide-y divide-gray-200" method='post' target='/api/line/'>
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div className="space-y-6 sm:space-y-5">
             <div>
