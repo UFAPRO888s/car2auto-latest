@@ -16,7 +16,7 @@ const lineNotify = require('line-notify-nodejs')(
   'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'
 )
 
-const notify = new lineNotify(`${'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'}`);
+//const notify = new lineNotify(`${'B7t6YD5UkTW9pdgGICAMcsRJ53vAdf0cKQwD2dW2m9y'}`);
 
 export default function handlerLine(req, res) {
   const {
@@ -27,15 +27,16 @@ export default function handlerLine(req, res) {
     selTel,
     selLine,
     selCity,
-    selGear,
-    selColor,
+    pricereq,
+    selModelex,
     URLimage,
   } = req.body
   if (selTel == '' || selYear == '' || URLimage == '') {
     return res.status(400).json({ error: 'MSG is required' })
   }
   try {
-    let mxmsg = `NEW\nปีรถ: ${selYear}\nยี่ห้อ: ${selMake}\nรุ่น: ${selModel}\nเกียร์: ${selGear}\nสีตัวรถ: ${selColor}\nชื่อติดต่อ: ${selNameUs}\nเบอร์โทร: ${selTel}\nline: ${selLine}\nจังหวัด: ${selCity}`
+    let mxmsg = `NEW\nปีรถ: ${selYear}\nยี่ห้อ: ${selMake}\nรุ่น: ${selModel}\nราคา: ${pricereq}\nโฉมรถ: ${selModelex}\nชื่อติดต่อ: ${selNameUs}\nเบอร์โทร: ${selTel}\nline: ${selLine}\nจังหวัด: ${selCity}`
+    //console.log(mxmsg,URLimage)
     lineNotify
       .notify({
         message: mxmsg,

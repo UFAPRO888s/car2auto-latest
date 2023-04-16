@@ -51,9 +51,18 @@ export default function FormSaleCar() {
 
   const [IDXCARID, SETIDXCARID] = useState('')
   const [GetUserUid, setGetUserUid] = useState()
-
+  const [NameSend, setNameSend] = useState()
+  const [TelPhone, setTelPhone] = useState()
+  const [checkThai, setcheckThai] = useState(0)
+  const [LineId, setLineId] = useState('')
+  const [userPrice, setuserPrice] = useState('')
   const methods = useForm({ mode: 'onBlur' })
   const [errorMessage, setErrorMessage] = useState(null)
+  const [ErrorNameMessage, setErrorNameMessage] = useState(null)
+
+  const [error, setError] = useState(false)
+  const [message, setMessage] = useState('')
+  const [subscribed, setSubscribed] = useState(false)
 
   const {
     register,
@@ -92,9 +101,83 @@ export default function FormSaleCar() {
     //setGetUserDisplayName(storedgetUser.name)
   }, [])
 
+  function isValidTel(telx) {
+    return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(telx)
+  }
+
+  function isValidName(namex) {
+    return /[กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์]/.test(namex)
+  }
+
+  const handleChangeTel = (event) => {
+    if (!isValidTel(event.target.value)) {
+      setErrorMessage('กรุณาใส่เบอร์โทรที่ถูกต้อง')
+    } else {
+      setErrorMessage(null)
+    }
+
+    setTelPhone(event.target.value)
+  }
+
+  const handleChangeName = (event) => {
+    if (!isValidName(event.target.value)) {
+      setErrorNameMessage('ชาวต่างชาติ กรุณาระบุสัญชาติด้วยนะค่ะ')
+      setcheckThai(1)
+    } else {
+      setcheckThai(0)
+      setErrorNameMessage(null)
+    }
+
+    setNameSend(event.target.value)
+  }
+
   //console.log(GetUserUid)
   //console.log(IDXCARID)
-  //console.log(IDXCARID)
+  //brand_car=Honda&model_car=BRIO&modelex_car=1.2V&year_minor_car=2011-2016&first-name=AVFREE
+  //&price-req=50000&tel=069-555-6666&line=ygfff&file-upload=สนุกกับBMW.png
+
+  const subscribe = async (e) => {
+    e.preventDefault()
+    if (
+      NameSend != '' ||
+      TelPhone != '' ||
+      LineId != ''
+    ) {
+      const res = await fetch(`/api/linenotify`, {
+        body: JSON.stringify({
+          selYear: selectedYear,
+          selMake: selectedBrand?.name,
+          selModel: selectedModelX,
+          selModelex: selectedModel_EX,
+          selNameUs: NameSend,
+          selTel: TelPhone,
+          selLine: LineId,
+          pricereq: userPrice,
+          selCity: selectedCity,
+          URLimage: encodeURI(dataImg[0].name),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      })
+
+      const { error } = await res.json()
+      let mxmsg = `NEW ปีรถ: ${selectedYear} ยี่ห้อ: ${selectedBrand?.name} รุ่น: ${selectedModelX} รุ่นย่อย: ${selectedModel_EX} ราคา: ${userPrice} ชื่อติดต่อ: ${NameSend} เบอร์โทร: ${TelPhone} line: ${LineId} จังหวัด: ${selectedCity}`
+      
+      //console.log(mxmsg)
+      if (error) {
+        setError(true)
+        setMessage('กรุณาตรวจสอบข้อมูล ก่อนส่งนะ!')
+        return
+      }
+
+      setError(false)
+      setSubscribed(true)
+      setMessage('ส่งข้อมูลเรียบร้อย! 🎉 พนักงานจะติดต่อกลับด่วนที่สุด\n' + mxmsg)
+    }
+  }
+
   const handleChange = (e) => {
     setProgess(0)
     setFileList(e.target.files)
@@ -151,7 +234,7 @@ export default function FormSaleCar() {
                       className="mt-1 input input-bordered input-error w-full max-w-xs font-semibold"
                       onChange={(event) => setQuery(event.target.value)}
                       displayValue={(person) => person?.name}
-                      id='brand_car'
+                      id="brand_car"
                       name="brand_car"
                     />
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
@@ -234,7 +317,10 @@ export default function FormSaleCar() {
               <div className="w-full">
                 {selectedModelX.length > 0 && (
                   <>
-                    <label htmlFor="modelex_car" className="block text-sm font-medium text-gray-100">
+                    <label
+                      htmlFor="modelex_car"
+                      className="block text-sm font-medium text-gray-100"
+                    >
                       รุ่นย่อยรถยนต์
                     </label>
 
@@ -290,7 +376,7 @@ export default function FormSaleCar() {
             <div className="space-y-6 sm:space-y-5">
               <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
-                  htmlFor="first-name"
+                  htmlFor="first_name"
                   className="block text-sm font-medium text-gray-100 sm:mt-px sm:pt-2"
                 >
                   ชื่อผู้ติดต่อ
@@ -298,17 +384,39 @@ export default function FormSaleCar() {
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                   <input
                     type="text"
-                    name="first-name"
-                    id="first-name"
+                    name="first_name"
+                    id="first_name"
                     className="input input-bordered input-success w-full max-w-xs"
+                    onChange={handleChangeName}
+                    defaultValue={NameSend}
                     required
                   />
+                  {ErrorNameMessage && <p className="text-red-400 py-2">{ErrorNameMessage}</p>}
                 </div>
               </div>
+              {checkThai > 0 && (
+                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
+                    htmlFor="thai-id"
+                    className="block text-sm font-medium text-gray-100 sm:mt-px sm:pt-2"
+                  >
+                    คนไทยหรือป่าวววว
+                  </label>
+
+                  <div className="mt-1 sm:col-span-2 sm:mt-0">
+                    <input
+                      type="thai-id"
+                      {...register('thai', { required: 'จำเป็นต้องแจ้งว่าเป็น คนไทยหรือป่าวววว' })}
+                      className={`input input-bordered input-success w-full max-w-xs`}
+                    />
+                    {errors.thai && <p className="text-red-400">{errors.thai.message}</p>}
+                  </div>
+                </div>
+              )}
 
               <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
-                  htmlFor="price-req"
+                  htmlFor="price_req"
                   className="block text-sm font-medium text-gray-100 sm:mt-px sm:pt-2"
                 >
                   ราคาขายที่ต้องการ
@@ -316,9 +424,10 @@ export default function FormSaleCar() {
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                   <input
                     type="number"
-                    name="price-req"
-                    id="price-req"
+                    name="price_req"
+                    id="price_req"
                     className="input input-bordered input-success w-full max-w-xs"
+                    onChange={(event) => setuserPrice(event.target.value)}
                     required
                   />
                 </div>
@@ -334,11 +443,14 @@ export default function FormSaleCar() {
 
                   <div className="mt-1 sm:col-span-2 sm:mt-0">
                     <input
-                      type="tel-phone"
+                      type="tel"
                       {...register('tel', { required: 'จำเป็นต้องใช้เบอร์โทร' })}
                       className={`input input-bordered input-warning w-full max-w-xs`}
+                      onChange={handleChangeTel}
+                      defaultValue={TelPhone}
                     />
                     {errors.tel && <p className="text-red-400">{errors.tel.message}</p>}
+                    {errorMessage && <p className="text-red-400 py-2">{errorMessage}</p>}
                   </div>
                 </div>
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -354,6 +466,7 @@ export default function FormSaleCar() {
                       type="line-id"
                       {...register('line', { required: 'จำเป็นต้องใช้LINE' })}
                       className={`input input-bordered input-success w-full max-w-xs`}
+                      onChange={(event) => setLineId(event.target.value)}
                     />
                     {errors.line && <p className="text-red-400">{errors.line.message}</p>}
                   </div>
@@ -375,6 +488,8 @@ export default function FormSaleCar() {
                   </label>
                   <select
                     className="select select-bordered"
+                    id="cityName"
+                    name="cityName"
                     onChange={(event) => setCity(event.target.value)}
                   >
                     <option disabled selected>
@@ -410,22 +525,23 @@ export default function FormSaleCar() {
                         </svg>
                         <div className="flex text-sm text-gray-100 gap-4">
                           <label
-                            htmlFor="file-upload"
+                            htmlFor="file_upload"
                             className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                           >
                             <span>คลิกเลือกรูปภาพ</span>
                             <input
-                              id="file-upload"
-                              name="file-upload"
+                              id="file_upload"
+                              name="file_upload"
                               type="file"
                               className="sr-only"
                               onChange={handleChange}
-                              value={dataImg[0]?.path}
                             />
                           </label>
-                         
                         </div>
-                        <div onClick={uploadFile} className="cursor-pointer rounded-md bg-red-500  text-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                        <div
+                          onClick={uploadFile}
+                          className="cursor-pointer rounded-md bg-red-500  text-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                        >
                           Upload
                         </div>
                       </div>
@@ -466,7 +582,11 @@ export default function FormSaleCar() {
                   </div>
                 </div>
                 <div className="col-span-1 md:col-span-1">
-                  <Button className="text-base bg-green-400 px-8 py-2 font-medium text-gray-500 bg-[#0E2E63] hover:text-gray-900 rounded-md">
+                  {message}
+                  <Button
+                    onClick={subscribe}
+                    className="text-base bg-green-400 px-8 py-2 font-medium text-gray-500 bg-[#0E2E63] hover:text-gray-900 rounded-md"
+                  >
                     ส่งข้อมูล
                   </Button>
                 </div>
