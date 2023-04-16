@@ -76,11 +76,14 @@ const resources = [
   { name: "เปรียบเทียบ", href: "#", icon: BookmarkSquareIcon },
   { name: "ข่าวสาร", href: "#", icon: ComputerDesktopIcon },
 ];
+
+
+
 const blogPosts = [
   {
     id: 1,
     name: "ประสบการณ์ความเร็ว แรง BMW",
-    href: "#",
+    href: "/car-story",
     preview:
       "สนุกกับประสบการณ์ความเร็ว แรง และคล่องตัวกับการขับรถในเมืองใน BMW ซีรีส์ 1",
     imageUrl: "/images/img/สนุกกับBMW.png",
@@ -88,7 +91,7 @@ const blogPosts = [
   {
     id: 2,
     name: "All-New Isuzu D-Max 2023",
-    href: "#",
+    href: "/car-recommend",
     preview:
       "รประสบความสำเร็จอย่างงดงามของรุ่นดีแมคซ์ (D-Max) เจเนอเรชันที่ 2 ในที่สุด อีซูซุ (Isuzu) ได้เปิดตัวรุ่นออลนิว ดีแมคซ์ (All-New D-Max) เจนเนอเรชั่นที่ 3 ในปี 2019",
     imageUrl: "/images/img/All-NEW-ISUZU-D-MAX.jpg",
@@ -148,6 +151,7 @@ const Navbar = ({ children }) => {
                   alt="Car2autobuy"
                   width={100}
                   height={50}
+                  priority
                 />
               </Link>
               <div className="hidden xl:flex items-center">
@@ -209,6 +213,7 @@ const Navbar = ({ children }) => {
                                         alt={item.name}
                                         width={100}
                                         height={100}
+                                        priority
                                       />
                                     </span>
                                   </div>
@@ -244,6 +249,7 @@ const Navbar = ({ children }) => {
                                       alt={item.name}
                                       width={100}
                                       height={100}
+                                      priority
                                     />
                                     <span className="ml-3 text-xs">
                                       {item.name}
@@ -371,6 +377,7 @@ const Navbar = ({ children }) => {
                                             alt={post.name}
                                             width={100}
                                             height={100}
+                                            priority
                                           />
                                         </div>
                                         <div className="w-0 flex-1 sm:ml-8">
@@ -514,6 +521,7 @@ const Navbar = ({ children }) => {
                         alt="Car2autobuy"
                         width={100}
                         height={50}
+                        priority
                       />
                     </Link>
                   </div>
@@ -540,6 +548,7 @@ const Navbar = ({ children }) => {
                               alt={item.name}
                               width={100}
                               height={100}
+                              priority
                             />
                           </div>
                           <div className="ml-4 text-base font-medium text-gray-900">

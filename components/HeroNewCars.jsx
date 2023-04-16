@@ -81,7 +81,7 @@ export function HeroNewCars() {
                           <Image
                             src={MakeBrandUP.imgpath}
                             alt={MakeBrandUP.brand}
-                            layout="fixed"
+                            priority
                             width={70}
                             height={70}
                             className="h-auto w-10 object-contain md:h-auto md:w-14"
@@ -105,7 +105,7 @@ export function HeroNewCars() {
                           <Image
                             src={MakeBrandUP.imgpath}
                             alt={MakeBrandUP.brand}
-                            layout="fixed"
+                            priority
                             width={70}
                             height={70}
                             className="h-5 w-5 object-contain"
@@ -143,7 +143,7 @@ export function HeroNewCars() {
                             GroupBrandSL.mainImage.path
                           }
                           alt={GroupBrandSL.variant}
-                     
+                          priority
                           width={100}
                           height={70}
                           className="h-auto w-full rounded-t-lg object-cover"
@@ -225,7 +225,7 @@ export function HeroNewCars() {
                               GroupBrandSL.mainImage.path
                             }
                             alt={GroupBrandSL.variant}
-                         
+                            priority
                             width={300}
                             height={200}
                             className="h-auto w-full rounded-t-lg object-cover"

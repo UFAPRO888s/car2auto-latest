@@ -23,7 +23,7 @@ export default function SwiperV({ imgxs }) {
           clickable: true,
         }}
         modules={[Mousewheel, Pagination]}
-        className="mySwiper2 rounded-xl overflow-hidden"
+        className="mySwiper2 rounded-md overflow-hidden"
       >
         {imgxs.map((groupgallery, groupIndex) => (
           <SwiperSlide key={groupIndex}>
@@ -32,7 +32,8 @@ export default function SwiperV({ imgxs }) {
               alt={groupgallery.label}
               width={800}
               height={600}
-              className="rounded-xl object-cover overflow-hidden"
+              className="rounded-md object-cover"
+              priority
             />
           </SwiperSlide>
         ))}

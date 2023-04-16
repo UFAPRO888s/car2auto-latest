@@ -90,14 +90,14 @@ const CarStoryPost = (props) => {
               <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-100">
                 {props.data[0]["excerpt"]["rendered"]
                   ?.replace(/(<([^>]+)>)|&.+;/gm, " ")
-                  ?.replace(/CARSOME/gim, "CAR2AUTOBUY")}
+                  ?.replace(/CARSOME|Carsome/g, "CAR2AUTOBUY")}
               </p>
             </div>
             <div className="mt-6 space-y-7">
               <article
                 className="prose max-w-none prose-img:rounded-xl prose-h1:text-blue-500 prose-h1:text-4xl prose-h2:text-blue-400 prose-h2:text-3xl prose-h3:text-blue-400 prose-h3:text-2xl leading-relaxed text-black"
                 dangerouslySetInnerHTML={{
-                  __html: props?.contentY?.replace(/CARSOME/gim, "CAR2AUTOBUY"),
+                  __html: props?.contentY?.replace(/CARSOME|Carsome/g, "CAR2AUTOBUY"),
                 }}
               ></article>
             </div>

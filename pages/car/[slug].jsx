@@ -185,9 +185,10 @@ export default function CarDetailing({ DataCar }) {
                         galleryBrandUP.path
                       }
                       alt={galleryBrandUP.label}
-                      width={1200}
-                      height={600}
-                      className="bg-[#d2e0ed]"
+                      width={600}
+                      height={400}
+                      className="w-full h-auto object-cover"
+                      priority
                     />
                   </SwiperSlide>
                 ))}

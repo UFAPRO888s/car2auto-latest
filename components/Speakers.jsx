@@ -5,17 +5,17 @@ import clsx from "clsx";
 import { Container } from "@/components/Container";
 import { DiamondIcon } from "@/components/DiamondIcon";
 
-import CarR1 from "@/images/imgcat/CarR1.jpg";
-import CarR2 from "@/images/imgcat/CarR2.jpg";
-import CarR3 from "@/images/imgcat/CarR3.jpg";
+import CarR1 from "/images/imgcat/CarR1.jpg";
+import CarR2 from "/images/imgcat/CarR2.jpg";
+import CarR3 from "/images/imgcat/CarR3.jpg";
 
-import CarX1 from "@/images/imgcat/CarX1.jpg";
-import CarX2 from "@/images/imgcat/CarX2.jpg";
-import CarX3 from "@/images/imgcat/CarX3.jpg";
+import CarX1 from "/images/imgcat/CarX1.jpg";
+import CarX2 from "/images/imgcat/CarX2.jpg";
+import CarX3 from "/images/imgcat/CarX3.jpg";
 
-import CarY1 from "@/images/imgcat/CarY1.jpg";
-import CarY2 from "@/images/imgcat/CarY2.jpg";
-import CarY3 from "@/images/imgcat/CarY3.jpg";
+import CarY1 from "/images/imgcat/CarY1.jpg";
+import CarY2 from "/images/imgcat/CarY2.jpg";
+import CarY3 from "/images/imgcat/CarY3.jpg";
 
 import LogoImage from "@/images/logos/Car2autobuy-Preview-01.svg";
 import Link from "next/link";
