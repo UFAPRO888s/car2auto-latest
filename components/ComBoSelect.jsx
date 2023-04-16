@@ -293,7 +293,7 @@ export default function ComBoSelect({ ComboData }) {
                     <Image
                       src={TypesCar.imgp}
                       alt={TypesCar.name}
-                      layout="responsive"
+                      
                       width={100}
                       height={100}
                       className="object-contain"
@@ -423,7 +423,7 @@ export default function ComBoSelect({ ComboData }) {
                     <Image
                       src={Trans.imgp}
                       alt={Trans.name}
-                      layout="responsive"
+                      
                       width={100}
                       height={100}
                       className="object-contain"

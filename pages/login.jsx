@@ -98,8 +98,8 @@ const LoginPage = () => {
                   className="h-20 w-20"
                   src={Img_GG}
                   alt="google"
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
               </Button>
             </div>
@@ -115,8 +115,8 @@ const LoginPage = () => {
                   className="h-20 w-20"
                   src={Img_FB}
                   alt="facebook"
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
               </Button>
             </div>
