@@ -174,9 +174,12 @@ export default function FormSaleCar() {
                             {({ active, selected }) => (
                               <>
                                 <div className="flex items-center">
-                                  <img
+                                  <Image
                                     src={person.imageUrl}
                                     alt={person.name}
+                                    width={100}
+                                    height={100}
+                                    priority
                                     className="h-6 w-6 flex-shrink-0 rounded-full"
                                   />
                                   <span

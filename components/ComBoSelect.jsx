@@ -18,9 +18,7 @@ import { Button } from '@/components/Button'
 import axios from 'axios'
 
 const current = new Date()
-const dateTimeAB = `${current.getDate()}${
-  current.getMonth() + 1
-}${current.getFullYear()}`
+const dateTimeAB = `${current.getDate()}${current.getMonth() + 1}${current.getFullYear()}`
 
 const uniqueId = () => {
   const dateString = Date.now().toString(36)
@@ -59,9 +57,7 @@ export default function ComBoSelect({ ComboData }) {
   const filteredModelex =
     selectedModelX === ''
       ? ex_model_Data
-      : ex_model_Data.filter(
-          (model_DataX) => model_DataX?.model == selectedModelX
-        )
+      : ex_model_Data.filter((model_DataX) => model_DataX?.model == selectedModelX)
 
   const filteredYearModel =
     selectedModel_EX === ''
@@ -72,12 +68,10 @@ export default function ComBoSelect({ ComboData }) {
             (model_Data_Year?.exmodel == selectedModel_EX)
         )
 
- 
   useEffect(() => {
     const UXIDCAR = uniqueId()
     SETIDXCARID(UXIDCAR)
-    
-    
+
     //setGetUserUid(storedgetUser.id)
     //setGetUserEmail(storedgetUser.email)
     //setGetUserDisplayName(storedgetUser.name)
@@ -99,9 +93,7 @@ export default function ComBoSelect({ ComboData }) {
       axios
         .post('https://storage.car2autobuy.com/upload', formData, {
           onUploadProgress: (ProgressEvent) => {
-            let progress =
-              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
-              '%'
+            let progress = Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) + '%'
             setProgess(progress)
           },
         })
@@ -121,11 +113,7 @@ export default function ComBoSelect({ ComboData }) {
     <div className="py-4">
       <div className="relative flex flex-col justify-between gap-4 py-4 md:flex md:flex-row">
         <div className="w-full">
-          <Combobox
-            as="div"
-            value={selectedBrand}
-            onChange={setSelectedBrand}
-          >
+          <Combobox as="div" value={selectedBrand} onChange={setSelectedBrand}>
             <Combobox.Label className="block text-sm font-medium text-gray-700">
               ยี่ห้อรถยนต์
             </Combobox.Label>
@@ -136,10 +124,7 @@ export default function ComBoSelect({ ComboData }) {
                 displayValue={(person) => person?.name}
               />
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-                <ChevronUpDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
+                <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </Combobox.Button>
 
               {filteredBrand.length > 0 && (
@@ -158,16 +143,16 @@ export default function ComBoSelect({ ComboData }) {
                       {({ active, selected }) => (
                         <>
                           <div className="flex items-center">
-                            <img
+                            <Image
                               src={person.imageUrl}
                               alt={person.name}
+                              width={100}
+                              height={100}
+                              priority
                               className="h-6 w-6 flex-shrink-0 rounded-full"
                             />
                             <span
-                              className={classNames(
-                                'ml-3 truncate',
-                                selected && 'font-semibold'
-                              )}
+                              className={classNames('ml-3 truncate', selected && 'font-semibold')}
                             >
                               {person.name}
                             </span>
@@ -180,10 +165,7 @@ export default function ComBoSelect({ ComboData }) {
                                 active ? 'text-white' : 'text-indigo-600'
                               )}
                             >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
+                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
                             </span>
                           )}
                         </>
@@ -196,10 +178,7 @@ export default function ComBoSelect({ ComboData }) {
           </Combobox>
         </div>
         <div className="w-full">
-          <label
-            htmlFor="model_car"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="model_car" className="block text-sm font-medium text-gray-700">
             รุ่นรถยนต์
           </label>
           <select
@@ -210,18 +189,13 @@ export default function ComBoSelect({ ComboData }) {
             onChange={(event) => setModelX(event.target.value)}
             //displayValue={(person) => person?.name}
           >
-            {CarModelList[selectedBrand?.name?.toUpperCase()]?.map(
-              (CarModel, indexCarModel) => (
-                <option key={indexCarModel}>{CarModel}</option>
-              )
-            )}
+            {CarModelList[selectedBrand?.name?.toUpperCase()]?.map((CarModel, indexCarModel) => (
+              <option key={indexCarModel}>{CarModel}</option>
+            ))}
           </select>
         </div>
         <div className="w-full">
-          <label
-            htmlFor="model_car"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="model_car" className="block text-sm font-medium text-gray-700">
             รุ่นย่อยรถยนต์
           </label>
           {selectedModelX.length > 0 && (
@@ -240,10 +214,7 @@ export default function ComBoSelect({ ComboData }) {
         </div>
 
         <div className="w-full">
-          <label
-            htmlFor="year_minor_car"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="year_minor_car" className="block text-sm font-medium text-gray-700">
             ปี-โฉมรถยนต์
           </label>
           <div className="mt-1">
@@ -293,7 +264,6 @@ export default function ComBoSelect({ ComboData }) {
                     <Image
                       src={TypesCar.imgp}
                       alt={TypesCar.name}
-                      
                       width={100}
                       height={100}
                       className="object-contain"
@@ -388,10 +358,7 @@ export default function ComBoSelect({ ComboData }) {
           </RadioGroup>
         </div>
         <div>
-          <RadioGroup
-            value={selectedTransmission}
-            onChange={setSelectedTransmission}
-          >
+          <RadioGroup value={selectedTransmission} onChange={setSelectedTransmission}>
             <RadioGroup.Label className="block text-sm font-medium text-gray-700">
               ประเภทเกียร์
             </RadioGroup.Label>
@@ -423,7 +390,6 @@ export default function ComBoSelect({ ComboData }) {
                     <Image
                       src={Trans.imgp}
                       alt={Trans.name}
-                      
                       width={100}
                       height={100}
                       className="object-contain"
@@ -481,10 +447,7 @@ export default function ComBoSelect({ ComboData }) {
       </div>
       <div className="relative flex flex-col justify-between gap-4 py-4 md:flex md:flex-row">
         <div className="w-full">
-          <label
-            htmlFor="mileage"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="mileage" className="block text-sm font-medium text-gray-700">
             เลขไมล์
           </label>
           <div className="mt-1">
@@ -500,10 +463,7 @@ export default function ComBoSelect({ ComboData }) {
           </div>
         </div>
         <div className="w-full">
-          <label
-            htmlFor="pricex"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="pricex" className="block text-sm font-medium text-gray-700">
             ราคาขาย
           </label>
           <div className="mt-1">
@@ -538,10 +498,7 @@ export default function ComBoSelect({ ComboData }) {
           </div>
         </div>
         <div className="w-full">
-          <label
-            htmlFor="car_act"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="car_act" className="block text-sm font-medium text-gray-700">
             พรบ รถยนต์
           </label>
           <div className="mt-1">
@@ -558,16 +515,10 @@ export default function ComBoSelect({ ComboData }) {
         </div>
       </div>
       <div>
-        <label
-          htmlFor="car_accessories"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="car_accessories" className="block text-sm font-medium text-gray-700">
           อุปกรณ์เสริมรถยนต์
         </label>
-        <fieldset
-          id="car_accessories"
-          className="border-b border-t border-gray-200 "
-        >
+        <fieldset id="car_accessories" className="border-b border-t border-gray-200 ">
           <legend className="sr-only">อุปกรณ์เสริมรถยนต์</legend>
           <div className="grid grid-cols-1 gap-4 divide-y divide-gray-200 md:grid-cols-3">
             {car_accessories.map((caraccessories, indexacc) => (
@@ -582,10 +533,7 @@ export default function ComBoSelect({ ComboData }) {
                   />
                 </div>
                 <div className="min-w-0 flex-1 text-sm">
-                  <label
-                    htmlFor={caraccessories.tid}
-                    className="font-medium text-gray-700"
-                  >
+                  <label htmlFor={caraccessories.tid} className="font-medium text-gray-700">
                     {caraccessories.label}
                   </label>
                   <p id="air_bag-description" className="text-gray-500">
@@ -610,10 +558,7 @@ export default function ComBoSelect({ ComboData }) {
         />
       </div>
       <div>
-        <label
-          htmlFor="car-photo"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="car-photo" className="block text-sm font-medium text-gray-700">
           รูปภาพรถยนต์
         </label>
         <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pb-6 pt-5">
@@ -644,7 +589,6 @@ export default function ComBoSelect({ ComboData }) {
                   type="file"
                   className="sr-only"
                   onChange={handleChange}
-                 
                   multiple
                 />
               </label>
@@ -670,7 +614,6 @@ export default function ComBoSelect({ ComboData }) {
                     width={100}
                     height={100}
                     className="rounded-md object-contain"
-                    
                   />
                 ) : (
                   <svg

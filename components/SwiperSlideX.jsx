@@ -53,7 +53,7 @@ export default function SwiperSlideX() {
                   รถสวยสภาพดี การันตีความปลอดภัย อยู่ที่ไหนก็ซื้อได้
                   <br />
                   <br />
-                  ตลาดรถยนตร์มือสอง Car2autobuy ซื้อรถง่าย ขายคล่อง เช็ค
+                  <strong>ตลาดรถยนตร์มือสอง</strong> Car2autobuy ซื้อรถง่าย ขายคล่อง เช็ค
                   <br />
                   ราคารถยนตร์ได้ทุกรุ่น ค้นหารถยนตร์มือสองสภาพดี ตรวจเช็ค
                   <br />
@@ -97,11 +97,11 @@ export default function SwiperSlideX() {
                 />
               </div>
               <div className="py-4">
-                <h1 className="text-2xl font-semibold text-white md:text-3xl">
-                  รถมือสอง ฟรีดาวน์ ผ่อนถูก!
-                </h1>
+                <h2 className="text-2xl font-semibold text-white md:text-3xl">
+                  รถยนต์มือสอง ฟรีดาวน์ ผ่อนถูก!
+                </h2>
                 <p className="hidden py-4 text-[18px] text-white md:block">
-                  รถมือสอง ราคาถูก สภาพดี ติดต่อได้ทันที บริการฟรี!
+                  <strong>รถมือสอง</strong> ราคาถูก สภาพดี ติดต่อได้ทันที บริการฟรี!
                   <br />
                   เว็บไซต์ ซื้อ-ขายรถยนต์มือสอง ที่มีรถให้เลือกมากกว่า 1
                   หมื่นคัน
