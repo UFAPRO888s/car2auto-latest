@@ -107,9 +107,9 @@ export default function TabsCom() {
       <div>
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 max-w-lg ">
-            {Object.keys(categories).map((category) => (
+            {Object.keys(categories).map((category,indexCat) => (
               <Tab
-                key={category}
+                key={indexCat}
                 className={({ selected }) =>
                   classNames(
                     'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
@@ -134,9 +134,9 @@ export default function TabsCom() {
                 )}
               >
                 <div className="flex flex-row justify-center gap-2">
-                  {posts.map((post) => (
+                  {posts.map((post,kettab) => (
                     <div>
-                      <div key={post.id} className="relative rounded-md hover:bg-gray-100">
+                      <div key={kettab} className="relative rounded-md hover:bg-gray-100">
                         <Image
                           src={post.imgPath}
                           alt={post.title}
