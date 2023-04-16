@@ -16,8 +16,6 @@ import {
 import Image from 'next/image'
 import { Button } from '@/components/Button'
 import axios from 'axios'
-import { useUser } from '@/lib/firebase/useUser'
-import { getUserFromCookie } from '@/lib/firebase/userCookies'
 
 const current = new Date()
 const dateTimeAB = `${current.getDate()}${
@@ -35,7 +33,6 @@ function classNames(...classes) {
 }
 
 export default function ComBoSelect({ ComboData }) {
-  const { user } = useUser()
   const [query, setQuery] = useState('')
   const [selectedBrand, setSelectedBrand] = useState(ComboData[0])
   const [selectedModelX, setModelX] = useState('')
@@ -79,12 +76,8 @@ export default function ComBoSelect({ ComboData }) {
   useEffect(() => {
     const UXIDCAR = uniqueId()
     SETIDXCARID(UXIDCAR)
-    const getUserCo = getUserFromCookie()
-    if(getUserCo){
-      
-      setGetUserUid(getUserCo)
-      
-    }
+    
+    
     //setGetUserUid(storedgetUser.id)
     //setGetUserEmail(storedgetUser.email)
     //setGetUserDisplayName(storedgetUser.name)
@@ -677,7 +670,7 @@ export default function ComBoSelect({ ComboData }) {
                     width={100}
                     height={100}
                     className="rounded-md object-contain"
-                    layout="fixed"
+                    
                   />
                 ) : (
                   <svg
