@@ -136,8 +136,8 @@ export default function LoanCalc() {
                 />
               </div>
               <div>
-                <p>
-                  ค้นหารถยนต์มือสอง ราคาตั้งแต่ 0 ถึง{" "}
+                <div className="py-4">
+                  ค้นหารถยนต์มือสอง<br/>ราคาตั้งแต่ 0 ถึง{" "}
                   <CurrencyFormat
                     value={parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown)}
                     displayType={"text"}
@@ -146,7 +146,7 @@ export default function LoanCalc() {
                     renderText={(value) => <span>{value}</span>}
                   />{" "}
                   บาท
-                </p>
+                </div>
                 <Button href={"/buycars?min=0&max="+(parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown))} className="rounded-sm">
                   ค้นหารถยนต์มือสอง
                 </Button>

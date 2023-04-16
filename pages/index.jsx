@@ -9,7 +9,7 @@ import BrandCards from "@/components/BrandCards";
 import { HeroNewCars } from "@/components/HeroNewCars";
 import { HeroWhite } from "@/components/HeroWhite";
 import Type_Cars from "@/components/Type_Cars";
-
+import TabsCom from "@/components/Tabs";
 
 export default function HomeCar2Auto() {
   return (
@@ -25,6 +25,7 @@ export default function HomeCar2Auto() {
         <HeroWhite />
         <BrandCards />
         <Type_Cars />
+        <TabsCom />
         <Speakers />
       </main>
       <Footer />
