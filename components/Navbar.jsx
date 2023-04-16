@@ -265,7 +265,7 @@ const Navbar = ({ children }) => {
                   )}
                 </Popover>
                 <Link
-                  href="#"
+                  href="/salecar"
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
                   ขายรถ
@@ -572,7 +572,7 @@ const Navbar = ({ children }) => {
               <div className="py-2 px-5">
                 <div className="grid grid-cols-2 gap-4">
                   <Link
-                    href="#"
+                    href="/salecar"
                     className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
                   >
                     ขายรถ
