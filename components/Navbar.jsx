@@ -174,7 +174,7 @@ const Navbar = ({ children }) => {
                       <Popover.Button
                         className={classNames(
                           open ? "text-gray-900" : "text-gray-500",
-                          "group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 "
+                          "group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 "
                         )}
                       >
                         <Link href={'/buycars'}>ซื้อรถ</Link>
@@ -241,7 +241,7 @@ const Navbar = ({ children }) => {
                                 <div key={item.name} className="flow-root">
                                   <Link
                                     href={item.href}
-                                    className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100"
+                                    className="-m-3 flex items-center rounded-md p-3 text-base font-semibold text-gray-900 hover:bg-gray-100"
                                   >
                                     <Image
                                       className="h-6 w-6 flex-shrink-0 text-gray-400"
@@ -266,13 +266,13 @@ const Navbar = ({ children }) => {
                 </Popover>
                 <Link
                   href="/salecar"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                  className="text-base font-semibold text-gray-500 hover:text-gray-900"
                 >
                   ขายรถ
                 </Link>
                 <Link
                   href="/loancalculator"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                  className="text-base font-semibold text-gray-500 hover:text-gray-900"
                 >
                   สินเชื่อ
                 </Link>
@@ -282,7 +282,7 @@ const Navbar = ({ children }) => {
                       <Popover.Button
                         className={classNames(
                           open ? "text-gray-900" : "text-gray-500",
-                          "group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 "
+                          "group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 "
                         )}
                       >
                         <span>โปรโมชั่น</span>

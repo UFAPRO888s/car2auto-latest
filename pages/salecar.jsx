@@ -1,5 +1,5 @@
 import { useAuth } from '@/context/AuthContext'
-import addData from '../firebase/firestore/addData'
+import addData from '@/firebase/firestore/addData'
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
