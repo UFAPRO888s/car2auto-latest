@@ -104,63 +104,62 @@ export default function TabsCom() {
   return (
     <Container className="w-full px-2 py-6 sm:px-0 mt-10">
       <h2 className="text-lg md:text-5xl font-semibold py-4">บริการของเรา</h2>
-      <div>
-        <Tab.Group>
-          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 max-w-lg ">
-            {Object.keys(categories).map((category,indexCat) => (
-              <Tab
-                key={indexCat}
-                className={({ selected }) =>
-                  classNames(
-                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                    'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                    selected
-                      ? 'bg-white shadow'
-                      : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                  )
-                }
-              >
-                {category}
-              </Tab>
-            ))}
-          </Tab.List>
-          <Tab.Panels className="mt-2">
-            {Object.values(categories).map((posts, idx) => (
-              <Tab.Panel
-                key={idx}
-                className={classNames(
-                  'rounded-xl bg-white p-3',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
-                )}
-              >
-                <div className="flex flex-row justify-center gap-2">
-                  {posts.map((post,kettab) => (
-                    <div>
-                      <div key={kettab} className="relative rounded-md hover:bg-gray-100">
-                        <Image
-                          src={post.imgPath}
-                          alt={post.title}
-                          width={200}
-                          height={300}
-                          className="object-contain"
-                          priority
-                        />
-                        <Link
-                          href="#"
-                          className={classNames(
-                            'absolute inset-0 rounded-md',
-                            'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
-                          )}
-                        />
-                      </div>
+
+      <Tab.Group>
+        <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 max-w-lg ">
+          {Object.keys(categories).map((category, indexCat) => (
+            <Tab
+              key={indexCat}
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              {category}
+            </Tab>
+          ))}
+        </Tab.List>
+        <Tab.Panels className="mt-2">
+          {Object.values(categories).map((posts, idx) => (
+            <Tab.Panel
+              key={idx}
+              className={classNames(
+                'rounded-xl bg-white p-3',
+                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+              )}
+            >
+              <div className="flex flex-row justify-center gap-2">
+                {posts.map((post, kettab) => (
+                  <div key={kettab} >
+                    <div className="relative rounded-md hover:bg-gray-100">
+                      <Image
+                        src={post.imgPath}
+                        alt={post.title}
+                        width={200}
+                        height={300}
+                        className="object-contain"
+                        priority
+                      />
+                      <Link
+                        href="#"
+                        className={classNames(
+                          'absolute inset-0 rounded-md',
+                          'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
+                        )}
+                      />
                     </div>
-                  ))}
-                </div>
-              </Tab.Panel>
-            ))}
-          </Tab.Panels>
-        </Tab.Group>
-      </div>
+                  </div>
+                ))}
+              </div>
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
     </Container>
   )
 }
