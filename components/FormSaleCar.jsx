@@ -130,7 +130,7 @@ export default function FormSaleCar() {
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div className="space-y-6 sm:space-y-5">
             <div>
-              <h3 className="text-lg font-medium leading-6 text-gray-100">ส่งรถ ประเมินราคา</h3>
+              <h3 className="text-3xl font-semibold leading-6 text-gray-100">ส่งรถ ประเมินราคา</h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-200">
                 ตรวจเช็คสภาพและประเมินราคาฟรีโดยมืออาชีพ
                 จองคิวของคุณเพียงติดต่อเจ้าหน้านี้ได้เลยวันนี้!
