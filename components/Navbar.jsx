@@ -83,7 +83,7 @@ const blogPosts = [
   {
     id: 1,
     name: "ประสบการณ์ความเร็ว แรง BMW",
-    href: "/car-story",
+    href: "/car-story?cat=ข้อมูลน่ารู้",
     preview:
       "สนุกกับประสบการณ์ความเร็ว แรง และคล่องตัวกับการขับรถในเมืองใน BMW ซีรีส์ 1",
     imageUrl: "/images/img/สนุกกับBMW.png",
@@ -91,7 +91,7 @@ const blogPosts = [
   {
     id: 2,
     name: "All-New Isuzu D-Max 2023",
-    href: "/car-recommend",
+    href: "/car-recommend?recom=รีวิว",
     preview:
       "รประสบความสำเร็จอย่างงดงามของรุ่นดีแมคซ์ (D-Max) เจเนอเรชันที่ 2 ในที่สุด อีซูซุ (Isuzu) ได้เปิดตัวรุ่นออลนิว ดีแมคซ์ (All-New D-Max) เจนเนอเรชั่นที่ 3 ในปี 2019",
     imageUrl: "/images/img/All-NEW-ISUZU-D-MAX.jpg",
