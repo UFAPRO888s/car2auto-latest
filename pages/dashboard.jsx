@@ -2,6 +2,8 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import addData from "../firebase/firestore/addData";
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import { PageSEO } from "@/components/SEO";
+import siteMetadata from "@/data/siteMetadata";
 
 const DashboardPage = () => {
   const { user } = useAuth();
@@ -24,6 +26,12 @@ const DashboardPage = () => {
 
   return (
     <ProtectedRoute>
+      <PageSEO
+        title={
+          "Dashboard " + siteMetadata.title + " | " + siteMetadata.author
+        }
+        description={"Dashboard " + siteMetadata.description}
+      />
       <div className="flex py-2 container mx-auto">
         <div className="text-gray-600 px-12 py-24 mt-24 overflow-y-hidden mx-auto">
           <h1>สวัสดี {user.email}</h1>
