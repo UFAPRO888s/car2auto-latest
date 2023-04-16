@@ -26,6 +26,7 @@ const nextConfig = {
       'www.carsome.co.th',
       'fastly-production.24c.in',
       'firebasestorage.googleapis.com',
+ 
     ],
   },
 }

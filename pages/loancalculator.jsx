@@ -99,6 +99,7 @@ export default function LoanCalc() {
                   alt={"คำนวนสินเชื่อ"}
                   width={300}
                   height={200}
+                  priority
                 />
               </div>
               <h4 className="text-3xl font-semibold">
