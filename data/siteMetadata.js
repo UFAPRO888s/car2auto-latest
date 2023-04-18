@@ -4,7 +4,7 @@ const siteMetadata = {
   description:
     'รถยนต์มือสอง คุณภาพเชื่อถือได้ บริการฟรี รถยนต์มือสอง ซื้อ-ขายรถบ้านบนเว็บ สะดวก ปลอดภัย ทั้งผู้ซื้อและผู้ขาย ลงประกาศขายรถมือสอง',
   language: 'th',
-  theme: 'class',
+  theme: 'light',
   siteUrl: 'https://car2autobuy.com',
   siteLogo: '/images/Car2autobuy-01.png',
   image: '/images/slidex/preview-banner-01.jpg',
