@@ -108,14 +108,14 @@ const Navbar = ({ children }) => {
       name: 'เข้าสู่ระบบ',
       link: '/login',
       iconx: icon1,
-      iconxalt: 'เข้าสู่ระบบ'
+      iconxalt: 'เข้าสู่ระบบ',
     },
     {
       id: 2,
       name: 'สมัครสมาชิก',
       link: '/signup',
       iconx: icon2,
-      iconxalt: 'สมัครสมาชิก'
+      iconxalt: 'สมัครสมาชิก',
     },
   ]
 
@@ -391,15 +391,15 @@ const Navbar = ({ children }) => {
                 </Popover>
               </Popover.Group>
               <div className="flex items-center md:ml-12">
-                <ul className="text-base ml-4 flex items-center justify-end">
+                <ul className="text-base ml-4 flex items-center justify-end bg-[#1B64A6] rounded-md overflow-hidden">
                   <>
                     {!user.uid ? (
                       menuItems.map((item) => (
-                        <li key={item.id} className="flex items-center bg-[#1B64A6]">
-                          <Button
+                        <li key={item.id} className="flex items-center">
+                          <button
                             href={item?.link}
                             //className="text-blue-800 hover:text-blue-900 transition px-4 py-2 bg-green-500 shadow-md rounded-md"
-                            className="text-lg h-10 text-gray-500 bg-[#1B64A6] hover:text-gray-900 rounded-md font-light overflow-hidden"
+                            className="btn text-lg h-10 text-gray-500 hover:text-gray-50 "
                           >
                             <Image
                               className="h-6 w-6 object-contain"
@@ -410,7 +410,7 @@ const Navbar = ({ children }) => {
                               priority
                             />{' '}
                             {item?.name}
-                          </Button>
+                          </button>
                         </li>
                       ))
                     ) : (
@@ -465,18 +465,21 @@ const Navbar = ({ children }) => {
                         </li>
                       </>
                     )}
-                    <li className="my-3 md:my-0 items-center px-4 md:inline-block block ">
-                      <Image
-                        className="h-10 w-10 object-cover"
-                        src={iconSC}
-                        alt={'ค้นหารถยนต์'}
-                        width={100}
-                        height={100}
-                        priority
-                      />
-                    </li>
                   </>
                 </ul>
+                <div className="my-3 md:my-0 items-center px-4 md:inline-block block ">
+                  <Link href={'/buycars'}>
+                    {' '}
+                    <Image
+                      className="h-10 w-10 object-cover"
+                      src={iconSC}
+                      alt={'ค้นหารถยนต์'}
+                      width={100}
+                      height={100}
+                      priority
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

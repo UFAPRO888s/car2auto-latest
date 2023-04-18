@@ -10,7 +10,7 @@ import { HeroNewCars } from '@/components/HeroNewCars'
 import { HeroWhite } from '@/components/HeroWhite'
 import Type_Cars from '@/components/Type_Cars'
 import TabsCom from '@/components/Tabs'
-
+import { HeroBrand } from '@/components/HeroBrand'
 export default function HomeCar2Auto() {
   return (
     <>
@@ -25,7 +25,7 @@ export default function HomeCar2Auto() {
 
       <SwiperSlideX />
       <main>
-        <HeroNewCars />
+        <HeroBrand />
         <HeroWhite />
         <BrandCards />
         <Type_Cars />
