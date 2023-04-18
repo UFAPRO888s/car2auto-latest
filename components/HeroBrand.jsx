@@ -60,6 +60,57 @@ const MakeBrand = [
   },
 ]
 
+const MakeType = [
+  {
+    brand: '2 ประตู',
+    imgpath: '/images/car_type/2-ประตู.png',
+    href: '/2ประตู',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: '4 ประตู',
+    imgpath: '/images/car_type/4-ประตู.png',
+    href: '/4ประตู',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'รถยนตร์ไฟฟ้า EV',
+    imgpath: '/images/car_type/รถยนตร์ไฟฟ้า-EV.png',
+    href: '/รถยนตร์ไฟฟ้า-EV',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'รถตู้',
+    imgpath: '/images/car_type/รถตู้.png',
+    href: '/รถตู้',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'มินิเเวน',
+    imgpath: '/images/car_type/มินิเเวน.png',
+    href: '/มินิเเวน',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'รถกระบะ',
+    imgpath: '/images/car_type/รถกระบะ.png',
+    href: '/รถกระบะ',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'รถสปอร์ต',
+    imgpath: '/images/car_type/รถสปอร์ต.png',
+    href: '/รถสปอร์ต',
+    bgcolor: 'bg-pink-600',
+  },
+  {
+    brand: 'รถ SUV',
+    imgpath: '/images/car_type/SUV.png',
+    href: '/SUV',
+    bgcolor: 'bg-pink-600',
+  },
+]
+
 export function HeroBrand() {
   return (
     <div
@@ -92,16 +143,35 @@ export function HeroBrand() {
           </div>
           <div className="grid grid-cols-8 gap-4">
             {MakeBrand.map((MakeBrandUP, MakeIndex) => (
-              <Link href={"/"}><div key={MakeIndex} className='border border-1 border-[#588DBC]/50 rounded-md mt-4 hover:bg-[#588DBC] cursor-pointer hover:shadow-lg'>
-                <Image
-                  src={MakeBrandUP.imgpath}
-                  alt={MakeBrandUP.brand}
-                  priority
-                  width={100}
-                  height={100}
-                  className="object-contain "
-                />
-              </div></Link>
+              <Link href={'#'} key={MakeIndex}>
+                <div className="h-[90px] w-[90px] border border-1 border-[#588DBC]/50 rounded-md mt-4 hover:bg-[#588DBC] cursor-pointer hover:shadow-md">
+                  <Image
+                    src={MakeBrandUP.imgpath}
+                    alt={MakeBrandUP.brand}
+                    priority
+                    width={100}
+                    height={100}
+                    className="object-contain "
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="grid grid-cols-8 gap-4 ">
+            {MakeType.map((MakeTypeUP, TypeIndex) => (
+              <Link href={'#'} key={TypeIndex}>
+                <div className="grid content-center h-[90px] w-[90px] border border-1 border-[#588DBC]/50 rounded-md mt-4 hover:bg-[#588DBC] cursor-pointer hover:shadow-md">
+                  <Image
+                    src={MakeTypeUP.imgpath}
+                    alt={MakeTypeUP.brand}
+                    priority
+                    width={100}
+                    height={100}
+                    className="w-full h-auto object-contain px-3"
+                  />
+                  <span className="text-center text-[10px] text-black">{MakeTypeUP.brand}</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
