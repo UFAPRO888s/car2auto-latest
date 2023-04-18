@@ -1,67 +1,76 @@
-import { Fragment, useEffect, useId, useRef, useState } from "react";
-import siteMetadata from "@/data/siteMetadata";
-import { PageSEO } from "@/components/SEO";
-import { Footer } from "@/components/Footer";
-import Image from "next/image";
-import CurrencyFormat from "react-currency-format";
-import LoanX from "@/components/LoanX";
-import Faqs from "@/components/Faqs";
-import { Button } from "@/components/Button";
+import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import Head from 'next/head'
+import siteMetadata from '@/data/siteMetadata'
+import { PageSEO } from '@/components/SEO'
+import { Footer } from '@/components/Footer'
+import Image from 'next/image'
+import CurrencyFormat from 'react-currency-format'
+import LoanX from '@/components/LoanX'
+import Faqs from '@/components/Faqs'
+import { Button } from '@/components/Button'
 
 const faqsX = [
   {
-    question: "คาร์ทูออโต้บาย จัดการภาษีมูลค่าเพิ่มหรือไม่?",
-    answer:
-      "คาร์ทูออโต้บาย ก็ไม่ แต่ถ้าคุณย้ายบริษัทไปต่างประเทศ คุณก็อาจจะเพิกเฉยได้",
+    question: 'คาร์ทูออโต้บาย จัดการภาษีมูลค่าเพิ่มหรือไม่?',
+    answer: 'คาร์ทูออโต้บาย ก็ไม่ แต่ถ้าคุณย้ายบริษัทไปต่างประเทศ คุณก็อาจจะเพิกเฉยได้',
   },
   {
-    question: "ข้อความรับรองเกี่ยวกับการฉ้อโกงภาษีเกี่ยวกับอะไร?",
+    question: 'ข้อความรับรองเกี่ยวกับการฉ้อโกงภาษีเกี่ยวกับอะไร?',
     answer:
-      "คาร์ทูออโต้บาย เป็นเพียงแอปพลิเคชันซอฟต์แวร์ ท้ายที่สุดแล้วหนังสือของคุณจะเป็นความรับผิดชอบของคุณ",
+      'คาร์ทูออโต้บาย เป็นเพียงแอปพลิเคชันซอฟต์แวร์ ท้ายที่สุดแล้วหนังสือของคุณจะเป็นความรับผิดชอบของคุณ',
   },
   {
-    question: "คุณจะสร้างรายงานได้อย่างไร?",
+    question: 'คุณจะสร้างรายงานได้อย่างไร?',
     answer:
-      "คุณเพียงแค่บอกเราว่าคุณต้องการรายงานข้อมูลใด และเราจะให้เด็กๆ สร้างแผนภูมิที่สวยงามให้คุณโดยใช้เฉพาะดินสอสีที่ดีที่สุดเท่านั้น",
+      'คุณเพียงแค่บอกเราว่าคุณต้องการรายงานข้อมูลใด และเราจะให้เด็กๆ สร้างแผนภูมิที่สวยงามให้คุณโดยใช้เฉพาะดินสอสีที่ดีที่สุดเท่านั้น',
   },
   {
-    question: "ฉันจะสมัครงานที่ คาร์ทูออโต้บาย ได้อย่างไร?",
+    question: 'ฉันจะสมัครงานที่ คาร์ทูออโต้บาย ได้อย่างไร?',
     answer:
-      "คาร์ทูออโต้บาย จ้างลูกค้าของเราเท่านั้น ดังนั้นสมัครสมาชิกอย่างน้อย 6 เดือนแล้วค่อยคุยกัน",
+      'คาร์ทูออโต้บาย จ้างลูกค้าของเราเท่านั้น ดังนั้นสมัครสมาชิกอย่างน้อย 6 เดือนแล้วค่อยคุยกัน',
   },
   {
-    question: "ฉันทำรหัสผ่านหาย ฉันจะเข้าสู่บัญชีของฉันได้อย่างไร?",
+    question: 'ฉันทำรหัสผ่านหาย ฉันจะเข้าสู่บัญชีของฉันได้อย่างไร?',
     answer:
-      "ส่งอีเมลถึงเรา แล้วเราจะส่งสำเนาสเปรดชีตรหัสผ่านล่าสุดให้คุณ เพื่อให้คุณค้นหาข้อมูลของคุณได้",
+      'ส่งอีเมลถึงเรา แล้วเราจะส่งสำเนาสเปรดชีตรหัสผ่านล่าสุดให้คุณ เพื่อให้คุณค้นหาข้อมูลของคุณได้',
   },
-];
+]
 
 export default function LoanCalc() {
-  const [RangeOne, setRangeOne] = useState(0);
-  const [RangeDown, setRangeDown] = useState(0);
-  const [RangeYear, setRangeYear] = useState(4);
+  const [RangeOne, setRangeOne] = useState(0)
+  const [RangeDown, setRangeDown] = useState(0)
+  const [RangeYear, setRangeYear] = useState(4)
 
   return (
     <>
+      <Head>
+        <title>
+          {'คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ ' +
+            siteMetadata.title +
+            ' | ' +
+            siteMetadata.author}
+        </title>
+        <meta
+          name="description"
+          content={'คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ ' + siteMetadata.description}
+        />
+      </Head>
       <PageSEO
         title={
-          "คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ " +
+          'คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ ' +
           siteMetadata.title +
-          " | " +
+          ' | ' +
           siteMetadata.author
         }
-        description={
-          "คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ " +
-          siteMetadata.description
-        }
+        description={'คำนวณค่างวด รถมือสอง ราคาคุ้มค่า รับประกันคุณภาพ ' + siteMetadata.description}
       />
       <main className="px-2 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 mt-10">
           <div className="h-full w-auto object-cover">
             <Image
               className="object-cover"
-              src={"/images/car-silver.webp"}
-              alt={"คำนวนสินเชื่อ"}
+              src={'/images/car-silver.webp'}
+              alt={'คำนวนสินเชื่อ'}
               width={1000}
               height={500}
             />
@@ -71,9 +80,7 @@ export default function LoanCalc() {
               <h1 className="text-3xl md:text-6xl font-light">
                 คำนวนสินเชื่อ รถมือสองที่ CAR2AUTOBUY
               </h1>
-              <p className="text-lg md:text-6xl font-semibold">
-                ดีลสุดคุ้มพร้อมโปรโมชั่น พิเศษ!
-              </p>
+              <p className="text-lg md:text-6xl font-semibold">ดีลสุดคุ้มพร้อมโปรโมชั่น พิเศษ!</p>
               <p className="text-base md:text-3xl font-semibold text-slate-500">
                 ดอกเบี้ยเริ่มต้นเพียง 2.99% ต่อปี
               </p>
@@ -83,8 +90,8 @@ export default function LoanCalc() {
         <div className="py-10 text-center">
           <h2 className="text-3xl font-semibold">การเงิน</h2>
           <p className="text-xs">
-            คาดการณ์การผ่อนชำระรายเดือน ด้วยเครื่องคำนวณสินเชื่อรถยนต์ของเรา
-            คำนวณค่างวด รถยนต์มือสอง
+            คาดการณ์การผ่อนชำระรายเดือน ด้วยเครื่องคำนวณสินเชื่อรถยนต์ของเรา คำนวณค่างวด
+            รถยนต์มือสอง
           </p>
         </div>
         <LoanX />
@@ -95,16 +102,14 @@ export default function LoanCalc() {
               <div className="h-full w-auto flex justify-center">
                 <Image
                   className="object-contain"
-                  src={"/images/Car2autobuy-01.png"}
-                  alt={"คำนวนสินเชื่อ"}
+                  src={'/images/Car2autobuy-01.png'}
+                  alt={'คำนวนสินเชื่อ'}
                   width={300}
                   height={200}
                   priority
                 />
               </div>
-              <h4 className="text-3xl font-semibold">
-                คำนวณงบฯ ที่เหมาะกับคุณ
-              </h4>
+              <h4 className="text-3xl font-semibold">คำนวณงบฯ ที่เหมาะกับคุณ</h4>
               <p className="text-base py-4 flex gap-4 justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -124,10 +129,10 @@ export default function LoanCalc() {
               </p>
               <div className="py-4">
                 <CurrencyFormat
-                  value={(parseInt(RangeOne) * (RangeYear * 12)) + parseInt(RangeDown)}
-                  displayType={"text"}
+                  value={parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown)}
+                  displayType={'text'}
                   thousandSeparator={true}
-                  prefix={"฿"}
+                  prefix={'฿'}
                   renderText={(value) => (
                     <p className="text-4xl font-bold">
                       {value} <span className="text-xs">บาท</span>
@@ -137,17 +142,25 @@ export default function LoanCalc() {
               </div>
               <div>
                 <div className="py-4">
-                  ค้นหารถยนต์มือสอง<br/>ราคาตั้งแต่ 0 ถึง{" "}
+                  ค้นหารถยนต์มือสอง
+                  <br />
+                  ราคาตั้งแต่ 0 ถึง{' '}
                   <CurrencyFormat
                     value={parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown)}
-                    displayType={"text"}
+                    displayType={'text'}
                     thousandSeparator={true}
-                    prefix={""}
+                    prefix={''}
                     renderText={(value) => <span>{value}</span>}
-                  />{" "}
+                  />{' '}
                   บาท
                 </div>
-                <Button href={"/buycars?min=0&max="+(parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown))} className="rounded-sm">
+                <Button
+                  href={
+                    '/buycars?min=0&max=' +
+                    (parseInt(RangeOne) * (RangeYear * 12) + parseInt(RangeDown))
+                  }
+                  className="rounded-sm"
+                >
                   ค้นหารถยนต์มือสอง
                 </Button>
               </div>
@@ -157,13 +170,12 @@ export default function LoanCalc() {
                 <div className="py-4">
                   <CurrencyFormat
                     value={RangeOne}
-                    displayType={"text"}
+                    displayType={'text'}
                     thousandSeparator={true}
-                    prefix={"฿"}
+                    prefix={'฿'}
                     renderText={(value) => (
                       <p className="text-2xl font-bold">
-                        ต่อเดือนสามารถส่งค่างวดได้ {value}{" "}
-                        <span className="text-xs">บาท</span>
+                        ต่อเดือนสามารถส่งค่างวดได้ {value} <span className="text-xs">บาท</span>
                       </p>
                     )}
                   />
@@ -189,13 +201,12 @@ export default function LoanCalc() {
                 <div className="py-4">
                   <CurrencyFormat
                     value={RangeDown}
-                    displayType={"text"}
+                    displayType={'text'}
                     thousandSeparator={true}
-                    prefix={"฿"}
+                    prefix={'฿'}
                     renderText={(value) => (
                       <p className="text-2xl font-bold">
-                        ยอดเงินดาวน์ {value}{" "}
-                        <span className="text-xs">บาท</span>
+                        ยอดเงินดาวน์ {value} <span className="text-xs">บาท</span>
                       </p>
                     )}
                   />
@@ -221,9 +232,9 @@ export default function LoanCalc() {
                 <div className="py-4">
                   <CurrencyFormat
                     value={RangeYear}
-                    displayType={"text"}
+                    displayType={'text'}
                     thousandSeparator={true}
-                    prefix={""}
+                    prefix={''}
                     renderText={(value) => (
                       <p className="text-2xl font-bold">
                         จำนวนปี {value} <span className="text-xs">ปี</span>
@@ -259,5 +270,5 @@ export default function LoanCalc() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

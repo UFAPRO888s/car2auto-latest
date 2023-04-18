@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
@@ -229,6 +230,17 @@ export default function TypeCarsPage() {
   const [selectedfuelType, setSelectedfuelType] = useState('')
   return (
     <>
+    <Head>
+        <title>
+        {siteMetadata.title + ' | ' + siteMetadata.author}
+        </title>
+        <meta
+          name="description"
+          content={
+            siteMetadata.description
+          }
+        />
+      </Head>
       <PageSEO
         title={siteMetadata.title + ' | ' + siteMetadata.author}
         description={siteMetadata.description}

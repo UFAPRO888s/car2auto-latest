@@ -1,4 +1,5 @@
 import { useAuth } from '@/context/AuthContext'
+import Head from 'next/head'
 import addData from '@/firebase/firestore/addData'
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react'
 import { PageSEO } from '@/components/SEO'
@@ -27,6 +28,10 @@ const SaleCarPage = () => {
 
   return (
     <>
+      <Head>
+        <title>{'ประเมินราคารถยนต์ ' + siteMetadata.title + ' | ' + siteMetadata.author}</title>
+        <meta name="description" content={'ประเมินราคารถยนต์ ' + siteMetadata.description} />
+      </Head>
       <PageSEO
         title={'ประเมินราคารถยนต์ ' + siteMetadata.title + ' | ' + siteMetadata.author}
         description={'ประเมินราคารถยนต์ ' + siteMetadata.description}
