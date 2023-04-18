@@ -396,21 +396,22 @@ const Navbar = ({ children }) => {
                     {!user.uid ? (
                       menuItems.map((item) => (
                         <li key={item.id} className="flex items-center">
-                          <button
-                            href={item?.link}
-                            //className="text-blue-800 hover:text-blue-900 transition px-4 py-2 bg-green-500 shadow-md rounded-md"
-                            className="btn text-lg h-10 text-gray-500 hover:text-gray-50 "
-                          >
-                            <Image
-                              className="h-6 w-6 object-contain"
-                              src={item?.iconx}
-                              alt={item?.iconxalt}
-                              width={100}
-                              height={100}
-                              priority
-                            />{' '}
-                            {item?.name}
-                          </button>
+                          <Link href={item?.link}>
+                            <div
+                              //className="text-blue-800 hover:text-blue-900 transition px-4 py-2 bg-green-500 shadow-md rounded-md"
+                              className="btn text-lg h-10 text-gray-500 hover:text-gray-50 "
+                            >
+                              <Image
+                                className="h-6 w-6 object-contain"
+                                src={item?.iconx}
+                                alt={item?.iconxalt}
+                                width={100}
+                                height={100}
+                                priority
+                              />{' '}
+                              {item?.name}
+                            </div>
+                          </Link>
                         </li>
                       ))
                     ) : (
