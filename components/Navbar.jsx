@@ -1,10 +1,13 @@
-import { Fragment, useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Ilogo from "@/images/logos/Car2autobuy-Preview-01.svg";
-import { useRouter } from "next/router";
-import { useAuth } from "@/context/AuthContext";
-import { Popover, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import Ilogo from '@/images/logos/Car2autobuy-Preview-01.svg'
+import { useRouter } from 'next/router'
+import { useAuth } from '@/context/AuthContext'
+import { Popover, Transition } from '@headlessui/react'
+import iconSC from '@/images/icon-แว่นขยาย.png'
+import icon1 from '@/images/icon-header-01.svg'
+import icon2 from '@/images/icon-header-02.svg'
 import {
   Bars3Icon,
   BookmarkSquareIcon,
@@ -23,110 +26,107 @@ import {
   Squares2X2Icon,
   UserGroupIcon,
   XMarkIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline'
 
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Button } from "./Button";
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Button } from './Button'
 
 const solutions = [
   {
-    name: "รถเล็ก ประหยัดน้ำมัน",
-    description:
-      "แรงจริงประหยัดจริง ด้วยเครื่องยนต์ 1.0 ลิตร เทอร์โบ ทั้งแรงและประหยัด",
-    href: "#",
-    icon: "/images/menunav/nav-eco.png",
+    name: 'รถเล็ก ประหยัดน้ำมัน',
+    description: 'แรงจริงประหยัดจริง ด้วยเครื่องยนต์ 1.0 ลิตร เทอร์โบ ทั้งแรงและประหยัด',
+    href: '#',
+    icon: '/images/menunav/nav-eco.png',
   },
   {
-    name: "รถ SUV คุ้มค่า",
-    description:
-      "ยนตรกรรมระดับพรีเมี่ยมในราคาที่เอื้อมถึง เมื่อสมรรถนะและความปลอดภัยคือสิ่งสำคัญ",
-    href: "#",
-    icon: "/images/menunav/nav-eco.png",
+    name: 'รถ SUV คุ้มค่า',
+    description: 'ยนตรกรรมระดับพรีเมี่ยมในราคาที่เอื้อมถึง เมื่อสมรรถนะและความปลอดภัยคือสิ่งสำคัญ',
+    href: '#',
+    icon: '/images/menunav/nav-eco.png',
   },
   {
-    name: "รถเก๋ง รุ่นหลากหลาย",
-    description:
-      "รถมือสองปีนี้มีรุ่นไหนน่าซื้อบ้าง ขายต่อราคาไม่ตก งบน้อยก็ซื้อได้ หลายยี่ห้อดัง",
-    href: "#",
-    icon: "/images/menunav/nav-eco.png",
+    name: 'รถเก๋ง รุ่นหลากหลาย',
+    description: 'รถมือสองปีนี้มีรุ่นไหนน่าซื้อบ้าง ขายต่อราคาไม่ตก งบน้อยก็ซื้อได้ หลายยี่ห้อดัง',
+    href: '#',
+    icon: '/images/menunav/nav-eco.png',
   },
   {
-    name: "รถกระบะ สายลุย",
-    description:
-      "รถกระบะออฟโรดสมรรถนะสูง อัดแน่นไปด้วยดีเอ็นเอของฟอร์ด เพอร์ฟอร์แมนซ์",
-    href: "#",
-    icon: "/images/menunav/nav-eco.png",
+    name: 'รถกระบะ สายลุย',
+    description: 'รถกระบะออฟโรดสมรรถนะสูง อัดแน่นไปด้วยดีเอ็นเอของฟอร์ด เพอร์ฟอร์แมนซ์',
+    href: '#',
+    icon: '/images/menunav/nav-eco.png',
   },
-];
+]
 const callsToAction = [
-  { name: "car2autobuy", href: "#", icon: "/images/img/linex.png" },
-  { name: "car2autobuy", href: "#", icon: "/images/img/fb.png" },
-  { name: "car2autobuy", href: "#", icon: "/images/img/youtube.png" },
-];
+  { name: 'car2autobuy', href: '#', icon: '/images/img/linex.png' },
+  { name: 'car2autobuy', href: '#', icon: '/images/img/fb.png' },
+  { name: 'car2autobuy', href: '#', icon: '/images/img/youtube.png' },
+]
 const company = [
-  { name: "เกี่ยวกับเรา", href: "#", icon: InformationCircleIcon },
-  { name: "รถมือสองของเรา", href: "#", icon: BuildingOfficeIcon },
-  { name: "การรับประกันคุณภาพ", href: "#", icon: NewspaperIcon },
-  { name: "ปรับสภาและซ่อมบำรุง", href: "#", icon: BriefcaseIcon },
-  { name: "เงื่อนไขการใช้บริการ", href: "/terms", icon: ShieldCheckIcon },
-];
+  { name: 'เกี่ยวกับเรา', href: '#', icon: InformationCircleIcon },
+  { name: 'รถมือสองของเรา', href: '#', icon: BuildingOfficeIcon },
+  { name: 'การรับประกันคุณภาพ', href: '#', icon: NewspaperIcon },
+  { name: 'ปรับสภาและซ่อมบำรุง', href: '#', icon: BriefcaseIcon },
+  { name: 'เงื่อนไขการใช้บริการ', href: '/terms', icon: ShieldCheckIcon },
+]
 const resources = [
-  { name: "ข้อมูลน่ารู้", href: "#", icon: UserGroupIcon },
-  { name: "รีวิว", href: "#", icon: GlobeAltIcon },
-  { name: "เปรียบเทียบ", href: "#", icon: BookmarkSquareIcon },
-  { name: "ข่าวสาร", href: "#", icon: ComputerDesktopIcon },
-];
-
-
+  { name: 'ข้อมูลน่ารู้', href: '#', icon: UserGroupIcon },
+  { name: 'รีวิว', href: '#', icon: GlobeAltIcon },
+  { name: 'เปรียบเทียบ', href: '#', icon: BookmarkSquareIcon },
+  { name: 'ข่าวสาร', href: '#', icon: ComputerDesktopIcon },
+]
 
 const blogPosts = [
   {
     id: 1,
-    name: "ประสบการณ์ความเร็ว แรง BMW",
-    href: "/car-story?cat=ข้อมูลน่ารู้",
-    preview:
-      "สนุกกับประสบการณ์ความเร็ว แรง และคล่องตัวกับการขับรถในเมืองใน BMW ซีรีส์ 1",
-    imageUrl: "/images/img/สนุกกับBMW.png",
+    name: 'ประสบการณ์ความเร็ว แรง BMW',
+    href: '/car-story?cat=ข้อมูลน่ารู้',
+    preview: 'สนุกกับประสบการณ์ความเร็ว แรง และคล่องตัวกับการขับรถในเมืองใน BMW ซีรีส์ 1',
+    imageUrl: '/images/img/สนุกกับBMW.png',
   },
   {
     id: 2,
-    name: "All-New Isuzu D-Max 2023",
-    href: "/car-recommend?recom=รีวิว",
+    name: 'All-New Isuzu D-Max 2023',
+    href: '/car-recommend?recom=รีวิว',
     preview:
-      "รประสบความสำเร็จอย่างงดงามของรุ่นดีแมคซ์ (D-Max) เจเนอเรชันที่ 2 ในที่สุด อีซูซุ (Isuzu) ได้เปิดตัวรุ่นออลนิว ดีแมคซ์ (All-New D-Max) เจนเนอเรชั่นที่ 3 ในปี 2019",
-    imageUrl: "/images/img/All-NEW-ISUZU-D-MAX.jpg",
+      'รประสบความสำเร็จอย่างงดงามของรุ่นดีแมคซ์ (D-Max) เจเนอเรชันที่ 2 ในที่สุด อีซูซุ (Isuzu) ได้เปิดตัวรุ่นออลนิว ดีแมคซ์ (All-New D-Max) เจนเนอเรชั่นที่ 3 ในปี 2019',
+    imageUrl: '/images/img/All-NEW-ISUZU-D-MAX.jpg',
   },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
 const Navbar = ({ children }) => {
-  const { user, logOut } = useAuth();
-  const router = useRouter();
+  const { user, logOut } = useAuth()
+  const router = useRouter()
 
   const menuItems = [
     {
       id: 1,
-      name: "เข้าสู่ระบบ",
-      link: "/login",
+      name: 'เข้าสู่ระบบ',
+      link: '/login',
+      iconx: icon1,
+      iconxalt: 'เข้าสู่ระบบ'
     },
     {
       id: 2,
-      name: "สมัครสมาชิก",
-      link: "/signup",
+      name: 'สมัครสมาชิก',
+      link: '/signup',
+      iconx: icon2,
+      iconxalt: 'สมัครสมาชิก'
     },
-  ];
+  ]
 
   const handleLogout = async () => {
     try {
-      await logOut();
-      router.push("/login");
+      await logOut()
+      router.push('/login')
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
-  };
+  }
 
   // useEffect(() => {
   //   if (user.email) {
@@ -137,10 +137,7 @@ const Navbar = ({ children }) => {
   return (
     <>
       <Popover className="relative bg-white shadow-lg sticky top-0 z-50">
-        <div
-          className="pointer-events-none absolute inset-0 z-30 shadow"
-          aria-hidden="true"
-        />
+        <div className="pointer-events-none absolute inset-0 z-30 shadow" aria-hidden="true" />
         <div className="relative z-20">
           <div className="mx-auto flex max-w-7xl items-center justify-between py-5 px-6 sm:py-4 md:justify-start md:space-x-10 lg:px-8">
             <div className="flex mr-auto md:w-68 flex-shrink-0">
@@ -155,9 +152,7 @@ const Navbar = ({ children }) => {
                 />
               </Link>
               <div className="hidden xl:flex items-center">
-                <small className="ml-3 font-semibold text-xs">
-                  ซื้อขายรถมือสอง
-                </small>
+                <small className="ml-3 font-semibold text-xs">ซื้อขายรถมือสอง</small>
               </div>
             </div>
             <div className="-my-2 -mr-2 md:hidden">
@@ -173,15 +168,15 @@ const Navbar = ({ children }) => {
                     <>
                       <Popover.Button
                         className={classNames(
-                          open ? "text-gray-900" : "text-gray-500",
-                          "group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 "
+                          open ? 'text-[#1B64A6]' : 'text-[#1B64A6]',
+                          'group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 '
                         )}
                       >
-                        <Link href={'/buycars'}>ซื้อรถ</Link>
+                        <Link href={'/buycars'}>ซื้อรถยนต์</Link>
                         <ChevronDownIcon
                           className={classNames(
-                            open ? "text-gray-600" : "text-gray-400",
-                            "ml-2 h-5 w-5 group-hover:text-gray-500"
+                            open ? 'text-[#1B64A6]' : 'text-[#1B64A6]',
+                            'ml-2 h-5 w-5 group-hover:text-gray-500'
                           )}
                           aria-hidden="true"
                         />
@@ -251,9 +246,7 @@ const Navbar = ({ children }) => {
                                       height={100}
                                       priority
                                     />
-                                    <span className="ml-3 text-xs">
-                                      {item.name}
-                                    </span>
+                                    <span className="ml-3 text-xs">{item.name}</span>
                                   </Link>
                                 </div>
                               ))}
@@ -266,30 +259,30 @@ const Navbar = ({ children }) => {
                 </Popover>
                 <Link
                   href="/salecar"
-                  className="text-base font-semibold text-gray-500 hover:text-gray-900"
+                  className="text-base font-semibold text-[#1B64A6] hover:text-gray-900"
                 >
-                  ขายรถ
+                  ขายรถยนต์
                 </Link>
                 <Link
                   href="/loancalculator"
-                  className="text-base font-semibold text-gray-500 hover:text-gray-900"
+                  className="text-base font-semibold text-[#1B64A6] hover:text-gray-900"
                 >
-                  สินเชื่อ
+                  คำนวนสินเชื่อ
                 </Link>
                 <Popover>
                   {({ open }) => (
                     <>
                       <Popover.Button
                         className={classNames(
-                          open ? "text-gray-900" : "text-gray-500",
-                          "group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 "
+                          open ? 'text-[#1B64A6]' : 'text-[#1B64A6]',
+                          'group inline-flex items-center rounded-md bg-white text-base font-semibold hover:text-gray-900 '
                         )}
                       >
                         <span>โปรโมชั่น</span>
                         <ChevronDownIcon
                           className={classNames(
-                            open ? "text-gray-600" : "text-gray-400",
-                            "ml-2 h-5 w-5 group-hover:text-gray-500"
+                            open ? 'text-[#1B64A6]' : 'text-[#1B64A6]',
+                            'ml-2 h-5 w-5 group-hover:text-gray-500'
                           )}
                           aria-hidden="true"
                         />
@@ -312,9 +305,7 @@ const Navbar = ({ children }) => {
                           <div className="relative mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
                             <nav className="grid gap-y-10 bg-white px-4 py-8 sm:grid-cols-2 sm:gap-x-8 sm:py-12 sm:px-6 lg:px-8 xl:pr-12">
                               <div>
-                                <h3 className="text-base font-medium text-gray-500">
-                                  CAR2AUTOBUY
-                                </h3>
+                                <h3 className="text-base font-medium text-gray-500">CAR2AUTOBUY</h3>
                                 <ul role="list" className="mt-5 space-y-6">
                                   {company.map((item) => (
                                     <li key={item.name} className="flow-root">
@@ -326,18 +317,14 @@ const Navbar = ({ children }) => {
                                           className="h-6 w-6 flex-shrink-0 text-gray-400"
                                           aria-hidden="true"
                                         />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
+                                        <span className="ml-4">{item.name}</span>
                                       </a>
                                     </li>
                                   ))}
                                 </ul>
                               </div>
                               <div>
-                                <h3 className="text-base font-medium text-gray-500">
-                                  บทความ
-                                </h3>
+                                <h3 className="text-base font-medium text-gray-500">บทความ</h3>
                                 <ul role="list" className="mt-5 space-y-6">
                                   {resources.map((item) => (
                                     <li key={item.name} className="flow-root">
@@ -349,9 +336,7 @@ const Navbar = ({ children }) => {
                                           className="h-6 w-6 flex-shrink-0 text-gray-400"
                                           aria-hidden="true"
                                         />
-                                        <span className="ml-4">
-                                          {item.name}
-                                        </span>
+                                        <span className="ml-4">{item.name}</span>
                                       </Link>
                                     </li>
                                   ))}
@@ -360,9 +345,7 @@ const Navbar = ({ children }) => {
                             </nav>
                             <div className="bg-gray-50 px-4 py-8 sm:py-12 sm:px-6 lg:px-8 xl:pl-12">
                               <div>
-                                <h3 className="text-base font-medium text-gray-500">
-                                  ข่าวล่าสุด
-                                </h3>
+                                <h3 className="text-base font-medium text-gray-500">ข่าวล่าสุด</h3>
                                 <ul role="list" className="mt-6 space-y-6">
                                   {blogPosts.map((post) => (
                                     <li key={post.id} className="flow-root">
@@ -394,10 +377,7 @@ const Navbar = ({ children }) => {
                                 </ul>
                               </div>
                               <div className="mt-6 text-sm font-medium">
-                                <Link
-                                  href="#"
-                                  className="text-indigo-600 hover:text-indigo-500"
-                                >
+                                <Link href="#" className="text-indigo-600 hover:text-indigo-500">
                                   อ่านข่าวทั้งหมด
                                   <span aria-hidden="true"> &rarr;</span>
                                 </Link>
@@ -415,12 +395,20 @@ const Navbar = ({ children }) => {
                   <>
                     {!user.uid ? (
                       menuItems.map((item) => (
-                        <li key={item.id} className="flex items-center mr-2 ">
+                        <li key={item.id} className="flex items-center bg-[#1B64A6]">
                           <Button
                             href={item?.link}
                             //className="text-blue-800 hover:text-blue-900 transition px-4 py-2 bg-green-500 shadow-md rounded-md"
-                            className="text-base font-medium text-gray-500 bg-[#0E2E63] hover:text-gray-900 rounded-md"
+                            className="text-lg h-10 text-gray-500 bg-[#1B64A6] hover:text-gray-900 rounded-md font-light overflow-hidden"
                           >
+                            <Image
+                              className="h-6 w-6 object-contain"
+                              src={item?.iconx}
+                              alt={item?.iconxalt}
+                              width={100}
+                              height={100}
+                              priority
+                            />{' '}
                             {item?.name}
                           </Button>
                         </li>
@@ -447,7 +435,7 @@ const Navbar = ({ children }) => {
                                 fill="currentColor"
                                 d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"
                               ></path>
-                            </svg>{" "}
+                            </svg>{' '}
                             หน้าสมาชิก
                           </Link>
                         </li>
@@ -471,27 +459,24 @@ const Navbar = ({ children }) => {
                                 fill="currentColor"
                                 d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"
                               ></path>
-                            </svg>{" "}
+                            </svg>{' '}
                             ออกจากระบบ
                           </div>
                         </li>
                       </>
                     )}
+                    <li className="my-3 md:my-0 items-center px-4 md:inline-block block ">
+                      <Image
+                        className="h-10 w-10 object-cover"
+                        src={iconSC}
+                        alt={'ค้นหารถยนต์'}
+                        width={100}
+                        height={100}
+                        priority
+                      />
+                    </li>
                   </>
                 </ul>
-
-                {/* <Link
-                  href="#"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  href="#"
-                  className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                >
-                  Sign up
-                </Link> */}
               </div>
             </div>
           </div>
@@ -551,7 +536,7 @@ const Navbar = ({ children }) => {
                               priority
                             />
                           </div>
-                          <div className="ml-4 text-base font-medium text-gray-900">
+                          <div className="ml-4 text-base font-medium text-[#1B64A6]">
                             {item.name}
                           </div>
                         </Link>
@@ -562,7 +547,7 @@ const Navbar = ({ children }) => {
                         href="/buycars"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
-                        ดูรถทั้งหมด
+                        ซื้อรถยนต์
                         <span aria-hidden="true"> &rarr;</span>
                       </Link>
                     </div>
@@ -573,25 +558,25 @@ const Navbar = ({ children }) => {
                 <div className="grid grid-cols-2 gap-4">
                   <Link
                     href="/salecar"
-                    className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
+                    className="rounded-md text-base font-medium text-[#1B64A6] hover:text-gray-700"
                   >
-                    ขายรถ
+                    ขายรถยนต์
                   </Link>
                   <Link
                     href="/loancalculator"
-                    className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
+                    className="rounded-md text-base font-medium text-[#1B64A6] hover:text-gray-700"
                   >
-                    สินเชื่อ
+                    คำนวนสินเชื่อ
                   </Link>
                   <Link
                     href="#"
-                    className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
+                    className="rounded-md text-base font-medium text-[#1B64A6] hover:text-gray-700"
                   >
                     เกี่ยวกับเรา
                   </Link>
                   <Link
                     href="#"
-                    className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700"
+                    className="rounded-md text-base font-medium text-[#1B64A6] hover:text-gray-700"
                   >
                     โปรโมชั่น
                   </Link>
@@ -645,7 +630,7 @@ const Navbar = ({ children }) => {
                                   fill="currentColor"
                                   d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"
                                 ></path>
-                              </svg>{" "}
+                              </svg>{' '}
                               หน้าสมาชิก
                             </Link>
                           </li>
@@ -669,7 +654,7 @@ const Navbar = ({ children }) => {
                                   fill="currentColor"
                                   d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"
                                 ></path>
-                              </svg>{" "}
+                              </svg>{' '}
                               ออกจากระบบ
                             </div>
                           </li>
@@ -685,7 +670,7 @@ const Navbar = ({ children }) => {
       </Popover>
       {children}
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
