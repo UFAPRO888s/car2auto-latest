@@ -291,7 +291,7 @@ export function HeroBrand() {
               </Link>
             ))}
             <Link href={'/buycars'}>
-              <div className="grid content-center bg-[#A3C1DB] h-10 border border-1 border-[#588DBC]/50 rounded-md mt-4 hover:bg-[#588DBC] cursor-pointer hover:shadow-md">
+              <div className="grid content-center bg-[#A3C1DB] h-10 w-[200px] md:w-auto border border-1 border-[#588DBC]/50 rounded-md mt-4 hover:bg-[#588DBC] cursor-pointer hover:shadow-md">
                 <p className="text-center font-semibold text-[12px] text-black hover:text-white">
                   ดูรถยนต์ที่มีทั้งหมด
                 </p>
@@ -393,6 +393,7 @@ export function HeroBrand() {
               </div>
               <div className="col-span-2 mt-2">
                 <Button
+                href={"/buycars/?make="+selectedBrand?.name}
                   variant="solid"
                   color="#1B64A6"
                   className="bg-[#1B64A6] rounded-md w-full text-white"
